@@ -1,0 +1,8 @@
+package Map;
+
+import javax.swing.JFrame;
+
+public class MapGUI extends JFrame 
+{
+
+}
