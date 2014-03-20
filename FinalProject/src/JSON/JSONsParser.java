@@ -21,8 +21,8 @@ import Cars.Car;
 public class JSONsParser extends Thread {
 	private ArrayList<Car> cars;
 
-	public JSONsParser() {
-		cars = new ArrayList<Car>();
+	public JSONsParser(ArrayList<Car> cars) {
+		this.cars = cars;
 	}
 
 	public void run() {
