@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.awt.Point"/>
-<fullyQualifiedTypeName name="java.awt.geom.Point2D"/>
-<fullyQualifiedTypeName name="Map.MapGUI"/>
-<fullyQualifiedTypeName name="Map.MapPanel.Gui"/>
-<fullyQualifiedTypeName name="javax.swing.JMenuBar"/>
-<fullyQualifiedTypeName name="javax.swing.JApplet"/>
-</qualifiedTypeNameHistroy>

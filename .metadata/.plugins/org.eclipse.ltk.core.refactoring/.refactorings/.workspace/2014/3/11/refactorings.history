@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Delete resource &apos;com.roots.swtmap&apos;" deleteContents="false" description="Delete resource &apos;com.roots.swtmap&apos;" element1="/com.roots.swtmap" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1394958077835"/>&#x0A;<refactoring comment="Delete resource &apos;com.roots.map&apos;" deleteContents="false" description="Delete resource &apos;com.roots.map&apos;" element1="/com.roots.map" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1394958198147"/>
-</session>
