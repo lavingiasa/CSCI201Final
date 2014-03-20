@@ -1,2 +1,0 @@
-INDEX VERSION 1.126+/Users/lavingiasa/Dropbox/USC/Class/Sophamore/Sophamore 2/CS201/Final Project/CSCI201Final/.metadata/.plugins/org.eclipse.jdt.core
-296566835.index

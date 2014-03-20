@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;MapPanel.java&apos; to &apos;FinalProject/src/Map&apos;&#x0A;- Original project: &apos;com.roots.map&apos;&#x0A;- Destination element: &apos;FinalProject/src/Map&apos;&#x0A;- Original element: &apos;com.roots.map.MapPanel.java&apos;" description="Copy compilation unit" destination="=FinalProject/src&lt;Map" element1="/src&lt;com.roots.map{MapPanel.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1394958102674" units="1" version="1.0"/>
-</session>
