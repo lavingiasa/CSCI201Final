@@ -63,7 +63,17 @@ More specifically this application will work as a traffic similator that is cons
 		+ Some function to export to a CSV file
 	+ #####Data:
 		+ The MySQL database
-
++ ###Graph:
+	+ This class will make and display the graph
+	+ #####Parents:
+		+ TBD
+	+ #####Functions:
+		+ showGraph:
+			+ Using the data in the ArrayList it will create the graph
+			+ This is going to be a popup with the JPanel in it (This is the current plan)
+	+ #####Data:
+		+ ArrayList<?> data: This is the data the graph will be based. It is TBD what this data structure will contain
+		+ JPanel graphPanel: This is the panel that is be the actual graph that is added to the popup
 + ###Nodes:
 	+ This class will be the nodes that are overlaid on the map that can be used by the user to gain more data
 	+ #####Parents:
