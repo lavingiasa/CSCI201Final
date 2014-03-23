@@ -16,5 +16,32 @@ public class Car
 		this.ramp = ramp;
 		this.freeway = freeway;
 	}
+
+	public int getID()
+	{
+		return id;
+	}
+
+	public void setSpeed(double speed)
+	{
+		this.speed = speed;
+	}
+
+	public void setDirection(String direction)
+	{
+		this.direction = direction;
+	}
+
+	public void setRamp(String ramp)
+	{
+		this.ramp = ramp;
+	}
+
+	public void setFreeway(String freeway)
+	{
+		this.freeway = freeway;
+	}
+
+
 	
 }

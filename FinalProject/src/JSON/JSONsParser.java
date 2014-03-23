@@ -64,7 +64,8 @@ public class JSONsParser extends Thread {
 			for (int i = 0; i < arrayFromFile.size(); i++) 
 			{
 				JSONObject car = (JSONObject) arrayFromFile.get(i);
-				
+				boolean carExists = false;
+				int indexOfExistingCar = -1;
 				Long longID = (long) -1;
 				int id = -1;
 				double speed = -1;
@@ -87,9 +88,28 @@ public class JSONsParser extends Thread {
 				System.out.println(freeway + "\n");
 				*/
 
-				Car currentCar = new Car(id, speed, direction, ramp, freeway);
-				System.out.println(currentCar.toString());
-				cars.add(currentCar);
+				for(int i = 0; i < cars.size(); i++)
+				{
+					if(cars.get(i).getID() == id)
+					{
+						carExists = true;
+						index = i;
+						break;
+					}
+				}
+
+				if(carExists)
+				{
+					Car currentCar = cars.get(indexOfExistingCar);
+					currentCar.setSpeed(speed);
+					currentCar.setDirection(direction);
+					currentCar.setRamp(ramp);
+					currentCar.setFreeway(freeway);
+				}else{
+					Car currentCar = new Car(id, speed, direction, ramp, freeway);
+					System.out.println(currentCar.toString());
+					cars.add(currentCar);
+				}
 			}
 
 		} catch (FileNotFoundException e) {
