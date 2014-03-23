@@ -48,7 +48,28 @@ More specifically this application will work as a traffic similator that is cons
 			+ I believe that we will make this work easist for the map. This would mean latitude in degrees in this case 
 		+ double YLocation: This is the y location of the car
 			+ I believe that we will make this work easist for the map. This would mean longitude in degrees in this case 
++ ###Database:
+	+ This class will be the abstraction layer inbetween all of the classes and the MySQL database
+	+ #####Parents:
+		+ TBD
+	+ #####Functions:
+		+ TBD
+		+ Some function to get the history from a start date/time to an end date/time
+		+ Some function to return all the cars on the road
+		+ Some function to get the best times to leave
+		+ Some function that will find the shortest amount of time to travel between two nodes
+		+ Some function to create and display the graph
+		+ Some function to export to a CSV file
+	+ #####Data:
+		+ The MySQL database
 
++ ###Nodes:
+	+ This class will be the nodes that are overlaid on the map that can be used by the user to gain more data
+	+ #####Parents:
+		+ 
+	+ #####Functions:
+	+ #####Data:
+	
 + ###JSONParser:
 	+ This class will pull and parse the JSON. This will be done at a certain time interval (set for three minutes at this moment)
 	+ #####Parents:
@@ -62,12 +83,20 @@ More specifically this application will work as a traffic similator that is cons
 			+ This method will use the new pulled JSON to update and add new cars. If the car is already in the system then it will just update, else it will create a new car
 	+ #####Data:
 		+ ArrayList <Car> cars: This will be the list of cars that are parsed out of the JSON
+		
 + ###MapPanel:
 	+ We did not write this class. It displays the map using data from Open Street Maps
+	
 + ###MapGUI:
 	+ This will be the main GUI of the application where everything will happen
 	+ #####Parents:
+		+ This is still TBD: For now it is JApplet, but I think we are going to make it a JPanel
 	+ #####Data:
+		+ MapPanel map: This is the map that everything will be drawn on top of
+		+ JPanel canvasOfCars: This is the actual blank canvas the cars will be drawn of
+			+ The background of this will be transparent/null so we can see the map through it
+			+ This is just an idea any may not work in the end
 	+ #####Functions:
+		+ TBD
 
 ##Flow of The Application:
