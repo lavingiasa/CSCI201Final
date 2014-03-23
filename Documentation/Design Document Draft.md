@@ -26,6 +26,7 @@ More specifically this application will work as a traffic similator that is cons
 		+ Getters/Setters for the data
 		+ UpdateLocation:
 			+ Using the location, direction, and speed of the car this method will be called to reupdate the location of the car
+			+ This will also be called and changed when the zoom and/or pan is changed (?)
 		+ Constructor:
 			+ Given the data from the JSON a new car will be created 
 	+ #####Data:
@@ -44,9 +45,9 @@ More specifically this application will work as a traffic similator that is cons
 				+ East -> South
 		+ String Ramp: This is the name of the ramp that the car got on
 		+ String Freeway: This is the name of the freeway the car is on
-		+ double XLocation: This is the x location of the car
+		+ double xLocation: This is the x location of the car
 			+ I believe that we will make this work easist for the map. This would mean latitude in degrees in this case 
-		+ double YLocation: This is the y location of the car
+		+ double yLocation: This is the y location of the car
 			+ I believe that we will make this work easist for the map. This would mean longitude in degrees in this case 
 + ###Database:
 	+ This class will be the abstraction layer inbetween all of the classes and the MySQL database
@@ -66,9 +67,19 @@ More specifically this application will work as a traffic similator that is cons
 + ###Nodes:
 	+ This class will be the nodes that are overlaid on the map that can be used by the user to gain more data
 	+ #####Parents:
-		+ 
+		+ TBD
+		+ This will most likely be a JComponent or a JLabel that will be positioned over the map
 	+ #####Functions:
+		+ Getters and setters
+		+ UpdateLocation:
+			+ Using the xLocation, yLocation, and zoom/pan it will redraw the node
+			+ This will be called and changed when the zoom and/or pan is changed (?)
+		+ More TBD
 	+ #####Data:
+		+ double xLocation: This is the x location of the node
+			+ I believe that we will make this work easist for the map. This would mean latitude in degrees in this case 
+		+ double yLocation: This is the y location of the node
+			+ I believe that we will make this work easist for the map. This would mean longitude in degrees in this case 
 	
 + ###JSONParser:
 	+ This class will pull and parse the JSON. This will be done at a certain time interval (set for three minutes at this moment)
