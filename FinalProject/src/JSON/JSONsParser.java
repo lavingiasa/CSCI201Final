@@ -58,6 +58,7 @@ public class JSONsParser extends Thread {
 	private void parseTheData() // http://www.mkyong.com/java/json-simple-example-read-and-write-json/
 	{
 		JSONParser parser = new JSONParser();
+		ArrayList<Integer> listOfIDs = new ArrayList<Integer>();
 		try {
 			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/initialTest.json"));
 
@@ -88,12 +89,12 @@ public class JSONsParser extends Thread {
 				System.out.println(freeway + "\n");
 				*/
 
-				for(int i = 0; i < cars.size(); i++)
+				for(int j = 0; i < cars.size(); i++)
 				{
 					if(cars.get(i).getID() == id)
 					{
 						carExists = true;
-						index = i;
+						indexOfExistingCar = j;
 						break;
 					}
 				}
@@ -110,7 +111,18 @@ public class JSONsParser extends Thread {
 					System.out.println(currentCar.toString());
 					cars.add(currentCar);
 				}
+
+				listOfIDs.add(id);
 			}
+
+	      for(int i = 0; i < cars.size(); i++)
+	      {
+	          if(!listOfIDs.contains(cars.get(i).getID()))
+	          {
+	              cars.remove(i);
+	              i--;
+	          }
+	      }
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
