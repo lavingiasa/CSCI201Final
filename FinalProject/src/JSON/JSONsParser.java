@@ -58,10 +58,10 @@ public class JSONsParser extends Thread {
 	private void parseTheData() // http://www.mkyong.com/java/json-simple-example-read-and-write-json/
 	{
 		JSONParser parser = new JSONParser();
-		ArrayList<Integer> listOfIDs = new ArrayList<Integer>();
+		//ArrayList<Integer> listOfIDs = new ArrayList<Integer>();
 		try {
 			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/initialTest.json"));
-
+			cars.clear();
 			for (int i = 0; i < arrayFromFile.size(); i++) 
 			{
 				JSONObject car = (JSONObject) arrayFromFile.get(i);
@@ -81,49 +81,13 @@ public class JSONsParser extends Thread {
 				freeway = (String) car.get("freeway");
 				id = Integer.parseInt(longID.toString());
 
-				/*
-				System.out.println(id);
-				System.out.println(speed);
-				System.out.println(direction);
-				System.out.println(ramp);
-				System.out.println(freeway + "\n");
-				*/
+			
+				Car currentCar = new Car(id, speed, direction, ramp, freeway);
+				System.out.println(currentCar.toString());
+				cars.add(currentCar);
 
-				for(int j = 0; i < cars.size(); i++)
-				{
-					if(cars.get(i).getID() == id)
-					{
-						carExists = true;
-						indexOfExistingCar = j;
-						break;
-					}
-				}
-
-				if(carExists)
-				{
-					Car currentCar = cars.get(indexOfExistingCar);
-					currentCar.setSpeed(speed);
-					currentCar.setDirection(direction);
-					currentCar.setRamp(ramp);
-					currentCar.setFreeway(freeway);
-				}else{
-					Car currentCar = new Car(id, speed, direction, ramp, freeway);
-					System.out.println(currentCar.toString());
-					cars.add(currentCar);
-				}
-
-				listOfIDs.add(id);
 			}
-
-	      for(int i = 0; i < cars.size(); i++)
-	      {
-	          if(!listOfIDs.contains(cars.get(i).getID()))
-	          {
-	              cars.remove(i);
-	              i--;
-	          }
-	      }
-
+ 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
