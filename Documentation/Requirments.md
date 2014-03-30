@@ -31,10 +31,6 @@
 
 ----
 
-##Map Design:
-
-----
-
 ##Car Design:
 + List of cars and all pertinent data
 	+ Car speed
@@ -51,12 +47,19 @@
 ----
 
 ##Client Interaction:
-+ Graphical Interface that displays map and car locations to user
-	+ Displays flow of traffic as individual cars moving at their listed speeds
++ Map Design:
+	+ Graphical Interface that displays map and car locations to user
+		+ Displays flow of traffic as individual cars moving at their listed speeds
 	+ Display fastest routes from specified starting and ending location
 		+ Method to select starting and ending locations
+			+ We will most likely overlay nodes (small ImageIcons) on the map that can be selected in order to do this
 		+ Provide estimated time of journey at speed limit and current speed
 + Interface to display historical data from database
 	+ Allow for determinations such as best time to travel from source to destination 
+	+ This will be done in a graph fashion
+		+ We will seperate the graph into increments of 15 minutes and make bar graphs
+		+ Adjacent bars will be of different colours to allow the user to distinguish them easily
+		+ On top of the bars will be a number to show a time that the user can read
+		+ This whole contraption will scale in size depending on the data to make sure that it will not be cut off
 
 ----
