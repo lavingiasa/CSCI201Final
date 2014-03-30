@@ -44,7 +44,9 @@
 ----
 
 ##Server Design:
-
++ It will pull and parse the JSON into a datastructure (most likely ArrayLists of Cars)
++ This will be done on a certain time interval
++ This data will be pulled by the database and the client to get the information on the cars that will be overlaid on the maps
 
 ----
 
