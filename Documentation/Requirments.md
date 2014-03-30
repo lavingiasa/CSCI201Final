@@ -34,7 +34,7 @@
 ##Map Design:
 + JavaScript Map will be embedded into standard Java application (maybe?)
 + Java AWT graphics will be overlayed on top of Map image
-	+ Cars
+	+ Cars. We will most likely try to overlay a transparent panel of the cars
 + Hopefully use capbilities integrated in Map API to trace paths for navigation
 + Map of LA
 	+ Integrate a mapping API to display map to user
