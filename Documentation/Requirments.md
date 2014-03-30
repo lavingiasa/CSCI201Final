@@ -28,7 +28,16 @@
 			+ Travel time at certain times of the day
 		  + Average travel times
   		+ Slowest highways on average
+----
 
+##Map Design:
++Map of LA
+	+Integrate a mapping API to display map to user
+		+Zoom-in and Zoom-out features
+	+Overlay nodes for practical movement of data
+	+Display flow of traffic in the form of individual cars
+		+Display cars in varying colors depending on latest speed
+	+Keep map up-to-date as server provides data 
 ----
 
 ##Car Design:
