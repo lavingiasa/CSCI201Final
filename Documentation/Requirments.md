@@ -1,4 +1,4 @@
-#Technical Requirements
+ <center><color = red>Technical Requirements
 ----
 ##Team:
 + Samir Lavingia
@@ -33,23 +33,24 @@
 
 ##Map Design:
 + JavaScript Map will be embedded into standard Java application (maybe?)
-+ Java AWT graphics will be overlayed on top of Map image
-	+ Cars. We will most likely try to overlay a transparent panel of the cars
-+ Hopefully use capbilities integrated in Map API to trace paths for navigation
++ Graphics will be overlayed on top of Map image
+	+ Cars should appear to be moving on top of map image
++ Trace paths on map for navigation
 + Map of LA
 	+ Integrate a mapping API to display map to user
 		+ Zoom-in and Zoom-out features
 	+ Overlay nodes for practical movement of data
 	+ Display flow of traffic in the form of individual cars
 		+ Display cars in varying colors depending on latest speed
+	+ Start with map centered around downtown LA
 	+ Keep map up-to-date as server provides data 
 ----
 
 ##Car Design:
 + List of cars and all pertinent data
-	+ Car speed
+	+ Car speed / direction
 	+ Car location
-	+ Car destination
++ Cars will have different colors based on the volume of traffic in which they are in
 
 ----
 
@@ -64,16 +65,13 @@
 + Map Design:
 	+ Graphical Interface that displays map and car locations to user
 		+ Displays flow of traffic as individual cars moving at their listed speeds
+		+ Areas of heavy traffic represented with red cars
+		+ Areas of light traffic represented with green cars
 	+ Display fastest routes from specified starting and ending location
 		+ Method to select starting and ending locations
 			+ We will most likely overlay nodes (small ImageIcons) on the map that can be selected in order to do this
 		+ Provide estimated time of journey at speed limit and current speed
 + Interface to display historical data from database
 	+ Allow for determinations such as best time to travel from source to destination 
-	+ This will be done in a graph fashion
-		+ We will seperate the graph into increments of 15 minutes and make bar graphs
-		+ Adjacent bars will be of different colours to allow the user to distinguish them easily
-		+ On top of the bars will be a number to show a time that the user can read
-		+ This whole contraption will scale in size depending on the data to make sure that it will not be cut off
 
 ----
