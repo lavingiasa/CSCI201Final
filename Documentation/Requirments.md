@@ -25,10 +25,10 @@
 ----
 
 ##Car Design:
-+List of cars and all pertinent data
-	+Car speed
-	+Car location
-	+Car destination
++ List of cars and all pertinent data
+	+ Car speed
+	+ Car location
+	+ Car destination
 
 ----
 
@@ -38,12 +38,11 @@
 ----
 
 ##Client Interaction:
-+Graphical Interface that displays map and car locations to user
-	+Displays flow of traffic as individual cars moving at their listed speeds
-	+Display fastest routes from specified starting and ending location
-		+Method to select starting and ending locations
-		+Provide estimated time of journey at speed limit and current speed
-	+
-+Interface to display historical data from database
-	+Allow for determinations such as best time to travel from source to destination 
++ Graphical Interface that displays map and car locations to user
+	+ Displays flow of traffic as individual cars moving at their listed speeds
+	+ Display fastest routes from specified starting and ending location
+		+ Method to select starting and ending locations
+		+ Provide estimated time of journey at speed limit and current speed
++ Interface to display historical data from database
+	+ Allow for determinations such as best time to travel from source to destination 
 ----
