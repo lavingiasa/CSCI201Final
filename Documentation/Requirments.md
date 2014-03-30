@@ -12,11 +12,22 @@
 + Data that will be put into the database:
 	+ All the data coming from the JSON files in terms of car speeds, locations, etc.
 	+ All messages received from server stored for fast retrieval
-	+Must implement SQL, and must connect to it using SQL statements
+	+ Must implement SQL, and must connect to it using SQL statements
+
 ----
-
 ##Data Export:
-
++ It should take the important data from the database and export it
++ We want it to export to a comma delimited file that can be opened in a nice format in excel
++ Will export: 
+	+ Car Data:
+		+ How many cars were on the road over the course of execution
+		+ Most traveled highways
+	+ Travel Times:
+		+ This will be for all the intersections that were used during the life of the program to all the other ones
+		+ Specifically:
+			+ Travel time at certain times of the day
+		  + Average travel times
+  		+ Slowest highways on average
 
 ----
 
@@ -45,4 +56,5 @@
 		+ Provide estimated time of journey at speed limit and current speed
 + Interface to display historical data from database
 	+ Allow for determinations such as best time to travel from source to destination 
+
 ----
