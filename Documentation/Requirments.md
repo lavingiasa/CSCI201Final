@@ -44,7 +44,8 @@
 	+ Display flow of traffic in the form of individual cars
 		+ Display cars in varying colors depending on latest speed (relative to speed limit)
 	+ Start with map centered around downtown LA
-	+ Keep map up-to-date as server provides data 
+	+ Keep map up-to-date as server provides data
+
 ----
 
 ##Car Design:
