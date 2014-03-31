@@ -1,4 +1,4 @@
- <center><color = red>Technical Requirements
+ <center><color = black>Technical Requirements
 ----
 ##Team:
 + Samir Lavingia
@@ -61,6 +61,7 @@
 + It will pull and parse the JSON into a datastructure (most likely ArrayList of Cars)
 + This will be done on a certain time interval
 + This data will be pulled by the database and the client to get the information on the cars that will be overlaid on the maps
++ The server will run in the same program, just on a different thread
 
 ----
 
@@ -75,6 +76,12 @@
 			+ We will most likely overlay nodes (small ImageIcons) on the map that can be selected in order to do this
 		+ Provide estimated time of journey at speed limit and current speed of traffic
 + Interface to display historical data from database
-	+ Allow for determinations such as best time to travel from source to destination 
+	+ Allow for determinations such as best time to travel from source to destination
++ Interface to display times and best paths
+	+ After choosing two points on a freeway a path will be drawn between them with the best route to take
+		+ We can choose between shortest amount of time or shortest physical distance
+			+ The time will be based on the historical data
+		+ You can also choose a third middle point to stop at for a certain amount of time
+			+ This will calculate the amount of time to get there, stop for the amount of time, then start again heading to the end location 
 
 ----
