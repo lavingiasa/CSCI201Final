@@ -44,7 +44,7 @@ More specifically this application will work as a traffic similator that is cons
 				+ South -> East
 				+ East -> South
 		+ String Ramp: This is the name of the ramp that the car got on
-		+ String Freeway: This is the name of the freeway the car is on
+		+ String Street: This is the name of the street (or freeway) the car is on
 		+ double xLocation: This is the x location of the car
 			+ I believe that we will make this work easiest for the map. This would mean latitude in degrees in this case 
 		+ double yLocation: This is the y location of the car
