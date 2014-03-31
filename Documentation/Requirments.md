@@ -4,7 +4,7 @@
 + Samir Lavingia
 + Alexei Naumann
 + Jeff Kang
-+ Ian Whelean
++ Ian Whelan
 + Aidan Blant
 
 ----
@@ -53,6 +53,7 @@
 	+ Car speed / direction
 	+ Car location
 + Cars will have different colors based on speed
++ Cars can be clicked on/hovered over to see their actual speed in traffic rather than just a color code
 
 ----
 
