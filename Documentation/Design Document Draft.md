@@ -18,14 +18,14 @@ More specifically this application will work as a traffic similator that is cons
 + ###Car:
 	+ This class will represent the cars on the map. Each car will be its own thread
 	+ #####Parents:
-		+ Runnable: This is because each car will be its own thread and due to Javas rules about multiplay inheritence we must impliment this, not inherit it.
-		+ JComponent(?): Each car will be able to draw itself on the map, so it must have the pain component method overwritten. To let cars draw themselves we need to inherit this class //TO-DO: Double check this.
+		+ Runnable: This is because each car will be its own thread and due to Javas rules about multiple inheritence we must impliment this, not inherit it.
+		+ JComponent(?): Each car will be able to draw itself on the map, so it must have the paintComponent method overwritten. To let cars draw themselves we need to inherit this class //TO-DO: Double check this.
 	+ #####Functions:
-		+ PaintComponent(Graphics g)
-			+ Using the location and speed the cars will draw themselves on that map with the graphics instance that is passed in
+		+ paintComponent(Graphics g)
+			+ Using the location and speed the cars will draw themselves on that map with the graphics class instance that is passed in
 		+ Getters/Setters for the data
 		+ UpdateLocation:
-			+ Using the location, direction, and speed of the car this method will be called to reupdate the location of the car
+			+ Using the location, direction, and speed of the car this method will be called to update the location of the car
 			+ This will also be called and changed when the zoom and/or pan is changed (?)
 		+ Constructor:
 			+ Given the data from the JSON a new car will be created 
@@ -46,11 +46,11 @@ More specifically this application will work as a traffic similator that is cons
 		+ String Ramp: This is the name of the ramp that the car got on
 		+ String Freeway: This is the name of the freeway the car is on
 		+ double xLocation: This is the x location of the car
-			+ I believe that we will make this work easist for the map. This would mean latitude in degrees in this case 
+			+ I believe that we will make this work easiest for the map. This would mean latitude in degrees in this case 
 		+ double yLocation: This is the y location of the car
-			+ I believe that we will make this work easist for the map. This would mean longitude in degrees in this case 
+			+ I believe that we will make this work easiest for the map. This would mean longitude in degrees in this case 
 + ###Database:
-	+ This class will be the abstraction layer inbetween all of the classes and the MySQL database
+	+ This class will be the abstraction layer between all of the classes and the MySQL database
 	+ #####Parents:
 		+ TBD
 	+ #####Functions:
@@ -72,10 +72,10 @@ More specifically this application will work as a traffic similator that is cons
 			+ Using the data in the ArrayList it will create the graph
 			+ This is going to be a popup with the JPanel in it (This is the current plan)
 	+ #####Data:
-		+ ArrayList<?> data: This is the data the graph will be based. It is TBD what this data structure will contain
-		+ JPanel graphPanel: This is the panel that is be the actual graph that is added to the popup
+		+ ArrayList<?> data: This is the data the graph will be based on. It is TBD what this data structure will contain
+		+ JPanel graphPanel: This is the panel that is the actual graph that is added to the popup
 + ###Nodes:
-	+ This class will be the nodes that are overlaid on the map that can be used by the user to gain more data
+	+ This class will be the nodes that are overlaid on the map that the user can select to gain more data
 	+ #####Parents:
 		+ TBD
 		+ This will most likely be a JComponent or a JLabel that will be positioned over the map
@@ -87,9 +87,9 @@ More specifically this application will work as a traffic similator that is cons
 		+ More TBD
 	+ #####Data:
 		+ double xLocation: This is the x location of the node
-			+ I believe that we will make this work easist for the map. This would mean latitude in degrees in this case 
+			+ I believe that we will make this work easiest for the map. This would mean latitude in degrees in this case 
 		+ double yLocation: This is the y location of the node
-			+ I believe that we will make this work easist for the map. This would mean longitude in degrees in this case 
+			+ I believe that we will make this work easiest for the map. This would mean longitude in degrees in this case 
 	
 + ###JSONParser:
 	+ This class will pull and parse the JSON. This will be done at a certain time interval (set for three minutes at this moment)
