@@ -10,6 +10,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Vector;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -19,9 +20,9 @@ import org.json.simple.parser.ParseException;
 import Cars.Car;
 
 public class JSONsParser extends Thread {
-	private ArrayList<Car> cars;
+	private Vector<Car> cars;
 
-	public JSONsParser(ArrayList<Car> cars) {
+	public JSONsParser(Vector<Car> cars) {
 		this.cars = cars;
 	}
 
