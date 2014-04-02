@@ -44,6 +44,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
     private JLabel mperpLabelValue = null;
     
     private Vector<Car> cars = new Vector<Car>();
+    private Vector<String> ramps = new Vector<String>();
     JSONsParser parser = null;
 
 	
@@ -115,14 +116,22 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 
 	private String getURLOfTheRamp(String rampName) 
 	{
 		String URLOfRamp = "http://nominatim.openstreetmap.org/search/";
-		System.out.println(rampName);
-		String[] arrayOfTheRampNameSplitByName = rampName.split(" ");
+		String fixedRampName = rampName.replace('?', ' ');
+		System.out.println(fixedRampName);
+		ramps.add(fixedRampName);
+		String[] arrayOfTheRampNameSplitByName = fixedRampName.split(" ");
 		for(int i = 0; i < arrayOfTheRampNameSplitByName.length; i++)
 		{
 			if(i == 0)
