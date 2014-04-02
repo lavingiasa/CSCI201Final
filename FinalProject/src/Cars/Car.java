@@ -42,6 +42,4 @@ public class Car
 		this.freeway = freeway;
 	}
 
-
-	
 }
