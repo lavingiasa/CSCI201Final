@@ -129,7 +129,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		}
 		
 	}
-
+//http://maps.googleapis.com/maps/api/geocode/json?address=market+and+4th,+san+francisco&sensor=false
 	private String getURLOfTheRamp(String rampName) 
 	{
 		String URLOfRamp = "http://nominatim.openstreetmap.org/search/";
