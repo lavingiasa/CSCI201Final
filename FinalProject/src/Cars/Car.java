@@ -36,6 +36,12 @@ public class Car
 	{
 		this.ramp = ramp;
 	}
+	
+
+	public String getRamp()
+	{
+		return ramp;
+	}
 
 	public void setFreeway(String freeway)
 	{

@@ -84,7 +84,7 @@ public class JSONsParser extends Thread {
 
 			
 				Car currentCar = new Car(id, speed, direction, ramp, freeway);
-				System.out.println(currentCar.toString());
+				//System.out.println(currentCar.toString());
 				cars.add(currentCar);
 
 			}

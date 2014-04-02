@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
 import Cars.Car;
+import JSON.JSONsParser;
 
 
 public class MapGUI extends JFrame implements JMapViewerEventListener
@@ -40,20 +42,29 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
     //private JLabel mperpLabelName=null;
     private JLabel mperpLabelValue = null;
+    
+    private Vector<Car> cars = new Vector<Car>();
+    JSONsParser parser = null;
 
 	
 	public static void main (String [] args)
 	{
 		MapGUI map = new MapGUI();
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		map.addTheOnOffRamps();
 	}
 	
 	private void addTheOnOffRamps() 
 	{
-		pullJSONUsingName();
-		Double xLocation = 0.0;
-		Double yLocation = 0.0;
-		parseJSONUsingPulledJSON(xLocation, yLocation);
+		for(int i = 0; i < cars.size(); i++)
+		{
+			pullJSONUsingName(cars.get(i).getRamp());
+			parseJSONUsingPulledJSON();
+		}
 		
 	}
 
@@ -63,14 +74,14 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 	}
 
-	private void parseJSONUsingPulledJSON(Double xLocation, Double yLocation) 
+	private void parseJSONUsingPulledJSON() 
 	{
 		JSONParser parser = new JSONParser();
 		try {
 			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/currentRamp.json"));
 			JSONObject ramp = (JSONObject) arrayFromFile.get(0);
-			xLocation = Double.parseDouble((String) ramp.get("lat"));
-			yLocation = Double.parseDouble((String) ramp.get("lon"));
+			Double xLocation = Double.parseDouble((String) ramp.get("lat"));
+			Double yLocation = Double.parseDouble((String) ramp.get("lon"));
 			System.out.println(xLocation +" " +yLocation);
 			drawTheRampOnTheMap(xLocation, yLocation);
 
@@ -86,12 +97,13 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 	}
 
-	private void pullJSONUsingName() 
+	private void pullJSONUsingName(String rampName) 
 	{
 		URL website;
+		String nameOfRampURL = getURLOfTheRamp(rampName);
 		try {
-			website = new URL(
-					"http://nominatim.openstreetmap.org/search/Robertson%20boulevard,%20Culver?format=json&polygon=0&addressdetails=0");
+			website = new URL(nameOfRampURL);
+					//"http://nominatim.openstreetmap.org/search/Robertson%20boulevard,%20Culver?format=json&polygon=0&addressdetails=0");
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
 			FileOutputStream fos = new FileOutputStream(
 					"JSONs/currentRamp.json");
@@ -106,10 +118,33 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 	}
 
+	private String getURLOfTheRamp(String rampName) 
+	{
+		String URLOfRamp = "http://nominatim.openstreetmap.org/search/";
+		System.out.println(rampName);
+		String[] arrayOfTheRampNameSplitByName = rampName.split(" ");
+		for(int i = 0; i < arrayOfTheRampNameSplitByName.length; i++)
+		{
+			if(i == 0)
+			{
+				URLOfRamp = URLOfRamp.concat(arrayOfTheRampNameSplitByName[i]);
+			}else{
+				URLOfRamp = URLOfRamp.concat("%20" + arrayOfTheRampNameSplitByName[i]);
+			}
+		}
+		
+		URLOfRamp = URLOfRamp.concat("?format=json&polygon=0&addressdetails=0");
+		return URLOfRamp; 
+		
+	}
+
 	public MapGUI()
 	{
 		super("Map Demo");
 		setSize(400,400);
+		
+		parser = new JSONsParser(cars);
+		parser.start();
 		
 		treeMap = new JMapViewerTree("Zones");
 		map().addJMVListener(this);
