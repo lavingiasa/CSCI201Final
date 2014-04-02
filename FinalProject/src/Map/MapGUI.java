@@ -80,11 +80,16 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		JSONParser parser = new JSONParser();
 		try {
 			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/currentRamp.json"));
-			JSONObject ramp = (JSONObject) arrayFromFile.get(0);
-			Double xLocation = Double.parseDouble((String) ramp.get("lat"));
-			Double yLocation = Double.parseDouble((String) ramp.get("lon"));
-			System.out.println(xLocation +" " +yLocation);
-			drawTheRampOnTheMap(xLocation, yLocation);
+			if(!arrayFromFile.isEmpty())
+			{
+				JSONObject ramp = (JSONObject) arrayFromFile.get(0);
+				Double xLocation = Double.parseDouble((String) ramp.get("lat"));
+				Double yLocation = Double.parseDouble((String) ramp.get("lon"));
+				System.out.println(xLocation +" " +yLocation);
+				drawTheRampOnTheMap(xLocation, yLocation);
+			}else{
+				System.out.println("I could not find the spot for a ramp :(");
+			}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -142,7 +147,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			}
 		}
 		
-		URLOfRamp = URLOfRamp.concat("?format=json&polygon=0&addressdetails=0");
+		URLOfRamp = URLOfRamp.concat("%20Los%20Angeles?format=json&polygon=0&addressdetails=0");
 		return URLOfRamp; 
 		
 	}
