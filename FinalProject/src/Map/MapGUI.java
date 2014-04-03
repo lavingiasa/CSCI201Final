@@ -79,17 +79,21 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	{
 		JSONParser parser = new JSONParser();
 		try {
-			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/currentRamp.json"));
-			if(!arrayFromFile.isEmpty())
-			{
-				JSONObject ramp = (JSONObject) arrayFromFile.get(0);
-				Double xLocation = Double.parseDouble((String) ramp.get("lat"));
-				Double yLocation = Double.parseDouble((String) ramp.get("lon"));
-				System.out.println(xLocation +" " +yLocation);
-				drawTheRampOnTheMap(xLocation, yLocation);
-			}else{
-				System.out.println("I could not find the spot for a ramp :(");
-			}
+			Object obj=parser.parse(new FileReader("JSONs/currentRamp.json"));
+			JSONArray array=(JSONArray)obj;
+			System.out.println(array.get(0));
+//			//JSONObject objectFromFile = (JSONObject) parser.parse(new FileReader("JSONs/currentRamp.json"));
+//			//if(!arrayFromFile.isEmpty())
+//			{
+//				JSONObject ramp = (JSONObject) objectFromFile.get(0);
+//				System.out.println(ramp);
+//				//Double xLocation = Double.parseDouble((String) ramp.get("lat"));
+//				//Double yLocation = Double.parseDouble((String) ramp.get("lon"));
+//				//System.out.println(xLocation +" " +yLocation);
+//				//drawTheRampOnTheMap(xLocation, yLocation);
+//		//	}else{
+//				System.out.println("I could not find the spot for a ramp :(");
+//			}
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -99,8 +103,6 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			e.printStackTrace();
 		}
 
-		
-		
 	}
 
 	private void pullJSONUsingName(String rampName) 
@@ -124,7 +126,6 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -132,7 +133,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 //http://maps.googleapis.com/maps/api/geocode/json?address=market+and+4th,+san+francisco&sensor=false
 	private String getURLOfTheRamp(String rampName) 
 	{
-		String URLOfRamp = "http://nominatim.openstreetmap.org/search/";
+		String URLOfRamp = "http://maps.googleapis.com/maps/api/geocode/json?address=";
 		String fixedRampName = rampName.replace('?', ' ');
 		System.out.println(fixedRampName);
 		ramps.add(fixedRampName);
@@ -143,11 +144,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			{
 				URLOfRamp = URLOfRamp.concat(arrayOfTheRampNameSplitByName[i]);
 			}else{
-				URLOfRamp = URLOfRamp.concat("%20" + arrayOfTheRampNameSplitByName[i]);
+				URLOfRamp = URLOfRamp.concat("+" + arrayOfTheRampNameSplitByName[i]);
 			}
 		}
 		
-		URLOfRamp = URLOfRamp.concat("%20Los%20Angeles?format=json&polygon=0&addressdetails=0");
+		URLOfRamp = URLOfRamp.concat("&sensor=false");
 		return URLOfRamp; 
 		
 	}
