@@ -135,7 +135,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	{
 		String URLOfRamp = "http://maps.googleapis.com/maps/api/geocode/json?address=";
 		String fixedRampName = rampName.replace('?', ' ');
-		//System.out.println(fixedRampName);
+		System.out.println(fixedRampName);
 		ramps.add(fixedRampName);
 		String[] arrayOfTheRampNameSplitByName = fixedRampName.split(" ");
 		for(int i = 0; i < arrayOfTheRampNameSplitByName.length; i++)
