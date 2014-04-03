@@ -79,22 +79,22 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	{
 		JSONParser parser = new JSONParser();
 		try {
-			Object obj=parser.parse(new FileReader("JSONs/currentRamp.json"));
-			JSONArray array=(JSONArray)obj;
-			System.out.println(array.get(0));
-//			//JSONObject objectFromFile = (JSONObject) parser.parse(new FileReader("JSONs/currentRamp.json"));
-//			//if(!arrayFromFile.isEmpty())
-//			{
-//				JSONObject ramp = (JSONObject) objectFromFile.get(0);
-//				System.out.println(ramp);
-//				//Double xLocation = Double.parseDouble((String) ramp.get("lat"));
-//				//Double yLocation = Double.parseDouble((String) ramp.get("lon"));
-//				//System.out.println(xLocation +" " +yLocation);
-//				//drawTheRampOnTheMap(xLocation, yLocation);
-//		//	}else{
-//				System.out.println("I could not find the spot for a ramp :(");
-//			}
-
+			JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("JSONs/currentRamp.json"));
+			String status = (String) jsonObject.get("status");
+			if(status.equals("OK"))
+			{
+				JSONArray resultsArray = (JSONArray) jsonObject.get("results");
+				JSONObject results = (JSONObject) resultsArray.get(0);
+				String formattedAddress = (String) results.get("formatted_address");
+				System.out.println(formattedAddress);
+				JSONObject geometry = (JSONObject) results.get("geometry");
+				JSONObject location = (JSONObject) geometry.get("location");
+				Double xLocation = (Double) location.get("lat");
+				Double yLocation = (Double) location.get("lng"); 
+				drawTheRampOnTheMap(xLocation, yLocation);
+			}else{
+				System.out.println("I could not find the spot for a ramp :(");
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -135,7 +135,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	{
 		String URLOfRamp = "http://maps.googleapis.com/maps/api/geocode/json?address=";
 		String fixedRampName = rampName.replace('?', ' ');
-		System.out.println(fixedRampName);
+		//System.out.println(fixedRampName);
 		ramps.add(fixedRampName);
 		String[] arrayOfTheRampNameSplitByName = fixedRampName.split(" ");
 		for(int i = 0; i < arrayOfTheRampNameSplitByName.length; i++)
@@ -148,7 +148,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			}
 		}
 		
-		URLOfRamp = URLOfRamp.concat("&sensor=false");
+		URLOfRamp = URLOfRamp.concat("+los+angeles&sensor=false");
 		return URLOfRamp; 
 		
 	}
