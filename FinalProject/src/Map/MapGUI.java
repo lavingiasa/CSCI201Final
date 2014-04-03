@@ -168,7 +168,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	    setExtendedState(JFrame.MAXIMIZED_BOTH);
 	    
 	    map().setTileSource((TileSource) new MapQuestOsmTileSource());
-	
+	    map().setDisplayPositionByLatLon(33.9804989,-118.0517325, 10); 
+
 	    add(treeMap);
 	    
 	    map().addMouseListener(new MouseAdapter() {
