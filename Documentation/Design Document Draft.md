@@ -1,4 +1,5 @@
-# Final Project Design Document
+<center> Design Document
+----
 Design document for out traffic simulator final project.
 The Team:
 ----
@@ -13,25 +14,26 @@ The Team:
 The goal is to showcase all that we have learned over the course of CSCI 201. This includes, but is not limited to: Multi-threading, Java based applications, programs using the Swing Javax library, and more.
 
 More specifically this application will work as a traffic similator that is constantly pulling live data from the server given to us.
+
 ##Classes:
 ----
 + ###Car:
-	+ This class will represent the cars on the map. Each car will be its own thread
+	+ This class will represent the cars on the map. Each car will be its own thread most likely
 	+ #####Parents:
 		+ Runnable: This is because each car will be its own thread and due to Javas rules about multiple inheritence we must impliment this, not inherit it.
-		+ JComponent(?): Each car will be able to draw itself on the map, so it must have the paintComponent method overwritten. To let cars draw themselves we need to inherit this class //TO-DO: Double check this.
+		+ JComponent: Each car will be able to draw itself on the map, so it must have the paintComponent method overwritten. To let cars draw themselves we need to inherit this class
 	+ #####Functions:
 		+ paintComponent(Graphics g)
 			+ Using the location and speed the cars will draw themselves on that map with the graphics class instance that is passed in
 		+ Getters/Setters for the data
 		+ UpdateLocation:
 			+ Using the location, direction, and speed of the car this method will be called to update the location of the car
-			+ This will also be called and changed when the zoom and/or pan is changed (?)
 		+ Constructor:
 			+ Given the data from the JSON a new car will be created 
 	+ #####Data:
 		+ int ID: This is the identification number of the car
 		+ double Speed: This is the speed that the car is currenly going
+		+ int startedTime: This is the time the car was made on the road from the JSON file
 		+ String Direction: This will be the direction the car is heading:
 			+ Acceptable Strings:
 				+ West
@@ -51,40 +53,38 @@ More specifically this application will work as a traffic similator that is cons
 			+ I believe that we will make this work easiest for the map. This would mean longitude in degrees in this case 
 + ###Database:
 	+ This class will be the abstraction layer between all of the classes and the MySQL database
-	+ #####Parents:
-		+ TBD
 	+ #####Functions:
-		+ TBD
-		+ Some function to get the history from a start date/time to an end date/time
-		+ Some function to return all the cars on the road
-		+ Some function to get the best times to leave
-		+ Some function that will find the shortest amount of time to travel between two nodes
-		+ Some function to create and display the graph
-		+ Some function to export to a CSV file
+		+ void addCar(Car car, int time): this function will add a car at the time it is on the road
+		+ ArrayList<String> getHistory(int start, int end): to get the history from a start date/time to an end date/time
+		+ ArrayList<Car>getCars(int start, int end): this function will return the cars on the road from the times given
+		+ ArrayList<Integer>getBestTimesToLeave(Ramp locationOne, Ramp locationTwo): this function will get the best times to leave from location A to location B
+			+ This is going to use many calls to the function right below it in order to get the shortest time between two locations and then it will sort it and return the best time to leave
+		+ ArrayList<String>shorestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes
+			+ To do this we are going to use Dijkstra's algorithm:
+				+ The nodes will be the ramps
+				+ The edge weights in this case will be the times to travel between two nodes, which is going to be found by looking at the speeds of the cars on the roads
+					+ We are going to average the cars on that section of the freeway and use the distance to get the amount of time to travel between the two locations
+		+ void makeAndDisplayGraph(ArrayList<ArrayList<String>> listOfShortestTimesToGetFromAtoB): function to make and display the graph of times and the like. It will make a  Graph (another class we have) and display it in a popup. The locations it chooses from depends on the nodes that will be selected
+		+ void exportToCSV(): This function will take all this data and export it to a CSV file
 	+ #####Data:
 		+ The MySQL database
 + ###Graph:
-	+ This class will make and display the graph
+	+ This class will make and display the graph. It is just going to popup all the information we need
 	+ #####Parents:
-		+ TBD
+		+ None
 	+ #####Functions:
-		+ showGraph:
+		+ void showGraph():
 			+ Using the data in the ArrayList it will create the graph
-			+ This is going to be a popup with the JPanel in it (This is the current plan)
+			+ This is going to be a popup with the JPanel in it 
 	+ #####Data:
-		+ ArrayList<?> data: This is the data the graph will be based on. It is TBD what this data structure will contain
+		+ ArrayList<ArrayList<String>> data: This will be a list of the shortest times to get from AtoB depending on the time and the two locations chosen. The locations it chooses from depends on the nodes that will be selected
 		+ JPanel graphPanel: This is the panel that is the actual graph that is added to the popup
 + ###Nodes:
-	+ This class will be the nodes that are overlaid on the map that the user can select to gain more data
+	+ This class will be the nodes that are overlaid on the map that the user can select to gain more data. We are going to draw this directly on the maps
 	+ #####Parents:
-		+ TBD
-		+ This will most likely be a JComponent or a JLabel that will be positioned over the map
+		+ None
 	+ #####Functions:
 		+ Getters and setters
-		+ UpdateLocation:
-			+ Using the xLocation, yLocation, and zoom/pan it will redraw the node
-			+ This will be called and changed when the zoom and/or pan is changed (?)
-		+ More TBD
 	+ #####Data:
 		+ double xLocation: This is the x location of the node
 			+ I believe that we will make this work easiest for the map. This would mean latitude in degrees in this case 
@@ -98,26 +98,26 @@ More specifically this application will work as a traffic similator that is cons
 	+ #####Functions:
 		+ run:
 			+ This method just pulls and parses the data then puts itself to sleep for a certain time interval
-		+ pullNewData:
+		+ void pullNewData():
 			+ This method will pull the new JSON file from the server and save it locally
-		+ parseTheData:
+		+ void parseTheData():
 			+ This method will use the new pulled JSON to update and add new cars. If the car is already in the system then it will just update, else it will create a new car
 	+ #####Data:
 		+ ArrayList <Car> cars: This will be the list of cars that are parsed out of the JSON
-		
-+ ###MapPanel:
-	+ We did not write this class. It displays the map using data from Open Street Maps
-	
+
 + ###MapGUI:
 	+ This will be the main GUI of the application where everything will happen
 	+ #####Parents:
-		+ This is still TBD: For now it is JApplet, but I think we are going to make it a JPanel
+		+ extends JFrame: so it will be a JFrame (main centre of our applications)
+		+ impliments JMapEventListener: so we can use the map and have the map move/work as we want it to
 	+ #####Data:
 		+ MapPanel map: This is the map that everything will be drawn on top of
-		+ JPanel canvasOfCars: This is the actual blank canvas the cars will be drawn of
-			+ The background of this will be transparent/null so we can see the map through it
-			+ This is just an idea any may not work in the end
+		+ JMapViewerTree treeMap:
+		+ JLabel zoomValue: this shows much much we are zoomed in on the map
+		+ Vector<Car> cars: this holds all the cars that are on the road
+		+ Vector<Ramp> ramps: this holds all the ramps we are going to use
 	+ #####Functions:
 		+ TBD
++ ###Ramp:
 
 ##Flow of The Application:
