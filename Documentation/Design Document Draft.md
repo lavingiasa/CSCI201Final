@@ -112,12 +112,19 @@ More specifically this application will work as a traffic similator that is cons
 		+ impliments JMapEventListener: so we can use the map and have the map move/work as we want it to
 	+ #####Data:
 		+ MapPanel map: This is the map that everything will be drawn on top of
-		+ JMapViewerTree treeMap:
+		+ JMapViewerTree treeMap: not really sure what this does, but we use it for the map :)
 		+ JLabel zoomValue: this shows much much we are zoomed in on the map
 		+ Vector<Car> cars: this holds all the cars that are on the road
 		+ Vector<Ramp> ramps: this holds all the ramps we are going to use
 	+ #####Functions:
-		+ TBD
+		+ void addTheOnOffRamps(): this pulls the on off ramps from the JSON using their names (from the cars) and then parses them
+		+ void drawTheRampOnTheMap(Double xLocation, Double yLocation): this draws a dot on the map for the ramp at xLocation,yLocation
+		+ void parseJSONUsingPulledJSON(): This looks at the pulled JSON and looks for the xLocation and yLocation from the thing and draws it on the map.
+			+ if it cannot find it, it will print out a sad message saying so
+		+ pullJSONUsingName(): using the name of the ramp it will pull the JSON information about it from the google maps API
+			+ we proceed to get the location from here and stuff like that
+		+ getURLOfTheRamp(String rampName): using the name of the ramp it will construct a string with the URL corresponding to it
+		+ constructor: sets the defaults and makes the map panel show up/aligns stuff
 + ###Ramp:
-
-##Flow of The Application:
+	+ This class will represent the ramps that we use in the program
+	+ ####Parents:
