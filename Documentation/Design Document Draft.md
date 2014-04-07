@@ -1,6 +1,9 @@
-<center> Design Document
+<center>Design Document
 ----
+
 Design document for out traffic simulator final project.
+
+----
 The Team:
 ----
 + Samir Lavingia
