@@ -13,7 +13,7 @@ The Team:
 ----
 The goal is to showcase all that we have learned over the course of CSCI 201. This includes, but is not limited to: Multi-threading, Java based applications, programs using the Swing Javax library, and more.
 
-More specifically this application will work as a traffic similator that is constantly pulling live data from the server given to us.
+More specifically this application will work as a traffic simulator that is constantly pulling live data from the server given to us.
 
 ##Classes:
 ----
@@ -29,7 +29,7 @@ More specifically this application will work as a traffic similator that is cons
 		+ UpdateLocation:
 			+ Using the location, direction, and speed of the car this method will be called to update the location of the car
 		+ Constructor:
-			+ Given the data from the JSON a new car will be created 
+			+ Given the data from the JSON a new car will be created
 	+ #####Data:
 		+ int ID: This is the identification number of the car
 		+ double Speed: This is the speed that the car is currenly going
@@ -136,3 +136,8 @@ More specifically this application will work as a traffic similator that is cons
 		+ static Vector<Ramp> ramps: this is just a vector to hold all the ramps after they are added
 	+ ####Functions:
 		+ getters and setters for the variables
+		
+
+Class Diagram:
+----
+<img src="TriangleImage.png" alt="Drawing" style="width: 500px;"/>"
