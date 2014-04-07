@@ -140,4 +140,4 @@ More specifically this application will work as a traffic simulator that is cons
 
 Class Diagram:
 ----
-<img src="TriangleImage.png" alt="Drawing" style="width: 500px;"/>"
+<img src="Images/TriangleImage.png" alt="Drawing" style="width: 200px"/>
