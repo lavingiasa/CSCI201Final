@@ -136,8 +136,16 @@ More specifically this application will work as a traffic simulator that is cons
 		+ static Vector<Ramp> ramps: this is just a vector to hold all the ramps after they are added
 	+ ####Functions:
 		+ getters and setters for the variables
-		
 
-Class Diagram:
+#Gui Images:
 ----
-<img src="Images/TriangleImage.png" alt="Drawing" style="width: 200px"/>
+<img src="Images/GUIDiagramNoClicks.png" alt="Nothing Clicked"/>
+<img src="Images/GUIDiagramWithFileClicked.png" alt="File Clicked"/>
+<img src="Images/GUIDiagramWithGraphClicked.png" alt="Graph Clicked"/>
+<img src="Images/GUIDiagramWithDirectionsClicked.png" alt="Graph Clicked"/>
+<img src="Images/GUIPopupForLocations.png" alt="Drawing"/>
+<img src="Images/GraphViaShortestTime.png" alt="Drawing"/>
+
+
+#Class Diagram:
+----
