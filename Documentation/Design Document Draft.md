@@ -59,7 +59,7 @@ More specifically this application will work as a traffic simulator that is cons
 		+ ArrayList<Car>getCars(int start, int end): this function will return the cars on the road from the times given
 		+ ArrayList<Integer>getBestTimesToLeave(Ramp locationOne, Ramp locationTwo): this function will get the best times to leave from location A to location B
 			+ This is going to use many calls to the function right below it in order to get the shortest time between two locations and then it will sort it and return the best time to leave
-		+ ArrayList<String>shorestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes
+		+ ArrayList<String> shorestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes
 			+ To do this we are going to use Dijkstra's algorithm:
 				+ The nodes will be the ramps
 				+ The edge weights in this case will be the times to travel between two nodes, which is going to be found by looking at the speeds of the cars on the roads
@@ -140,4 +140,4 @@ More specifically this application will work as a traffic simulator that is cons
 
 Class Diagram:
 ----
-<img src="TriangleImage.png" alt="Drawing" style="width: 500px;"/>"
+<img src="DesignDocument_ClassDiagram.pdf" alt="Drawing" style="width: 500px;"/>"
