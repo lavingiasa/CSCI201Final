@@ -148,6 +148,7 @@ More specifically this application will work as a traffic simulator that is cons
 <img src="Images/GUIDiagramWithDirectionsClicked.png" alt="Graph Clicked"/>
 <img src="Images/GUIPopupForLocations.png" alt="Drawing"/>
 <img src="Images/GraphViaShortestTime.png" alt="Drawing"/>
+<img src="Images/CarPopup.png" alt="Drawing" width="1000px"/>
 
 
 #Class Diagram:
