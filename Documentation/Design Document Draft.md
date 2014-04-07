@@ -1,3 +1,4 @@
+
 <center>Design Document
 ----
 
@@ -64,7 +65,6 @@ More specifically this application will work as a traffic simulator that is cons
 			+ This is going to use many calls to the function right below it in order to get the shortest time between two locations. This function will then sort these times and return the best times to leave.
 		+ ArrayList\<String> shortestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes.
 		+ ArrayList\<String> shortestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes.
->>>>>>> 39e1ef2f75ffc6b788edf7de58cd21f29f2f2ec8
 			+ To achieve this, we are going to use Dijkstra's algorithm:
 				+ The nodes will be the ramps
 				+ The edge weights in this case will be the times to travel between two nodes, which will be found by looking at the speeds of the cars on the roads.
