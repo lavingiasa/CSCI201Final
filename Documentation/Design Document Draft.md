@@ -1,6 +1,9 @@
-<center> Design Document
+<center>Design Document
 ----
+
 Design document for out traffic simulator final project.
+
+----
 The Team:
 ----
 + Samir Lavingia
@@ -55,16 +58,20 @@ More specifically this application will work as a traffic simulator that is cons
 	+ This class will be the abstraction layer between all of the classes and the MySQL database
 	+ #####Functions:
 		+ void addCar(Car car, int time): this function will add a car at the time it is on the road
-		+ ArrayList<String> getHistory(int start, int end): to get the history from a start date/time to an end date/time
-		+ ArrayList<Car>getCars(int start, int end): this function will return the cars on the road from the times given
-		+ ArrayList<Integer>getBestTimesToLeave(Ramp locationOne, Ramp locationTwo): this function will get the best times to leave from location A to location B
+		+ ArrayList\<String> getHistory(int start, int end): to get the history from a start date/time to an end date/time
+		+ ArrayList\<Car>getCars(int start, int end): this function will return the cars on the road from the times given
+		+ ArrayList\<Integer>getBestTimesToLeave(Ramp locationOne, Ramp locationTwo): this function will get the best times to leave from location A to location B
 			+ This is going to use many calls to the function right below it in order to get the shortest time between two locations and then it will sort it and return the best time to leave
+<<<<<<< HEAD
 		+ ArrayList<String> shorestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes
+=======
+		+ ArrayList\<String>shorestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes
+>>>>>>> 39e1ef2f75ffc6b788edf7de58cd21f29f2f2ec8
 			+ To do this we are going to use Dijkstra's algorithm:
 				+ The nodes will be the ramps
 				+ The edge weights in this case will be the times to travel between two nodes, which is going to be found by looking at the speeds of the cars on the roads
 					+ We are going to average the cars on that section of the freeway and use the distance to get the amount of time to travel between the two locations
-		+ void makeAndDisplayGraph(ArrayList<ArrayList<String>> listOfShortestTimesToGetFromAtoB): function to make and display the graph of times and the like. It will make a  Graph (another class we have) and display it in a popup. The locations it chooses from depends on the nodes that will be selected
+		+ void makeAndDisplayGraph(ArrayList\<ArrayList\<String>> listOfShortestTimesToGetFromAtoB): function to make and display the graph of times and the like. It will make a  Graph (another class we have) and display it in a popup. The locations it chooses from depends on the nodes that will be selected
 		+ void exportToCSV(): This function will take all this data and export it to a CSV file
 	+ #####Data:
 		+ The MySQL database
@@ -77,7 +84,7 @@ More specifically this application will work as a traffic simulator that is cons
 			+ Using the data in the ArrayList it will create the graph
 			+ This is going to be a popup with the JPanel in it 
 	+ #####Data:
-		+ ArrayList<ArrayList<String>> data: This will be a list of the shortest times to get from AtoB depending on the time and the two locations chosen. The locations it chooses from depends on the nodes that will be selected
+		+ ArrayList\<ArrayList\<String>> data: This will be a list of the shortest times to get from AtoB depending on the time and the two locations chosen. The locations it chooses from depends on the nodes that will be selected
 		+ JPanel graphPanel: This is the panel that is the actual graph that is added to the popup
 + ###Nodes:
 	+ This class will be the nodes that are overlaid on the map that the user can select to gain more data. We are going to draw this directly on the maps
@@ -103,7 +110,7 @@ More specifically this application will work as a traffic simulator that is cons
 		+ void parseTheData():
 			+ This method will use the new pulled JSON to update and add new cars. If the car is already in the system then it will just update, else it will create a new car
 	+ #####Data:
-		+ ArrayList <Car> cars: This will be the list of cars that are parsed out of the JSON
+		+ ArrayList \<Car> cars: This will be the list of cars that are parsed out of the JSON
 
 + ###MapGUI:
 	+ This will be the main GUI of the application where everything will happen
@@ -114,8 +121,8 @@ More specifically this application will work as a traffic simulator that is cons
 		+ MapPanel map: This is the map that everything will be drawn on top of
 		+ JMapViewerTree treeMap: not really sure what this does, but we use it for the map :)
 		+ JLabel zoomValue: this shows much much we are zoomed in on the map
-		+ Vector<Car> cars: this holds all the cars that are on the road
-		+ Vector<Ramp> ramps: this holds all the ramps we are going to use
+		+ Vector\<Car> cars: this holds all the cars that are on the road
+		+ Vector\<Ramp> ramps: this holds all the ramps we are going to use
 	+ #####Functions:
 		+ void addTheOnOffRamps(): this pulls the on off ramps from the JSON using their names (from the cars) and then parses them
 		+ void drawTheRampOnTheMap(Double xLocation, Double yLocation): this draws a dot on the map for the ramp at xLocation,yLocation
@@ -133,11 +140,24 @@ More specifically this application will work as a traffic simulator that is cons
 		+ string Name: this is the string that is the name for the ramp
 		+ double xLocation: this is the xLocation of the ramp
 		+ double yLocation: this is the yLocation of the ramp
-		+ static Vector<Ramp> ramps: this is just a vector to hold all the ramps after they are added
+		+ static Vector\<Ramp> ramps: this is just a vector to hold all the ramps after they are added
 	+ ####Functions:
 		+ getters and setters for the variables
-		
 
-Class Diagram:
+#Gui Images:
 ----
-<img src="DesignDocument_ClassDiagram.pdf" alt="Drawing" style="width: 500px;"/>"
+<img src="Images/GUIDiagramNoClicks.png" alt="Nothing Clicked"/>
+<img src="Images/GUIDiagramWithFileClicked.png" alt="File Clicked"/>
+<img src="Images/GUIDiagramWithGraphClicked.png" alt="Graph Clicked"/>
+<img src="Images/GUIPopupForLocations.png" alt="Drawing"/>
+<img src="Images/GraphViaShortestTime.png" alt="Drawing"/>
+<img src="Images/GUIDiagramWithDirectionsClicked.png" alt="Graph Clicked"/>
+<img src="Images/GUITripleOption.png" alt="Graph Clicked"/>
+<img src="Images/CarPopup.png" alt="Drawing" width="1000px"/>
+
+
+#Class Diagram:
+----
+<img src="Images/DesignDocument_ClassDiagram.pdf" alt="Drawing"/>"
+
+
