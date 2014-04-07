@@ -128,3 +128,11 @@ More specifically this application will work as a traffic similator that is cons
 + ###Ramp:
 	+ This class will represent the ramps that we use in the program
 	+ ####Parents:
+		+ None
+	+ ####Data:
+		+ string Name: this is the string that is the name for the ramp
+		+ double xLocation: this is the xLocation of the ramp
+		+ double yLocation: this is the yLocation of the ramp
+		+ static Vector<Ramp> ramps: this is just a vector to hold all the ramps after they are added
+	+ ####Functions:
+		+ getters and setters for the variables
