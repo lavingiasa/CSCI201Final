@@ -60,18 +60,16 @@ More specifically this application will work as a traffic simulator that is cons
 		+ void addCar(Car car, int time): This function will add a car at the time it is on the road.
 		+ ArrayList\<String> getHistory(int start, int end): This function will return the history from a start date/time to an end date/time.
 		+ ArrayList\<Car>getCars(int start, int end): This function will return the cars that were on the road between the times given.
-		+ ArrayList\<Integer>getBestTimesToLeave(Ramp locationOne, Ramp locationTwo): This function will return the best times to leave from location A when traveling to location B.
+		+ ArrayList\<Integer> getBestTimesToLeave(Ramp locationOne, Ramp locationTwo): This function will return the best times to leave from location A when traveling to location B.
 			+ This is going to use many calls to the function right below it in order to get the shortest time between two locations. This function will then sort these times and return the best times to leave.
-<<<<<<< HEAD
-		+ ArrayList<String> shorestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes.
-=======
-		+ ArrayList\<String>shorestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes.
+		+ ArrayList\<String> shortestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes.
+		+ ArrayList\<String> shortestTimeToGetFromAToB(Ramp locationOne, Ramp locationTwo, int startTime, int endTime): Some function that will find the shortest amount of time to travel between two nodes.
 >>>>>>> 39e1ef2f75ffc6b788edf7de58cd21f29f2f2ec8
 			+ To achieve this, we are going to use Dijkstra's algorithm:
 				+ The nodes will be the ramps
 				+ The edge weights in this case will be the times to travel between two nodes, which will be found by looking at the speeds of the cars on the roads.
 					+ We will average the speeds of the cars on that section of the freeway and use the distance to get the amount of time to travel between the two locations.
-		+ void makeAndDisplayGraph(ArrayList\<ArrayList\<String>> listOfShortestTimesToGetFromAtoB): This function will make and display the graph of times and the like. It will make a Graph (another class we have) and display it in a popup. The locations it chooses from depends on the nodes that will be selected.
+		+ void makeAndDisplayGraph(ArrayList\<ArrayList\<String>> listOfShortestTimesToGetFromAtoB): This function will make and display the graph of times and the like. It will make a Graph (another class we have) and display it in a popup. The locations it chooses from depend on the nodes that will be selected.
 		+ void exportToCSV(): This function will take all this data and export it to a CSV file.
 	+ #####Data:
 		+ The MySQL database
@@ -110,7 +108,7 @@ More specifically this application will work as a traffic simulator that is cons
 		+ void parseTheData():
 			+ This method will use the new pulled JSON to update and add new cars. If the car is already in the system then it will just update, else it will create a new car.
 	+ #####Data:
-		+ ArrayList \<Car> cars: This will be the list of cars that are parsed out of the JSON.
+		+ ArrayList\<Car> cars: This will be the list of cars that are parsed out of the JSON.
 
 + ###MapGUI:
 	+ This will be the main GUI of the application where everything will happen.
