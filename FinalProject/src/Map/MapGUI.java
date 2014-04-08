@@ -27,10 +27,12 @@ import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
 import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.events.JMVCommandEvent;
 import org.openstreetmap.gui.jmapviewer.interfaces.JMapViewerEventListener;
+import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
 import Cars.Car;
+import Cars.CarDot;
 import Freeways.Interstate10;
 import Freeways.Interstate101;
 import Freeways.Interstate105;
@@ -181,10 +183,10 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	    }
 		
 	}
-
+	//http://svn.openstreetmap.org/applications/viewer/jmapviewer/src/org/openstreetmap/gui/jmapviewer/
 	private void drawTheRampOnTheMap(Double xLocation, Double yLocation) 
 	{
-		map().addMapMarker(new MapMarkerDot(Color.PINK, xLocation, yLocation));
+		map().addMapMarker(new CarDot(Color.PINK, xLocation, yLocation));
 
 	}
 	
