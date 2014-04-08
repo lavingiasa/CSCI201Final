@@ -67,7 +67,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			parseJSONUsingPulledJSON();
 		}
 		
-		testFreeqwayWaypoints();
+		testFreewayWaypoints();
 
 	}
 
@@ -219,8 +219,9 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			zoomValue.setText(String.format("%s", map().getZoom()));
 	}
 
-	private void testFreeqwayWaypoints() {
+	private void testFreewayWaypoints() 
+	{
 		
-		map().addMapMarker(new MapMarkerDot(xLocation, yLocation));
+		//map().addMapMarker(new MapMarkerDot(xLocation, yLocation));
 	}
 }
