@@ -33,6 +33,7 @@ import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
 import Cars.Car;
 import Cars.CarDot;
+import Cars.RampDot;
 import Freeways.Interstate10;
 import Freeways.Interstate101;
 import Freeways.Interstate105;
@@ -186,7 +187,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	//http://svn.openstreetmap.org/applications/viewer/jmapviewer/src/org/openstreetmap/gui/jmapviewer/
 	private void drawTheRampOnTheMap(Double xLocation, Double yLocation) 
 	{
-		map().addMapMarker(new CarDot(Color.PINK, xLocation, yLocation));
+		map().addMapMarker(new RampDot(xLocation, yLocation));
 
 	}
 	
