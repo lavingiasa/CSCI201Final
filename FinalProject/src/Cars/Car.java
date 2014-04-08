@@ -7,6 +7,7 @@ public class Car
 	private String direction;
 	private String ramp;
 	private String freeway;
+	private int rampNumber;
 	
 	public Car(int id, double speed, String direction, String ramp, String freeway)
 	{
@@ -15,6 +16,13 @@ public class Car
 		this.direction = direction;
 		this.ramp = ramp;
 		this.freeway = freeway;
+		setRampNumber();
+	}
+
+	private void setRampNumber() 
+	{
+		// TODO Auto-generated method stub
+		
 	}
 
 	public int getID()
@@ -52,6 +60,12 @@ public class Car
 	{
 		return freeway;
 	}
+
+	public int getRampNumber() 
+	{
+		return rampNumber;
+	}
+
 	
 	
 

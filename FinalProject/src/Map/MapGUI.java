@@ -34,6 +34,7 @@ import Freeways.Interstate10;
 import Freeways.Interstate101;
 import Freeways.Interstate105;
 import Freeways.Interstate405;
+import Freeways.Ramp;
 import JSON.JSONsParser;
 
 
@@ -92,16 +93,16 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			Integer freewayNumber = Integer.parseInt(cars.get(i).getFreeway());
 			switch (freewayNumber) {
 			case 10:
-				
+				//drawCarOnThe10(cars.get(i));
 				break;
 			case 101:
-				
+				//drawCarOnThe101(cars.get(i));
 				break;
 			case 105:
-					
+				drawCarOnThe105(cars.get(i));
 				break;
 			case 405:
-						
+				drawCarOnThe405(cars.get(i));
 				break;
 			default:
 				break;
@@ -109,12 +110,40 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		}
 	}
 
+	private void drawCarOnThe405(Car car) 
+	{
+		int rampNumber = car.getRampNumber();
+		
+	}
+
+	private void drawCarOnThe105(Car car) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void drawCarOnThe101(Car car) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+	
+	private void drawCarOnThe10(Car car) 
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void addFreewayPoints() 
 	{
 		I10.addFreewayPoints();
+		Ramp.setCurrentID(0);
 		I101.addFreewayPoints();
+		Ramp.setCurrentID(0);
 		I105.addFreewayPoints();
+		Ramp.setCurrentID(0);
 		I405.addFreewayPoints();
+		Ramp.setCurrentID(0);
 		//testTheFreewayPoints();
 		for(int i = 0; i < I105.ramps.size(); i++)
 		{
