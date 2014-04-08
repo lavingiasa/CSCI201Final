@@ -24,7 +24,16 @@ public class Car
 	private void setRampNumber() 
 	{
 		switch (freewayNumber) {
-		case value:
+		case 10:
+			
+			break;
+		case 101:
+		
+			break;
+		case 105:
+			
+			break;
+		case 405:
 			
 			break;
 
