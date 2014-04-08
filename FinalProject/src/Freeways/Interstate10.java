@@ -8,8 +8,14 @@ import java.util.ArrayList;
 
 public class Interstate10 extends Freeway 
 {
-	static ArrayList<Ramp> ramps;
-	static ArrayList<Waypoint> waypoints;
+	public ArrayList<Ramp> ramps;
+	public ArrayList<Waypoint> waypoints;
+	
+	public Interstate10()
+	{
+		ramps = new ArrayList<Ramp>();
+		waypoints = new ArrayList<Waypoint>();
+	}
 	
 	public void addFreewayPoints()
 	{

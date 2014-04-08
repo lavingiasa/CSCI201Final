@@ -68,7 +68,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		map.addTheOnOffRamps();
+		//map.addTheOnOffRamps();
 		map.addFreewayPoints();
 
 	}
@@ -86,10 +86,24 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private void addFreewayPoints() 
 	{
-		I10.addFreewayPoints();
+		//I10.addFreewayPoints();
 		I101.addFreewayPoints();
-		I105.addFreewayPoints();
+		//I105.addFreewayPoints();
 		I405.addFreewayPoints();
+		testTheFreewayPoints();
+	}
+
+	private void testTheFreewayPoints() 
+	{
+		for(int i = 0; i < I101.waypoints.size(); i++)
+		{
+			drawTheRampOnTheMap(I101.waypoints.get(i).getxLocation(), I101.waypoints.get(i).getyLocation());
+		}
+		
+		for(int i = 0; i < I405.waypoints.size(); i++)
+		{
+			drawTheRampOnTheMap(I405.waypoints.get(i).getxLocation(), I405.waypoints.get(i).getyLocation());
+		}
 		
 	}
 
