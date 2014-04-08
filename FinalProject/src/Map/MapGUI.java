@@ -4,7 +4,6 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -38,8 +37,10 @@ import Freeways.Interstate405;
 import JSON.JSONsParser;
 
 
+@SuppressWarnings("serial")
 public class MapGUI extends JFrame implements JMapViewerEventListener
 {	
+
 	private JMapViewerTree treeMap = null;
 
 	//private JLabel zoomLabel=null;
@@ -86,6 +87,9 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	private void addFreewayPoints() 
 	{
 		I10.addFreewayPoints();
+		I101.addFreewayPoints();
+		I105.addFreewayPoints();
+		I405.addFreewayPoints();
 		
 	}
 
