@@ -72,7 +72,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		map.addFreewayPoints();
 
 	}
-
+	/*
 	private void addTheOnOffRamps() 
 	{
 		for(int i = 0; i < cars.size(); i++)
@@ -82,7 +82,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		}
 		
 
-	}
+	}*/
 
 	private void addFreewayPoints() 
 	{
@@ -126,7 +126,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		map().addMapMarker(new MapMarkerDot(xLocation, yLocation));
 
 	}
-
+	
+	/*
 	private void parseJSONUsingPulledJSON() 
 	{
 		JSONParser parser = new JSONParser();
@@ -155,8 +156,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			e.printStackTrace();
 		}
 
-	}
-
+	}*/
+	/*
 	private void pullJSONUsingName(String rampName) 
 	{
 		URL website;
@@ -204,6 +205,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		return URLOfRamp; 
 
 	}
+	*/
 
 	public MapGUI()
 	{
