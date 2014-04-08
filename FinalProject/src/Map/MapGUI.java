@@ -37,17 +37,17 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 {	
 	private JMapViewerTree treeMap = null;
 
-    //private JLabel zoomLabel=null;
-    private JLabel zoomValue=null;
+	//private JLabel zoomLabel=null;
+	private JLabel zoomValue=null;
 
-    //private JLabel mperpLabelName=null;
-    private JLabel mperpLabelValue = null;
-    
-    private Vector<Car> cars = new Vector<Car>();
-    private Vector<String> ramps = new Vector<String>();
-    JSONsParser parser = null;
+	//private JLabel mperpLabelName=null;
+	private JLabel mperpLabelValue = null;
 
-	
+	private Vector<Car> cars = new Vector<Car>();
+	private Vector<String> ramps = new Vector<String>();
+	JSONsParser parser = null;
+
+
 	public static void main (String [] args)
 	{
 		MapGUI map = new MapGUI();
@@ -58,7 +58,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		}
 		map.addTheOnOffRamps();
 	}
-	
+
 	private void addTheOnOffRamps() 
 	{
 		for(int i = 0; i < cars.size(); i++)
@@ -67,12 +67,14 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			parseJSONUsingPulledJSON();
 		}
 		
+		testFreeqwayWaypoints();
+
 	}
 
 	private void drawTheRampOnTheMap(Double xLocation, Double yLocation) 
 	{
 		map().addMapMarker(new MapMarkerDot(xLocation, yLocation));
-		
+
 	}
 
 	private void parseJSONUsingPulledJSON() 
@@ -111,7 +113,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		String nameOfRampURL = getURLOfTheRamp(rampName);
 		try {
 			website = new URL(nameOfRampURL);
-					//"http://nominatim.openstreetmap.org/search/Robertson%20boulevard,%20Culver?format=json&polygon=0&addressdetails=0");
+			//"http://nominatim.openstreetmap.org/search/Robertson%20boulevard,%20Culver?format=json&polygon=0&addressdetails=0");
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
 			FileOutputStream fos = new FileOutputStream(
 					"JSONs/currentRamp.json");
@@ -128,9 +130,9 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-//http://maps.googleapis.com/maps/api/geocode/json?address=market+and+4th,+san+francisco&sensor=false
+	//http://maps.googleapis.com/maps/api/geocode/json?address=market+and+4th,+san+francisco&sensor=false
 	private String getURLOfTheRamp(String rampName) 
 	{
 		String URLOfRamp = "http://maps.googleapis.com/maps/api/geocode/json?address=";
@@ -147,74 +149,78 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				URLOfRamp = URLOfRamp.concat("+" + arrayOfTheRampNameSplitByName[i]);
 			}
 		}
-		
+
 		URLOfRamp = URLOfRamp.concat("+los+angeles&sensor=false");
 		return URLOfRamp; 
-		
+
 	}
 
 	public MapGUI()
 	{
 		super("Map Demo");
 		setSize(400,400);
-		
+
 		parser = new JSONsParser(cars);
 		parser.start();
-		
+
 		treeMap = new JMapViewerTree("Zones");
 		map().addJMVListener(this);
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    setExtendedState(JFrame.MAXIMIZED_BOTH);
-	    
-	    map().setTileSource((TileSource) new MapQuestOsmTileSource());
-	    map().setDisplayPositionByLatLon(33.9804989,-118.0517325, 10); 
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-	    add(treeMap);
-	    
-	    map().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON1) {
-                    map().getAttribution().handleAttribution(e.getPoint(), true);
-                }
-            }
-        });
+		map().setTileSource((TileSource) new MapQuestOsmTileSource());
+		map().setDisplayPositionByLatLon(33.9804989,-118.0517325, 10); 
 
-        map().addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                Point p = e.getPoint();
-                boolean cursorHand = map().getAttribution().handleAttributionCursor(p);
-                if (cursorHand) {
-                    map().setCursor(new Cursor(Cursor.HAND_CURSOR));
-                } else {
-                    map().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                }
-            }
-        });
-        
-        setVisible(true);
+		add(treeMap);
+
+		map().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (e.getButton() == MouseEvent.BUTTON1) {
+					map().getAttribution().handleAttribution(e.getPoint(), true);
+				}
+			}
+		});
+
+		map().addMouseMotionListener(new MouseAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				Point p = e.getPoint();
+				boolean cursorHand = map().getAttribution().handleAttributionCursor(p);
+				if (cursorHand) {
+					map().setCursor(new Cursor(Cursor.HAND_CURSOR));
+				} else {
+					map().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+				}
+			}
+		});
+
+		setVisible(true);
 	}
 
 	private JMapViewer map() 
 	{
-        return treeMap.getViewer();
+		return treeMap.getViewer();
 	}
 
 	@Override
 	public void processCommand(JMVCommandEvent command) {
-        if (command.getCommand().equals(JMVCommandEvent.COMMAND.ZOOM) ||
-                command.getCommand().equals(JMVCommandEvent.COMMAND.MOVE)) {
-            updateZoomParameters();
-        }
-    }
-	
-	 private void updateZoomParameters() {
-	        if (mperpLabelValue!=null)
-	            mperpLabelValue.setText(String.format("%s",map().getMeterPerPixel()));
-	        if (zoomValue!=null)
-	            zoomValue.setText(String.format("%s", map().getZoom()));
-	    }
-	
+		if (command.getCommand().equals(JMVCommandEvent.COMMAND.ZOOM) ||
+				command.getCommand().equals(JMVCommandEvent.COMMAND.MOVE)) {
+			updateZoomParameters();
+		}
+	}
+
+	private void updateZoomParameters() {
+		if (mperpLabelValue!=null)
+			mperpLabelValue.setText(String.format("%s",map().getMeterPerPixel()));
+		if (zoomValue!=null)
+			zoomValue.setText(String.format("%s", map().getZoom()));
+	}
+
+	private void testFreeqwayWaypoints() {
+		
+		map().addMapMarker(new MapMarkerDot(xLocation, yLocation));
+	}
 }
