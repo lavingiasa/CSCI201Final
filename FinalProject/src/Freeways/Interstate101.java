@@ -20,7 +20,7 @@ public class Interstate101 extends Freeway
 	public void addFreewayPoints()
 	{
 		try {
-			FileReader fr = new FileReader("src/101WayPoints.txt");
+			FileReader fr = new FileReader("waypoints/101WayPoints.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String line;
 			String headerText = br.readLine();
