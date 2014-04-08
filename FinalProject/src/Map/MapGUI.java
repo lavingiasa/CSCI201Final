@@ -88,7 +88,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	{
 		I10.addFreewayPoints();
 		I101.addFreewayPoints();
-		//I105.addFreewayPoints();
+		I105.addFreewayPoints();
 		I405.addFreewayPoints();
 		testTheFreewayPoints();
 	}
@@ -109,6 +109,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		{
 			drawTheRampOnTheMap(I10.waypoints.get(i).getxLocation(), I10.waypoints.get(i).getyLocation());
 		}
+
+    for(int i = 0; i < I105.waypoints.size(); i++)
+    {
+      drawTheRampOnTheMap(I105.waypoints.get(i).getxLocation(), I105.waypoints.get(i).getyLocation());
+    }
 		
 	}
 
