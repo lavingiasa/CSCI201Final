@@ -223,7 +223,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private void testFreewayWaypoints() {
 		try {
-			FileReader fr = new FileReader("src/FreewayWaypoints.txt");
+			FileReader fr = new FileReader("src/110WayPoints.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String line;
 			String headerText = br.readLine();
