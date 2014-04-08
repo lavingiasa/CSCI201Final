@@ -31,6 +31,10 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
 import Cars.Car;
+import Freeways.Interstate10;
+import Freeways.Interstate101;
+import Freeways.Interstate105;
+import Freeways.Interstate405;
 import JSON.JSONsParser;
 
 
@@ -46,6 +50,12 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private Vector<Car> cars = new Vector<Car>();
 	private Vector<String> ramps = new Vector<String>();
+	
+	public Interstate10 I10 = new Interstate10();
+	public Interstate101 I101 = new Interstate101();
+	public Interstate105 I105 = new Interstate105();
+	public Interstate405 I405 = new Interstate405();
+
 	JSONsParser parser = null;
 
 
@@ -58,6 +68,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			e.printStackTrace();
 		}
 		map.addTheOnOffRamps();
+		map.addFreewayPoints();
+
 	}
 
 	private void addTheOnOffRamps() 
@@ -68,8 +80,13 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			parseJSONUsingPulledJSON();
 		}
 		
-		testFreewayWaypoints();
 
+	}
+
+	private void addFreewayPoints() 
+	{
+		I10.addFreewayPoints();
+		
 	}
 
 	private void drawTheRampOnTheMap(Double xLocation, Double yLocation) 
@@ -220,25 +237,4 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			zoomValue.setText(String.format("%s", map().getZoom()));
 	}
 
-
-	private void testFreewayWaypoints() {
-		try {
-			FileReader fr = new FileReader("src/110WayPoints.txt");
-			BufferedReader br = new BufferedReader(fr);
-			String line;
-			String headerText = br.readLine();
-			System.out.println("Adding points on " + headerText);         // Prints out name of highway
-			while ((line = br.readLine()) != null) {
-				final String[] coordinatesArray = line.split(",");
-				final double x = Double.parseDouble(coordinatesArray[0]);
-				final double y = Double.parseDouble(coordinatesArray[1]);
-//				System.out.println(x + ", " + y);
-				map().addMapMarker(new MapMarkerDot(x, y));
-			}
-			
-			br.close();
-		} catch (NumberFormatException nfe) { nfe.printStackTrace(); } 
-		catch (FileNotFoundException e) { e.printStackTrace(); }  
-		catch (IOException e) { e.printStackTrace();}		
-	}
 }
