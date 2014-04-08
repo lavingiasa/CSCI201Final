@@ -15,6 +15,7 @@ import org.openstreetmap.gui.jmapviewer.Style;
 public class CarDot extends MapMarkerCircle{
 
 	public static final int DOT_RADIUS = 5;
+	public Color colour;
 
     public CarDot(Coordinate coord) {
         this(null, null, coord);
@@ -28,9 +29,19 @@ public class CarDot extends MapMarkerCircle{
     public CarDot(Layer layer, String name, Coordinate coord) {
         this(layer, name, coord, getDefaultStyle());
     }
-    public CarDot(Color color, double lat, double lon) {
+    public CarDot(double speed, Color color, double lat, double lon) {
         this(null, null, lat, lon);
         setColor(color);
+        if(speed < 20)
+        {
+        		colour = Color.RED;
+        }else if(speed < 40){
+        		colour = Color.ORANGE;
+        }else if(speed < 60){
+        		colour = Color.YELLOW;
+        }else{
+        		colour = Color.GREEN;
+        }
     }
     public CarDot(double lat, double lon) {
         this(null, null, lat, lon);
@@ -63,7 +74,7 @@ public class CarDot extends MapMarkerCircle{
             Composite oldComposite = g2.getComposite();
             g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
             //g2.setPaint(getBackColor());
-            g2.setPaint(Color.BLUE);
+            g2.setPaint(colour);
             g.fillOval(position.x - size_h, position.y - size_h, size, size);
             g2.setComposite(oldComposite);
         }

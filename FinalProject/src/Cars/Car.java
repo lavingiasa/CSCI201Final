@@ -97,7 +97,11 @@ public class Car
 	{
 		this.rampNumber = rampNumber;
 	}
-
+	
+	public double getSpeed()
+	{
+		return speed;
+	}
 	
 	
 

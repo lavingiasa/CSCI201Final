@@ -33,12 +33,12 @@ import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
 import Cars.Car;
 import Cars.CarDot;
-import Cars.RampDot;
 import Freeways.Interstate10;
 import Freeways.Interstate101;
 import Freeways.Interstate105;
 import Freeways.Interstate405;
 import Freeways.Ramp;
+import Freeways.RampDot;
 import JSON.JSONsParser;
 
 
@@ -120,13 +120,13 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		Ramp ramp = I405.ramps.get(rampNumber);
 		double xLocation = ramp.getxLocation();
 		double yLocation = ramp.getyLocation();
-		drawTheCarOnTheMap(xLocation, yLocation);
+		drawTheCarOnTheMap(car.getSpeed(), xLocation, yLocation);
 		
 	}
 
-	private void drawTheCarOnTheMap(double xLocation, double yLocation) 
+	private void drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
 	{
-		map().addMapMarker(new MapMarkerDot(Color.BLUE,xLocation, yLocation));		
+		map().addMapMarker(new CarDot(speed, Color.BLACK, xLocation, yLocation));		
 	}
 
 	private void drawCarOnThe105(Car car) 
