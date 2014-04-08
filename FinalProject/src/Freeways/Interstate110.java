@@ -9,7 +9,7 @@ public class Interstate110 extends Freeway
 	
 	static
 	{
-		ramps.add(new Ramp(20, 20));
+		ramps.add(new Ramp(20, 20,"",""));
 		
 		waypoints.add(new Waypoint(10, 10));
 		

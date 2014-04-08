@@ -1,0 +1,54 @@
+405 (San Diego Freeway)
+South
+34.28328,-118.468816|Rinaldi Street - Mission Hills
+34.268776,-118.472271|SR 118 (Ronald Reagan Freeway) - Simi Valley
+34.265052,-118.472335|Devonshire Street - Granada Hills
+34.238803,-118.473151|Nordhoff Street
+34.22477,-118.473301|Roscoe Boulevard - Panorama City
+34.205571,-118.473494|Haskell Avenue/Sherman Way
+34.192029,-118.474374|Haskell Avenue/Victory Boulevard - Van Nuys
+34.176888,-118.46843|Burbank Boulevard
+34.165935,-118.469675|US 101 (Ventura Freeway) - Ventura, Los Angeles
+34.156862,-118.469095|Ventura Boulevard
+34.149759,-118.468881|Sepulveda Boulevard, Valley Vista Boulevard
+34.100378,-118.478086|Sepulveda Boulevard, Getty Center Drive
+34.074983,-118.468473|Church Lane, Sunset Boulevard, Montana Avenue
+34.060905,-118.4565|Wilshire Boulevard
+34.050168,-118.449054|SR 2 (Santa Monica Boulevard)
+34.03886,-118.439934|Sawtelle Boulevard/Olympic Boulevard, Pico Boulevard
+34.036886,-118.438776|I-10 (Santa Monica Freeway) - Santa Monica, Los Angeles
+34.01149,-118.41809|Sawtelle Boulevard/Venice Boulevard (SR 187), Washington Boulevard
+34.005763,-118.413584|Sawtelle Boulevard/Culver Boulevard, Washington Boulevard - Culver City
+33.992278,-118.402898|SR 90 west (Marina Freeway) - Marina del Rey
+33.98977,-118.40086|Jefferson Boulevard
+33.978703,-118.391783|Howard Hughes Parkway, Sepulveda Boulevard
+33.973703,-118.381634|La Tijera Boulevard
+33.968613,-118.37245|Manchester Boulevard, La Cienega Boulevard, Florence Avenue
+North
+33.957009,-118.36921|Manchester Boulevard, La Cienega Boulevard, Florence Avenue
+33.970375,-118.374746|La Tijera Boulevard
+33.972848,-118.379595|Howard Hughes Parkway, Sepulveda Boulevard
+33.983098,-118.395281|SR 90 west (Marina Freeway) - Marina del Rey
+33.984824,-118.396654|Jefferson Boulevard
+33.999554,-118.408263|Culver Boulevard, Washington Boulevard - Culver City
+34.009,-118.415666|Sepulveda Boulevard/Venice Boulevard (SR 187), Washington Boulevard
+34.024562,-118.428004|National Boulevard
+34.025345,-118.428669|I-10 (Santa Monica Freeway) - Santa Monica, Los Angeles
+34.043163,-118.443217|SR 2 (Santa Monica Boulevard)
+34.052426,-118.449461|Wilshire Boulevard
+34.069526,-118.463581|Sunset Boulevard
+34.076103,-118.468945|Moraga Drive
+34.092275,-118.475704|Sepulveda Boulevard, Getty Center Drive
+34.121235,-118.479524|Mulholland Drive, Skirball Center Drive
+34.149705,-118.468494|Ventura Boulevard, Sepulveda Boulevard, Valley Vista Boulevard
+34.154518,-118.468001|US 101 (Ventura Freeway) - Ventura, Los Angeles
+34.169308,-118.467872|Burbank Boulevard
+34.185995,-118.473923|Victory Boulevard - Van Nuys
+34.197833,-118.47403|Sherman Way
+34.217744,-118.473043|Roscoe Boulevard - Panorama City
+34.232416,-118.472958|Nordhoff Street
+34.254074,-118.472056|Devonshire Street - Granada Hills
+34.2592,-118.472121|SR 118 (Ronald Reagan Freeway) - Simi Valley
+34.267819,-118.471949|San Fernando Mission Boulevard - San Fernando
+34.276064,-118.470597|Sepulveda Boulevard/Rinaldi Street - Mission Hills
+34.296878,-118.473108|I-5 north (Golden State Freeway) - Sacramento
