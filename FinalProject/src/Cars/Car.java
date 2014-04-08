@@ -8,6 +8,7 @@ public class Car
 	private String ramp;
 	private String freeway;
 	private int rampNumber;
+	private int freewayNumber;
 	
 	public Car(int id, double speed, String direction, String ramp, String freeway)
 	{
@@ -16,12 +17,20 @@ public class Car
 		this.direction = direction;
 		this.ramp = ramp;
 		this.freeway = freeway;
+		this.freewayNumber = Integer.parseInt(freeway);
 		setRampNumber();
 	}
 
 	private void setRampNumber() 
 	{
-		// TODO Auto-generated method stub
+		switch (freewayNumber) {
+		case value:
+			
+			break;
+
+		default:
+			break;
+		}
 		
 	}
 
@@ -64,6 +73,20 @@ public class Car
 	public int getRampNumber() 
 	{
 		return rampNumber;
+	}
+
+	public int getFreewayNumber() {
+		return freewayNumber;
+	}
+
+	public void setFreewayNumber(int freewayNumber)
+	{
+		this.freewayNumber = freewayNumber;
+	}
+
+	public void setRampNumber(int rampNumber) 
+	{
+		this.rampNumber = rampNumber;
 	}
 
 	

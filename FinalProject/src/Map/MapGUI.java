@@ -90,7 +90,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	{
 		for (int i = 0; i < cars.size(); i++) 
 		{
-			Integer freewayNumber = Integer.parseInt(cars.get(i).getFreeway());
+			Integer freewayNumber = cars.get(i).getFreewayNumber();
 			switch (freewayNumber) {
 			case 10:
 				//drawCarOnThe10(cars.get(i));
@@ -113,7 +113,16 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	private void drawCarOnThe405(Car car) 
 	{
 		int rampNumber = car.getRampNumber();
+		Ramp ramp = I405.ramps.get(rampNumber);
+		double xLocation = ramp.getxLocation();
+		double yLocation = ramp.getyLocation();
+		drawTheCarOnTheMap(xLocation, yLocation);
 		
+	}
+
+	private void drawTheCarOnTheMap(double xLocation, double yLocation) 
+	{
+		map().addMapMarker(new MapMarkerDot(xLocation, yLocation));		
 	}
 
 	private void drawCarOnThe105(Car car) 
