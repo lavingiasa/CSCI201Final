@@ -50,7 +50,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	private JLabel mperpLabelValue = null;
 
 	private Vector<Car> cars = new Vector<Car>();
-	private Vector<String> ramps = new Vector<String>();
+	//private Vector<String> ramps = new Vector<String>();
 	
 	public Interstate10 I10 = new Interstate10();
 	public Interstate101 I101 = new Interstate101();
@@ -70,6 +70,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		}
 		//map.addTheOnOffRamps();
 		map.addFreewayPoints();
+		map.drawCars();
 
 	}
 	/*
@@ -83,6 +84,30 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 
 	}*/
+
+	private void drawCars() 
+	{
+		for (int i = 0; i < cars.size(); i++) 
+		{
+			Integer freewayNumber = Integer.parseInt(cars.get(i).getFreeway());
+			switch (freewayNumber) {
+			case 10:
+				
+				break;
+			case 101:
+				
+				break;
+			case 105:
+					
+				break;
+			case 405:
+						
+				break;
+			default:
+				break;
+			}
+		}
+	}
 
 	private void addFreewayPoints() 
 	{

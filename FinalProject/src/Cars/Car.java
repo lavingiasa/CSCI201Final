@@ -48,4 +48,11 @@ public class Car
 		this.freeway = freeway;
 	}
 
+	public String getFreeway() 
+	{
+		return freeway;
+	}
+	
+	
+
 }
