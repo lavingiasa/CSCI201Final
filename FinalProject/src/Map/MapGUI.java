@@ -4,7 +4,6 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -31,11 +30,17 @@ import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
 import Cars.Car;
+import Freeways.Interstate10;
+import Freeways.Interstate101;
+import Freeways.Interstate105;
+import Freeways.Interstate405;
 import JSON.JSONsParser;
 
 
+@SuppressWarnings("serial")
 public class MapGUI extends JFrame implements JMapViewerEventListener
 {	
+
 	private JMapViewerTree treeMap = null;
 
 	//private JLabel zoomLabel=null;
@@ -46,6 +51,12 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private Vector<Car> cars = new Vector<Car>();
 	private Vector<String> ramps = new Vector<String>();
+	
+	public Interstate10 I10 = new Interstate10();
+	public Interstate101 I101 = new Interstate101();
+	public Interstate105 I105 = new Interstate105();
+	public Interstate405 I405 = new Interstate405();
+
 	JSONsParser parser = null;
 
 
@@ -57,7 +68,9 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		map.addTheOnOffRamps();
+		//map.addTheOnOffRamps();
+		map.addFreewayPoints();
+
 	}
 
 	private void addTheOnOffRamps() 
@@ -68,8 +81,30 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			parseJSONUsingPulledJSON();
 		}
 		
-		testFreewayWaypoints();
 
+	}
+
+	private void addFreewayPoints() 
+	{
+		//I10.addFreewayPoints();
+		I101.addFreewayPoints();
+		//I105.addFreewayPoints();
+		I405.addFreewayPoints();
+		testTheFreewayPoints();
+	}
+
+	private void testTheFreewayPoints() 
+	{
+		for(int i = 0; i < I101.waypoints.size(); i++)
+		{
+			drawTheRampOnTheMap(I101.waypoints.get(i).getxLocation(), I101.waypoints.get(i).getyLocation());
+		}
+		
+		for(int i = 0; i < I405.waypoints.size(); i++)
+		{
+			drawTheRampOnTheMap(I405.waypoints.get(i).getxLocation(), I405.waypoints.get(i).getyLocation());
+		}
+		
 	}
 
 	private void drawTheRampOnTheMap(Double xLocation, Double yLocation) 
@@ -220,25 +255,4 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			zoomValue.setText(String.format("%s", map().getZoom()));
 	}
 
-
-	private void testFreewayWaypoints() {
-		try {
-			FileReader fr = new FileReader("src/110WayPoints.txt");
-			BufferedReader br = new BufferedReader(fr);
-			String line;
-			String headerText = br.readLine();
-			System.out.println("Adding points on " + headerText);         // Prints out name of highway
-			while ((line = br.readLine()) != null) {
-				final String[] coordinatesArray = line.split(",");
-				final double x = Double.parseDouble(coordinatesArray[0]);
-				final double y = Double.parseDouble(coordinatesArray[1]);
-//				System.out.println(x + ", " + y);
-				map().addMapMarker(new MapMarkerDot(x, y));
-			}
-			
-			br.close();
-		} catch (NumberFormatException nfe) { nfe.printStackTrace(); } 
-		catch (FileNotFoundException e) { e.printStackTrace(); }  
-		catch (IOException e) { e.printStackTrace();}		
-	}
 }
