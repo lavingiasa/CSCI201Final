@@ -1,5 +1,6 @@
 package Map;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
@@ -122,7 +123,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private void drawTheCarOnTheMap(double xLocation, double yLocation) 
 	{
-		map().addMapMarker(new MapMarkerDot(xLocation, yLocation));		
+		map().addMapMarker(new MapMarkerDot(Color.BLUE,xLocation, yLocation));		
 	}
 
 	private void drawCarOnThe105(Car car) 
@@ -153,11 +154,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		Ramp.setCurrentID(0);
 		I405.addFreewayPoints();
 		Ramp.setCurrentID(0);
-		//testTheFreewayPoints();
-		for(int i = 0; i < I105.ramps.size(); i++)
-		{
-			System.out.println(I105.ramps.get(i).getName() + ": " + I105.ramps.get(i).getxLocation() + ": " + I105.ramps.get(i).getyLocation());
-		}
+		testTheFreewayPoints();
+		
 	}
 
 	private void testTheFreewayPoints() 
@@ -186,7 +184,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private void drawTheRampOnTheMap(Double xLocation, Double yLocation) 
 	{
-		map().addMapMarker(new MapMarkerDot(xLocation, yLocation));
+		map().addMapMarker(new MapMarkerDot(Color.PINK, xLocation, yLocation));
 
 	}
 	
