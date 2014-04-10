@@ -66,8 +66,8 @@ public class JSONsParser extends Thread {
 			for (int i = 0; i < arrayFromFile.size(); i++) 
 			{
 				JSONObject car = (JSONObject) arrayFromFile.get(i);
-				boolean carExists = false;
-				int indexOfExistingCar = -1;
+				//boolean carExists = false;
+				//int indexOfExistingCar = -1;
 				Long longID = (long) -1;
 				int id = -1;
 				double speed = -1;
