@@ -21,6 +21,7 @@ public class Car extends Thread
 	private double xLocation;
 	private double yLocation;
 	private double currentTime;
+	private CarDot marker;
 	
 	public Car(int id, double speed, String direction, String ramp, String freeway, long time)
 	{
@@ -206,7 +207,8 @@ public class Car extends Thread
 			yLocation += newY;
 			
 			//System.out.println("moving car: " + id);
-			MapGUI.currentMap.drawTheCarOnTheMap(speed, xLocation, yLocation);
+			marker.setLat(xLocation);
+			marker.setLon(yLocation);
 			
 			currentTime = currentTimeParam;
 			try {
@@ -216,6 +218,11 @@ public class Car extends Thread
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void setMarker(CarDot currentCarDot)
+	{
+		marker = currentCarDot;
 	}
 	
 }
