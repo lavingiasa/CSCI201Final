@@ -76,7 +76,20 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		//map.addTheOnOffRamps();
 		map.addFreewayPoints();
 		map.drawCars();
-
+		while(true)
+		{
+			map.moveCars();
+		}
+		
+	}
+	private void moveCars() 
+	{
+		for(int i = 3; i < 4; i++)
+		{
+			long currentTime = System.currentTimeMillis();
+			cars.get(i).updateLocation(currentTime);
+			drawCars();
+		}
 	}
 	/*
 	private void addTheOnOffRamps() 
@@ -100,7 +113,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				//drawCarOnThe10(cars.get(i));
 				break;
 			case 101:
-				//drawCarOnThe101(cars.get(i));
+				drawCarOnThe101(cars.get(i));
 				break;
 			case 105:
 				drawCarOnThe105(cars.get(i));
@@ -113,14 +126,20 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			}
 		}
 	}
-
+	//making this one work first
 	private void drawCarOnThe405(Car car) 
 	{
-		int rampNumber = car.getRampNumber();
-		Ramp ramp = I405.ramps.get(rampNumber);
-		double xLocation = ramp.getxLocation();
-		double yLocation = ramp.getyLocation();
-		drawTheCarOnTheMap(car.getSpeed(), xLocation, yLocation);
+		System.out.println(car.getID());
+		if(car.getxLocation() == 0 || car.getyLocation() == 0)
+		{
+			int rampNumber = car.getRampNumber();
+			Ramp ramp = I405.ramps.get(rampNumber);
+			double xLocation = ramp.getxLocation();
+			double yLocation = ramp.getyLocation();
+			car.setxLocation(xLocation);
+			car.setyLocation(yLocation);
+		}
+		drawTheCarOnTheMap(car.getSpeed(), car.getxLocation(), car.getyLocation());
 		
 	}
 
@@ -157,7 +176,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		Ramp.setCurrentID(0);
 		I405.addFreewayPoints();
 		Ramp.setCurrentID(0);
-		testTheFreewayPoints();
+		//testTheFreewayPoints();
 		
 	}
 
