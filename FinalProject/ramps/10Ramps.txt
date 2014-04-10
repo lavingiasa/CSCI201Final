@@ -30,3 +30,34 @@ South
 34.055604,-118.184322|City Terrace Drive
 34.058691,-118.177351|Eastern Avenue
 North
+34.014590,-118.486370|4th Street, 5th Street
+34.017157,-118.482479|SR 1 south (Lincoln Boulevard) to SR 2 east
+34.025913,-118.464353|Cloverfield Boulevard
+34.027814,-118.452821|Centinela Avenue
+34.031756,-118.430250|I-405 (San Diego Freeway) – Sacramento, LAX Airport, Long Beach
+34.031736,-118.414077|National Boulevard, Overland Avenue
+34.033458,-118.386786|Robertson Boulevard – Culver City
+34.034913,-118.367582|La Cienega Boulevard, Venice Boulevard (SR 187 west)
+34.034352,-118.364728|Fairfax Avenue, Washington Boulevard
+34.034682,-118.344261|La Brea Avenue
+34.035352, -118.329132|Crenshaw Boulevard
+34.037285, -118.309862|Arlington Avenue
+34.037089,-118.295382|Western Avenue, Normandie Avenue
+34.037203,-118.288597|Hoover Street, Vermont Avenue
+34.038109,-118.275780|I-110 south (Harbor Freeway) / SR 110 north (Harbor Freeway) / Pico Boulevard – San Pedro, Pasadena, Downtown Los   Angeles"></exit>
+34.034337, -118.266481|Grand Avenue
+34.031003,-118.258776|Maple Avenue
+34.030939,-118.258810|Los Angeles Street – Convention Center
+34.026642,-118.250395|San Pedro Street
+34.023754,-118.243304|Central Avenue
+34.026270,-118.235627|Alameda Street
+34.029496,-118.222997|Mateo Street, Santa Fe Avenue
+34.028536,-118.229613|I-5 south (Santa Ana Freeway) / SR 60 east (Pomona Freeway) – Santa Ana, Pomona
+34.033938,-118.220813|Boyle Avenue
+34.041171,-118.218225|Fourth Street
+34.047545,-118.214427|Cesar Chavez Avenue
+34.053116, -118.213692|I-5 north (Golden State Freeway) – Sacramento
+34.056291,-118.212657|US 101 north (Santa Ana Freeway via San Bernardino Freeway) – Los Angeles, Hollywood
+34.054612, -118.209656|State Street
+34.168396,-118.497403|City Terrace Drive
+34.061477,-118.166155|Eastern Avenue
