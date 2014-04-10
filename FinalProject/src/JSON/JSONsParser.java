@@ -30,13 +30,15 @@ public class JSONsParser extends Thread {
 		// pullTheNewData(); //Reenable later
 		parseTheData();
 		try {
-			sleep(180000); // 180000ms = 3 minutes
+			sleep( 3 * 60 * 1000 ); // 3 min * 60 sec/min *
+									// 1000 ( millisec / sec ) = 3 min
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
 	}
 
+	// Pulls new Data and replaces currentData.json file
 	private void pullTheNewData() {
 		URL website;
 		try {
@@ -56,6 +58,7 @@ public class JSONsParser extends Thread {
 
 	}
 
+	// Parses the currentData ( or it will ) and updates car data
 	private void parseTheData() // http://www.mkyong.com/java/json-simple-example-read-and-write-json/
 	{
 		JSONParser parser = new JSONParser();
@@ -66,8 +69,8 @@ public class JSONsParser extends Thread {
 			for (int i = 0; i < arrayFromFile.size(); i++) 
 			{
 				JSONObject car = (JSONObject) arrayFromFile.get(i);
-				boolean carExists = false;
-				int indexOfExistingCar = -1;
+				boolean carExists = false;	// ??	I assume this is either for testing
+				int indexOfExistingCar = -1;	// or just unimplemented so far?
 				Long longID = (long) -1;
 				int id = -1;
 				double speed = -1;

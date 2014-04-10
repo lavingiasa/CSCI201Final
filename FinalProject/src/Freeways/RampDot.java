@@ -57,7 +57,9 @@ public class RampDot extends MapMarkerCircle{
 		//super.paint(arg0, arg1, arg2);
 		int size_h = radio;
         int size = size_h * 2;
-
+        	
+        // What is the implication *if* g is Graphics 2D?
+        	// I see color thing but 
         if (g instanceof Graphics2D && getBackColor()!=null) {
             Graphics2D g2 = (Graphics2D) g;
             Composite oldComposite = g2.getComposite();
@@ -69,7 +71,8 @@ public class RampDot extends MapMarkerCircle{
         }
         g.setColor(getColor());
         g.drawOval(position.x - size_h, position.y - size_h, size, size);
-
+        
+        
         if(getLayer()==null||getLayer().isVisibleTexts()) paintText(g, position);
 	}
     

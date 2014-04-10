@@ -19,6 +19,8 @@ public class Ramp
 		currentID ++;
 	}
 
+	
+	// Accessors
 	public double getxLocation() {
 		return xLocation;
 	}

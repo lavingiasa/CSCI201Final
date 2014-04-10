@@ -93,4 +93,3 @@ North
 34.170216, -118.610753|Shoup Avenue
 34.162626, -118.629089|Woodlake Avenue
 34.160788, -118.634207|Mulholland Drive, Valley Circle Boulevard
-
