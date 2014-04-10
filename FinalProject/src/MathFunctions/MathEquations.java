@@ -1,8 +1,8 @@
 package MathFunctions;
-//http://stackoverflow.com/questions/27928/how-do-i-calculate-distance-between-two-latitude-longitude-points
 public class MathEquations 
 {
 	public final static double AVERAGE_RADIUS_OF_EARTH = 6371;
+  //http://stackoverflow.com/questions/27928/how-do-i-calculate-distance-between-two-latitude-longitude-points
 	public static int calculateDistance(double userLat, double userLng, double venueLat, double venueLng) {
 
 	    double latDistance = Math.toRadians(userLat - venueLat);
