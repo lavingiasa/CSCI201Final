@@ -56,7 +56,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private Vector<Car> cars = new Vector<Car>();
 	//private Vector<String> ramps = new Vector<String>();
-	
+	public static MapGUI currentMap;
 	public Interstate10 I10 = new Interstate10();
 	public Interstate101 I101 = new Interstate101();
 	public Interstate105 I105 = new Interstate105();
@@ -64,10 +64,12 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	JSONsParser parser = null;
 
-
+	
+	
 	public static void main (String [] args)
 	{
 		MapGUI map = new MapGUI();
+		currentMap = map;
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
@@ -75,21 +77,22 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		}
 		//map.addTheOnOffRamps();
 		map.addFreewayPoints();
-		map.drawCars();
-		while(true)
+		map.setTheCurrentXandYs();
+		for(int i = 0; i < map.cars.size(); i++)
 		{
-			map.moveCars();
+			map.cars.get(i).start();
 		}
+		
 		
 	}
 	private void moveCars() 
 	{
-		for(int i = 3; i < 4; i++)
+		/*
+		for(int i = 0; i < cars.size(); i++)
 		{
 			long currentTime = System.currentTimeMillis();
-			cars.get(i).updateLocation(currentTime);
 			drawCars();
-		}
+		}*/
 	}
 	/*
 	private void addTheOnOffRamps() 
@@ -102,8 +105,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 
 	}*/
-
-	private void drawCars() 
+	
+	private void setTheCurrentXandYs() 
 	{
 		for (int i = 0; i < cars.size(); i++) 
 		{
@@ -126,6 +129,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			}
 		}
 	}
+	
 	//making this one work first
 	private void drawCarOnThe405(Car car) 
 	{
@@ -143,7 +147,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 	}
 
-	private void drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
+	public synchronized void drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
 	{
 		map().addMapMarker(new CarDot(speed, Color.BLACK, xLocation, yLocation));		
 	}

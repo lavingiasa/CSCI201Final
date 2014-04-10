@@ -82,10 +82,14 @@ public class JSONsParser extends Thread {
 				freeway = (String) car.get("freeway");
 				id = Integer.parseInt(longID.toString());
 
-			
-				Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
-				//System.out.println(currentCar.toString());
-				cars.add(currentCar);
+				
+				//TODO only 405 for now
+				if(freeway.equals("405"))
+				{
+					Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
+					cars.add(currentCar);
+				}
+				
 
 			}
  

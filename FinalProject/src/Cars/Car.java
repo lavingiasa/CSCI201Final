@@ -6,9 +6,10 @@ import Freeways.Interstate105;
 import Freeways.Interstate405;
 import Freeways.Ramp;
 import Freeways.Waypoint;
+import Map.MapGUI;
 import MathFunctions.MathEquations;
 
-public class Car 
+public class Car extends Thread
 {
 	private int id;
 	private double speed;
@@ -19,7 +20,7 @@ public class Car
 	private int freewayNumber;
 	private double xLocation;
 	private double yLocation;
-	private long currentTime;
+	private double currentTime;
 	
 	public Car(int id, double speed, String direction, String ramp, String freeway, long time)
 	{
@@ -162,48 +163,59 @@ public class Car
 		this.yLocation = yLocation;
 	}
 
-	public void updateLocation(long currentTimeParam) 
+	@Override
+	public void run() 
 	{
-		Ramp nextWaypoint = null;
-		switch (freewayNumber) {
-		case 10:
-			//TODO fix this to do waypoints
-			nextWaypoint = Interstate10.ramps.get(rampNumber + 1);
-			break;
-		case 101:
-			nextWaypoint = Interstate101.ramps.get(rampNumber + 1);
-			rampNumber = 0;
-			break;
-		case 105:
-			nextWaypoint = Interstate105.ramps.get(rampNumber + 1);
-			rampNumber = 0;
-			break;
-		case 405:
-			nextWaypoint = Interstate405.ramps.get(rampNumber + 1);
-			rampNumber = 0;
-			break;
+		while(true)
+		{
+			Ramp nextWaypoint = null;
+	
+			switch (freewayNumber) {
+			case 10:
+				//TODO fix this to do waypoints
+				nextWaypoint = Interstate10.ramps.get(rampNumber + 1);
+				break;
+			case 101:
+				nextWaypoint = Interstate101.ramps.get(rampNumber + 1);
+				rampNumber = 0;
+				break;
+			case 105:
+				nextWaypoint = Interstate105.ramps.get(rampNumber + 1);
+				rampNumber = 0;
+				break;
+			case 405:
+				nextWaypoint = Interstate405.ramps.get(rampNumber + 1);
+				rampNumber = 0;
+				break;
+				
+			default:
+				break;
+			}
 			
-		default:
-			break;
+			double currentTimeParam = System.currentTimeMillis();
+			double KMPerHour = MathEquations.milesInKM(speed);
+			double deltaTime = currentTime - currentTimeParam;
+			double deltaX = Math.abs(xLocation - nextWaypoint.getxLocation());
+			double deltaY = Math.abs(yLocation - nextWaypoint.getyLocation());
+			double angleInRad = Math.atan2(deltaY, deltaX);
+			double deltaWhatIWantToMove = KMPerHour * 0.00000027777778 * deltaTime; //TODO wrong units
+			double newX = deltaWhatIWantToMove * Math.cos(angleInRad);
+			double newY = deltaWhatIWantToMove * Math.sin(angleInRad);
+			
+			xLocation += newX;
+			yLocation += newY;
+			
+			//System.out.println("moving car: " + id);
+			MapGUI.currentMap.drawTheCarOnTheMap(speed, xLocation, yLocation);
+			
+			currentTime = currentTimeParam;
+			try {
+				sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
-		double KMPerHour = MathEquations.milesInKM(speed);
-		double deltaTime = currentTime - currentTimeParam;
-		double deltaX = Math.abs(xLocation - nextWaypoint.getxLocation());
-		double deltaY = Math.abs(yLocation - nextWaypoint.getyLocation());
-		double angleInRad = Math.atan2(deltaY, deltaX);
-		double deltaWhatIWantToMove = KMPerHour * 0.00000027777778 * deltaTime; //TODO wrong units
-		double newX = deltaWhatIWantToMove * Math.cos(angleInRad);
-		double newY = deltaWhatIWantToMove * Math.sin(angleInRad);
-		
-		xLocation += newX;
-		yLocation += newY;
-		
-		currentTime = currentTimeParam;
 	}
 	
-	
-	
-	
-
 }
