@@ -1,5 +1,7 @@
 package Cars;
 
+import java.util.Vector;
+
 import Freeways.Interstate10;
 import Freeways.Interstate101;
 import Freeways.Interstate105;
@@ -22,6 +24,7 @@ public class Car extends Thread
 	private double yLocation;
 	private double currentTime;
 	private CarDot marker;
+	private Waypoint currentWaypoint;
 	
 	public Car(int id, double speed, String direction, String ramp, String freeway, long time)
 	{
@@ -34,6 +37,7 @@ public class Car extends Thread
 		this.currentTime = time;
 		this.xLocation = 0;
 		this.yLocation = 0;
+		this.currentWaypoint = null;
 		setRampNumberTesting();
 		//setRampNumber();
 	}
@@ -169,23 +173,25 @@ public class Car extends Thread
 	{
 		while(true)
 		{
-			Ramp nextWaypoint = null;
-	
+			Ramp nextRamp = null;
+			//get closest point to current ramp
+			Waypoint nextWaypoint = getNextWaypoint();
+			
 			switch (freewayNumber) {
 			case 10:
 				//TODO fix this to do waypoints
-				nextWaypoint = Interstate10.ramps.get(rampNumber + 1);
+				nextRamp = Interstate10.ramps.get(rampNumber + 1);
 				break;
 			case 101:
-				nextWaypoint = Interstate101.ramps.get(rampNumber + 1);
+				nextRamp = Interstate101.ramps.get(rampNumber + 1);
 				rampNumber = 0;
 				break;
 			case 105:
-				nextWaypoint = Interstate105.ramps.get(rampNumber + 1);
+				nextRamp = Interstate105.ramps.get(rampNumber + 1);
 				rampNumber = 0;
 				break;
 			case 405:
-				nextWaypoint = Interstate405.ramps.get(rampNumber + 1);
+				nextRamp = Interstate405.ramps.get(rampNumber + 1);
 				rampNumber = 0;
 				break;
 				
@@ -219,6 +225,43 @@ public class Car extends Thread
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private Waypoint getNextWaypoint() 
+	{
+		Vector <Ramp> ramps = null;
+		Vector <Waypoint> waypoints = null;
+		if(currentWaypoint == null)
+		{
+			switch (freewayNumber) {
+			case 10:
+				//TODO fix this to do waypoints
+				ramps = Interstate10.ramps;
+				waypoints = Interstate10.waypoints;
+				break;
+			case 101:
+				ramps = Interstate101.ramps;
+				waypoints = Interstate101.waypoints;
+				rampNumber = 0;
+				break;
+			case 105:
+				ramps = Interstate105.ramps;
+				waypoints = Interstate105.waypoints;
+				rampNumber = 0;
+				break;
+			case 405:
+				ramps = Interstate405.ramps;
+				waypoints = Interstate405.waypoints;
+				rampNumber = 0;
+				break;
+				
+			default:
+				break;
+			}
+		}else{
+			
+		}
+		return null;
 	}
 
 	public void setMarker(CarDot currentCarDot)
