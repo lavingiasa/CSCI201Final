@@ -242,21 +242,33 @@ public class Car extends Thread
 			case 101:
 				ramps = Interstate101.ramps;
 				waypoints = Interstate101.waypoints;
-				rampNumber = 0;
 				break;
 			case 105:
 				ramps = Interstate105.ramps;
 				waypoints = Interstate105.waypoints;
-				rampNumber = 0;
 				break;
 			case 405:
 				ramps = Interstate405.ramps;
 				waypoints = Interstate405.waypoints;
-				rampNumber = 0;
 				break;
 				
 			default:
 				break;
+			}
+			
+			double minimumDifference = 10000;
+			double nextIndex;
+			for(int i = 0; i < ramps.size(); i++)
+			{
+				for(int j = 0; j < waypoints.size(); j++)
+				{
+					double distance = 0;
+				
+					if(true)
+					{
+						
+					}
+				}
 			}
 		}else{
 			
