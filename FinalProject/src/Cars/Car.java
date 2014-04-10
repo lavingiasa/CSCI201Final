@@ -24,7 +24,10 @@ public class Car extends Thread
 	private double yLocation;
 	private double currentTime;
 	private CarDot marker;
+	private Ramp currentRamp;
 	private Waypoint currentWaypoint;
+	private Vector <Ramp> ramps;
+	private Vector <Waypoint> waypoints;
 	
 	public Car(int id, double speed, String direction, String ramp, String freeway, long time)
 	{
@@ -38,11 +41,12 @@ public class Car extends Thread
 		this.xLocation = 0;
 		this.yLocation = 0;
 		this.currentWaypoint = null;
-		setRampNumberTesting();
+		this.currentRamp = null;
+		setRampTesting();
 		//setRampNumber();
 	}
 
-	private void setRampNumberTesting() 
+	private void setRampTesting() 
 	{
 		
 		switch (freewayNumber) {
@@ -180,19 +184,31 @@ public class Car extends Thread
 			switch (freewayNumber) {
 			case 10:
 				//TODO fix this to do waypoints
+				currentRamp = Interstate10.ramps.get(rampNumber);
 				nextRamp = Interstate10.ramps.get(rampNumber + 1);
+				ramps = Interstate10.ramps;
+				waypoints = Interstate10.waypoints;
 				break;
 			case 101:
+				currentRamp = Interstate101.ramps.get(rampNumber);
 				nextRamp = Interstate101.ramps.get(rampNumber + 1);
-				rampNumber = 0;
+				ramps = Interstate101.ramps;
+				waypoints = Interstate101.waypoints;
+				//rampNumber = 0;
 				break;
 			case 105:
+				currentRamp = Interstate105.ramps.get(rampNumber);
 				nextRamp = Interstate105.ramps.get(rampNumber + 1);
-				rampNumber = 0;
+				ramps = Interstate105.ramps;
+				waypoints = Interstate105.waypoints;
+				//rampNumber = 0;
 				break;
 			case 405:
+				currentRamp = Interstate405.ramps.get(rampNumber);
 				nextRamp = Interstate405.ramps.get(rampNumber + 1);
-				rampNumber = 0;
+				ramps = Interstate405.ramps;
+				waypoints = Interstate405.waypoints;
+				//rampNumber = 0;
 				break;
 				
 			default:
@@ -205,7 +221,7 @@ public class Car extends Thread
 			double deltaX = Math.abs(xLocation - nextWaypoint.getxLocation());
 			double deltaY = Math.abs(yLocation - nextWaypoint.getyLocation());
 			double angleInRad = Math.atan2(deltaY, deltaX);
-			double deltaWhatIWantToMove = KMPerHour * 0.00000027777778 * deltaTime; //TODO wrong units
+			double deltaWhatIWantToMove = KMPerHour * 0.00000027777778 * deltaTime;
 			double newX = deltaWhatIWantToMove * Math.cos(angleInRad);
 			double newY = deltaWhatIWantToMove * Math.sin(angleInRad);
 			
@@ -229,47 +245,25 @@ public class Car extends Thread
 
 	private Waypoint getNextWaypoint() 
 	{
-		Vector <Ramp> ramps = null;
-		Vector <Waypoint> waypoints = null;
 		if(currentWaypoint == null)
 		{
-			switch (freewayNumber) {
-			case 10:
-				//TODO fix this to do waypoints
-				ramps = Interstate10.ramps;
-				waypoints = Interstate10.waypoints;
-				break;
-			case 101:
-				ramps = Interstate101.ramps;
-				waypoints = Interstate101.waypoints;
-				break;
-			case 105:
-				ramps = Interstate105.ramps;
-				waypoints = Interstate105.waypoints;
-				break;
-			case 405:
-				ramps = Interstate405.ramps;
-				waypoints = Interstate405.waypoints;
-				break;
-				
-			default:
-				break;
-			}
 			
 			double minimumDifference = 10000;
-			double nextIndex;
-			for(int i = 0; i < ramps.size(); i++)
+			int nextIndex = -1;
+
+			for(int j = 0; j < waypoints.size(); j++)
 			{
-				for(int j = 0; j < waypoints.size(); j++)
+				double deltaX = Math.abs(currentRamp.getxLocation() - waypoints.get(j).getxLocation());
+				double deltaY = Math.abs(currentRamp.getyLocation() - waypoints.get(j).getyLocation());
+				double distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+
+				if(distance < minimumDifference)
 				{
-					double distance = 0;
-				
-					if(true)
-					{
-						
-					}
+					minimumDifference = distance;
+					nextIndex = j;
 				}
 			}
+			currentWaypoint = waypoints.get(nextIndex);
 		}else{
 			
 		}
