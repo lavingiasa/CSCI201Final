@@ -211,6 +211,7 @@ public class Car extends Thread
 			marker.setLon(yLocation);
 			
 			currentTime = currentTimeParam;
+			MapGUI.refreshTheMap();
 			try {
 				sleep(1000);
 			} catch (InterruptedException e) {

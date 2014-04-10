@@ -139,6 +139,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		map().addMapMarker(currentDot);		
 		return currentDot;
 	}
+	
+	public static synchronized void refreshTheMap()
+	{
+		currentMap.repaint();
+	}
 
 	private void drawCarOnThe105(Car car) 
 	{
