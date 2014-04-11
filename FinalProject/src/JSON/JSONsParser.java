@@ -8,8 +8,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Vector;
 
 import org.json.simple.JSONArray;
@@ -66,18 +64,17 @@ public class JSONsParser extends Thread {
 		try {
 			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/initialTest.json"));
 			cars.clear();
-			for (int i = 0; i < arrayFromFile.size(); i++) 
+			for (int i = 0; i < arrayFromFile.size(); i++)
 			{
 				JSONObject car = (JSONObject) arrayFromFile.get(i);
-				boolean carExists = false;	// ??	I assume this is either for testing
-				int indexOfExistingCar = -1;	// or just unimplemented so far?
+
 				Long longID = (long) -1;
 				int id = -1;
 				double speed = -1;
 				String direction = "";
 				String ramp = "";
 				String freeway = "";
-				
+
 				longID = (Long) car.get("id");
 				speed = (Double) car.get("speed");
 				direction = (String) car.get("direction");
@@ -85,13 +82,17 @@ public class JSONsParser extends Thread {
 				freeway = (String) car.get("freeway");
 				id = Integer.parseInt(longID.toString());
 
-			
-				Car currentCar = new Car(id, speed, direction, ramp, freeway);
-				//System.out.println(currentCar.toString());
-				cars.add(currentCar);
+
+				//TODO only 405 for now
+				if(freeway.equals("405"))
+				{
+					Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
+					cars.add(currentCar);
+				}
+
 
 			}
- 
+
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -100,6 +101,6 @@ public class JSONsParser extends Thread {
 			e.printStackTrace();
 		}
 
-		
+
 	}
 }

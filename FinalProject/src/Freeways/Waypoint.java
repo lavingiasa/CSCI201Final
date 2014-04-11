@@ -15,6 +15,7 @@ public class Waypoint
 		currentID ++;
 	}
 
+	// Accessors
 	public double getxLocation() {
 		return xLocation;
 	}

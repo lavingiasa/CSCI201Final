@@ -57,6 +57,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	private Vector<Car> cars = new Vector<Car>();
 	//private Vector<String> ramps = new Vector<String>();
 	
+	
 	public Interstate10 I10 = new Interstate10();
 	public Interstate101 I101 = new Interstate101();
 	public Interstate105 I105 = new Interstate105();
@@ -69,7 +70,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	{
 		MapGUI map = new MapGUI();
 		try {
-			Thread.sleep(500);
+			Thread.sleep(500);	// .5 seconds
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}

@@ -1,0 +1,34 @@
+JSONs Parser
+  This class has two main methods, pullTheNewData and ParseTheData, which as their names suggest pull the data from the online json file and parse it into useful data.
+
+  private void pulltheNewData(){}
+
+	This method accesses JSON file located at specified URL, and replace the previous "currentData.json" file that parser accesses.
+
+	Three catches are in place 
+
+	Malformed Exception: JSON file is not appropriately formatted
+		1)	Check JSON file for any 
+	FileNotFoundException: File is not Present 
+	   Testing:
+		1) Check online to see if file is present
+		2) 
+	IOException: Other misc exception with IO
+		1)
+
+	
+  parseTheData(){}
+	
+	This method parses the currentData.JSON file and updates the car data
+	
+	
+	MalforedURLException:
+		1) 
+	FileNotFoundException:
+		1) 
+	IOException:
+		1) 
+		
+Freeway
+	
+		
