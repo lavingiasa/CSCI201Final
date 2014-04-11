@@ -188,27 +188,32 @@ public class Car extends Thread
 
 		while(true)
 		{
-			Ramp nextRamp = null;
+			//Ramp nextRamp = null;
 			//get closest point to current ramp
 			currentRamp = ramps.get(rampNumber);
-			nextRamp = ramps.get(rampNumber + 1);
+			//nextRamp = ramps.get(rampNumber + 1);
 			
 			Waypoint nextWaypoint = getNextWaypoint();
 			long timeItShouldBeThereBy = getTimeItShouldBeThereBy(nextWaypoint);
-			
-			
+			//System.out.println("TimeShould " + timeItShouldBeThereBy + "current" +  System.currentTimeMillis());
+
+
 			while(timeItShouldBeThereBy > System.currentTimeMillis())
 			{
-				//System.out.println("ID: " + id + " Current: " +System.currentTimeMillis() + " By: " + timeItShouldBeThereBy );
+				if(id == 6)
+				{
+					System.out.println("ID: " + id + " More Seconds: " + (timeItShouldBeThereBy - System.currentTimeMillis())/1000 );
+				}
 			}
-			
+			System.out.println(nextWaypoint.getxLocation());
+			System.out.println(nextWaypoint.getyLocation());
 			marker.setLat(nextWaypoint.getxLocation());
 			marker.setLon(nextWaypoint.getyLocation());			
-			
+			currentWaypoint = nextWaypoint;
 			//currentTime = currentTimeParam;
 			MapGUI.refreshTheMap();
 			try {
-				sleep(100);
+				sleep(10);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -218,6 +223,10 @@ public class Car extends Thread
 	private long getTimeItShouldBeThereBy(Waypoint nextWaypoint) 
 	{
 		double distanceItShouldBe = MathEquations.calculateDistance(xLocation, yLocation, nextWaypoint.getxLocation(), nextWaypoint.getyLocation());
+		if(distanceItShouldBe == 0)
+		{
+			distanceItShouldBe = .1;
+		}
 		double KMPerHour = MathEquations.milesInKM(speed);
 
 		double timeItShouldTakeInHours = (distanceItShouldBe/KMPerHour);
@@ -249,10 +258,14 @@ public class Car extends Thread
 			}
 			
 			currentWaypoint = waypoints.get(nextIndex);
+			System.out.println(xLocation +" "+currentWaypoint.getxLocation());
+			System.out.println(yLocation +" "+currentWaypoint.getyLocation());
+
 			wayPointNumber = nextIndex;
 			return currentWaypoint;
-		}else{
+		}else{			
 			currentWaypoint = waypoints.get(wayPointNumber+1);
+			wayPointNumber ++;
 			return currentWaypoint;
 		}
 	}
