@@ -19,6 +19,7 @@ import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
 import Cars.Car;
 import Cars.CarDot;
+import Freeways.Freeway;
 import Freeways.Interstate10;
 import Freeways.Interstate101;
 import Freeways.Interstate105;
@@ -43,11 +44,17 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	//private Vector<String> ramps = new Vector<String>();
 		
 	public static MapGUI currentMap;
-	public Interstate10 I10 = new Interstate10();
+/*	public Interstate10 I10 = new Interstate10();
 	public Interstate101 I101 = new Interstate101();
 	public Interstate105 I105 = new Interstate105();
-	public Interstate405 I405 = new Interstate405();
-
+	public Interstate405 I405 = new Interstate405();*/
+	public Freeway I10 = new Freeway( 10 );
+	public Freeway I101 = new Freeway( 101 );
+	public Freeway I105 = new Freeway( 105 );
+	public Freeway I405 = new Freeway( 405 );
+	
+	
+	
 	JSONsParser parser = null;
 
 	

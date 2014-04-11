@@ -3,7 +3,7 @@ package Freeways;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class Interstate110 extends Freeway 
+public class Interstate110
 {
 	static Vector<Ramp> ramps;
 	static Vector<Waypoint> waypoints;

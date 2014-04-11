@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class Interstate405 extends Freeway 
+public class Interstate405
 {
 	public static Vector<Ramp> ramps;
 	public static Vector<Waypoint> waypoints;

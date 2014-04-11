@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class Interstate10 extends Freeway 
+public class Interstate10
 {
 	public static Vector<Ramp> ramps;
 	public static Vector<Waypoint> waypoints;
@@ -17,7 +17,7 @@ public class Interstate10 extends Freeway
 		ramps = new Vector<Ramp>();
 		waypoints = new Vector<Waypoint>();
 	}
-	
+	/*
 	public void addFreewayPoints()
 	{
 		try {
@@ -58,5 +58,5 @@ public class Interstate10 extends Freeway
 		} catch (NumberFormatException nfe) { nfe.printStackTrace(); } 
 		catch (FileNotFoundException e) { e.printStackTrace(); }  
 		catch (IOException e) { e.printStackTrace();}
-	}
+	}*/
 }
