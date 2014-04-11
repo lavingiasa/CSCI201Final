@@ -203,19 +203,13 @@ public class Car extends Thread
 			}
 			
 			marker.setLat(nextWaypoint.getxLocation());
-			marker.setLon(nextWaypoint.getyLocation());
-			
-			
-			
-			//System.out.println("moving car: " + id);
-			
+			marker.setLon(nextWaypoint.getyLocation());			
 			
 			//currentTime = currentTimeParam;
 			MapGUI.refreshTheMap();
 			try {
 				sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -229,7 +223,6 @@ public class Car extends Thread
 		double timeItShouldTakeInHours = (distanceItShouldBe/KMPerHour);
 		long timeItShouldTakeInMilliSeconds = (long) (timeItShouldTakeInHours * 3600000); 
 		long totalTime = System.currentTimeMillis() + timeItShouldTakeInMilliSeconds;
-		//System.out.println("ID: " + id +" curr: " + System.currentTimeMillis() + "timeshould: " + timeItShouldTakeInMilliSeconds +" by: " +  totalTime );
 
 		return totalTime;
 	}
