@@ -5,16 +5,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class Interstate101 extends Freeway 
 {
-	public static ArrayList<Ramp> ramps;
-	public static ArrayList<Waypoint> waypoints;
+	public static Vector<Ramp> ramps;
+	public static Vector<Waypoint> waypoints;
 	
 	public Interstate101()
 	{
-		ramps = new ArrayList<Ramp>();
-		waypoints = new ArrayList<Waypoint>();
+		ramps = new Vector<Ramp>();
+		waypoints = new Vector<Waypoint>();
 	}
 	
 	public void addFreewayPoints()

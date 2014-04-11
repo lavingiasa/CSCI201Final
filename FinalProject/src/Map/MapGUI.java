@@ -5,29 +5,15 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.events.JMVCommandEvent;
 import org.openstreetmap.gui.jmapviewer.interfaces.JMapViewerEventListener;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
@@ -143,13 +129,20 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			car.setxLocation(xLocation);
 			car.setyLocation(yLocation);
 		}
-		drawTheCarOnTheMap(car.getSpeed(), car.getxLocation(), car.getyLocation());
+		car.setMarker(drawTheCarOnTheMap(car.getSpeed(), car.getxLocation(), car.getyLocation()));
 		
 	}
 
-	public synchronized void drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
+	public synchronized CarDot drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
 	{
-		map().addMapMarker(new CarDot(speed, Color.BLACK, xLocation, yLocation));		
+		CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
+		map().addMapMarker(currentDot);		
+		return currentDot;
+	}
+	
+	public static synchronized void refreshTheMap()
+	{
+		currentMap.repaint();
 	}
 
 	private void drawCarOnThe105(Car car) 

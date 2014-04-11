@@ -1,5 +1,7 @@
 package Cars;
 
+import java.util.Vector;
+
 import Freeways.Interstate10;
 import Freeways.Interstate101;
 import Freeways.Interstate105;
@@ -21,6 +23,11 @@ public class Car extends Thread
 	private double xLocation;
 	private double yLocation;
 	private double currentTime;
+	private CarDot marker;
+	private Ramp currentRamp;
+	private Waypoint currentWaypoint;
+	private Vector <Ramp> ramps;
+	private Vector <Waypoint> waypoints;
 	
 	public Car(int id, double speed, String direction, String ramp, String freeway, long time)
 	{
@@ -33,11 +40,13 @@ public class Car extends Thread
 		this.currentTime = time;
 		this.xLocation = 0;
 		this.yLocation = 0;
-		setRampNumberTesting();
+		this.currentWaypoint = null;
+		this.currentRamp = null;
+		setRampTesting();
 		//setRampNumber();
 	}
 
-	private void setRampNumberTesting() 
+	private void setRampTesting() 
 	{
 		
 		switch (freewayNumber) {
@@ -168,24 +177,38 @@ public class Car extends Thread
 	{
 		while(true)
 		{
-			Ramp nextWaypoint = null;
-	
+			Ramp nextRamp = null;
+			//get closest point to current ramp
+			Waypoint nextWaypoint = getNextWaypoint();
+			
 			switch (freewayNumber) {
 			case 10:
 				//TODO fix this to do waypoints
-				nextWaypoint = Interstate10.ramps.get(rampNumber + 1);
+				currentRamp = Interstate10.ramps.get(rampNumber);
+				nextRamp = Interstate10.ramps.get(rampNumber + 1);
+				ramps = Interstate10.ramps;
+				waypoints = Interstate10.waypoints;
 				break;
 			case 101:
-				nextWaypoint = Interstate101.ramps.get(rampNumber + 1);
-				rampNumber = 0;
+				currentRamp = Interstate101.ramps.get(rampNumber);
+				nextRamp = Interstate101.ramps.get(rampNumber + 1);
+				ramps = Interstate101.ramps;
+				waypoints = Interstate101.waypoints;
+				//rampNumber = 0;
 				break;
 			case 105:
-				nextWaypoint = Interstate105.ramps.get(rampNumber + 1);
-				rampNumber = 0;
+				currentRamp = Interstate105.ramps.get(rampNumber);
+				nextRamp = Interstate105.ramps.get(rampNumber + 1);
+				ramps = Interstate105.ramps;
+				waypoints = Interstate105.waypoints;
+				//rampNumber = 0;
 				break;
 			case 405:
-				nextWaypoint = Interstate405.ramps.get(rampNumber + 1);
-				rampNumber = 0;
+				currentRamp = Interstate405.ramps.get(rampNumber);
+				nextRamp = Interstate405.ramps.get(rampNumber + 1);
+				ramps = Interstate405.ramps;
+				waypoints = Interstate405.waypoints;
+				//rampNumber = 0;
 				break;
 				
 			default:
@@ -198,7 +221,7 @@ public class Car extends Thread
 			double deltaX = Math.abs(xLocation - nextWaypoint.getxLocation());
 			double deltaY = Math.abs(yLocation - nextWaypoint.getyLocation());
 			double angleInRad = Math.atan2(deltaY, deltaX);
-			double deltaWhatIWantToMove = KMPerHour * 0.00000027777778 * deltaTime; //TODO wrong units
+			double deltaWhatIWantToMove = KMPerHour * 0.00000027777778 * deltaTime;
 			double newX = deltaWhatIWantToMove * Math.cos(angleInRad);
 			double newY = deltaWhatIWantToMove * Math.sin(angleInRad);
 			
@@ -206,9 +229,11 @@ public class Car extends Thread
 			yLocation += newY;
 			
 			//System.out.println("moving car: " + id);
-			MapGUI.currentMap.drawTheCarOnTheMap(speed, xLocation, yLocation);
+			marker.setLat(xLocation);
+			marker.setLon(yLocation);
 			
 			currentTime = currentTimeParam;
+			MapGUI.refreshTheMap();
 			try {
 				sleep(1000);
 			} catch (InterruptedException e) {
@@ -216,6 +241,38 @@ public class Car extends Thread
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private Waypoint getNextWaypoint() 
+	{
+		if(currentWaypoint == null)
+		{
+			
+			double minimumDifference = 10000;
+			int nextIndex = -1;
+
+			for(int j = 0; j < waypoints.size(); j++)
+			{
+				double deltaX = Math.abs(currentRamp.getxLocation() - waypoints.get(j).getxLocation());
+				double deltaY = Math.abs(currentRamp.getyLocation() - waypoints.get(j).getyLocation());
+				double distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+
+				if(distance < minimumDifference)
+				{
+					minimumDifference = distance;
+					nextIndex = j;
+				}
+			}
+			currentWaypoint = waypoints.get(nextIndex);
+		}else{
+			
+		}
+		return null;
+	}
+
+	public void setMarker(CarDot currentCarDot)
+	{
+		marker = currentCarDot;
 	}
 	
 }
