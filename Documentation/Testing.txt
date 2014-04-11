@@ -2,33 +2,100 @@ JSONs Parser
   This class has two main methods, pullTheNewData and ParseTheData, which as their names suggest pull the data from the online json file and parse it into useful data.
 
   private void pulltheNewData(){}
-
 	This method accesses JSON file located at specified URL, and replace the previous "currentData.json" file that parser accesses.
 
-	Three catches are in place 
-
-	Malformed Exception: JSON file is not appropriately formatted
-		1)	Check JSON file for any 
-	FileNotFoundException: File is not Present 
-	   Testing:
-		1) Check online to see if file is present
-		2) 
-	IOException: Other misc exception with IO
-		1)
+	Three catches
+		Malformed Exception: JSON file is not appropriately formatted
+			1)	Check JSON file for any 
+		FileNotFoundException: File is not Present 
+		   Testing:
+			1) Check online to see if file is present
+			2) 
+		IOException: Other misc exception with IO
+			1)
 
 	
   parseTheData(){}
-	
 	This method parses the currentData.JSON file and updates the car data
 	
-	
-	MalforedURLException:
-		1) 
-	FileNotFoundException:
-		1) 
-	IOException:
-		1) 
-		
+	Three catches
+		MalformedURLException:
+			1) 
+		FileNotFoundException:
+			1) 
+		IOException:
+			1) 
+			
 Freeway
+  Freeway class holds Ramp and Waypoint vectors, with a method 'addFreewayPoints()
 	
+  public void addFreewayPoints(){};
+	Parses waypoint and ramp file matching the freeway
+	
+	Three catches:
+		NumberFormatException: 
+			1)
+		FileNotFoundException: 
+			1)
+		IOException: 
+			1)
+	
+  private void setTheCurrentXandYs(){}
+  
+
+  public synchronized CarDot drawCarOnTheMap( double speed, double xLoc, double yLoc){}
+			CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
+			map().addMapMarker(currentDot);		
+			return currentDot;
+		Blah blah blah blah, this returns cardot so a test can test it...
+		code and stuff
+	
+	private void addFreewayPoints(){}
+		I(Freeway).addFreeWayPoints();
+		Ramp.setCurrentID(0);
+			Repeats x5 for each freeway
+			
+		CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
+		map().addMapMarker(currentDot);		
+		return currentDot;
+			
+		private void testTheFreewayPoints(){
+			for(int i = 0; i < I101.waypoints.size(); i++){
+				drawTheRampOnTheMap(I101.waypoints.get(i).getxLocation(), I101.waypoints.get(i).getyLocation());
+			}
+			for(int i = 0; i < I405.waypoints.size(); i++){
+				drawTheRampOnTheMap(I405.waypoints.get(i).getxLocation(), I405.waypoints.get(i).getyLocation());
+			}
+			for(int i = 0; i < I10.waypoints.size(); i++){
+				drawTheRampOnTheMap(I10.waypoints.get(i).getxLocation(), I10.waypoints.get(i).getyLocation());
+			}
+			for(int i = 0; i < I105.waypoints.size(); i++){
+			  drawTheRampOnTheMap(I105.waypoints.get(i).getxLocation(), I105.waypoints.get(i).getyLocation());
+			  }
+		}
 		
+	private void drawTheRampOnTheMap(Double xLocation, Double yLocation){
+		map().addMapMarker(new RampDot(xLocation, yLocation));
+	}
+	
+	
+	
+  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

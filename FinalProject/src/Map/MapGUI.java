@@ -27,7 +27,6 @@ import Freeways.Ramp;
 import Freeways.RampDot;
 import JSON.JSONsParser;
 
-
 @SuppressWarnings("serial")
 public class MapGUI extends JFrame implements JMapViewerEventListener
 {	
@@ -42,12 +41,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private Vector<Car> cars = new Vector<Car>();
 	//private Vector<String> ramps = new Vector<String>();
-<<<<<<< HEAD
-	
-	
-=======
+		
 	public static MapGUI currentMap;
->>>>>>> 6ac9ffc849f4ced2e379c1cc90bd140d3b7d0c42
 	public Interstate10 I10 = new Interstate10();
 	public Interstate101 I101 = new Interstate101();
 	public Interstate105 I105 = new Interstate105();
