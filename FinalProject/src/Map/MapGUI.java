@@ -5,29 +5,15 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
-import org.openstreetmap.gui.jmapviewer.MapMarkerDot;
 import org.openstreetmap.gui.jmapviewer.events.JMVCommandEvent;
 import org.openstreetmap.gui.jmapviewer.interfaces.JMapViewerEventListener;
-import org.openstreetmap.gui.jmapviewer.interfaces.MapMarker;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
@@ -56,8 +42,12 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private Vector<Car> cars = new Vector<Car>();
 	//private Vector<String> ramps = new Vector<String>();
+<<<<<<< HEAD
 	
 	
+=======
+	public static MapGUI currentMap;
+>>>>>>> 6ac9ffc849f4ced2e379c1cc90bd140d3b7d0c42
 	public Interstate10 I10 = new Interstate10();
 	public Interstate101 I101 = new Interstate101();
 	public Interstate105 I105 = new Interstate105();
@@ -65,19 +55,43 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	JSONsParser parser = null;
 
-
+	
+	
 	public static void main (String [] args)
 	{
 		MapGUI map = new MapGUI();
+		currentMap = map;
+		map.addFreewayPoints();
+		
+		
+		map.parser = new JSONsParser(map.cars);
+		map.parser.start();
+		
 		try {
 			Thread.sleep(500);	// .5 seconds
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//map.addTheOnOffRamps();
-		map.addFreewayPoints();
-		map.drawCars();
+		
 
+		map.setTheCurrentXandYs();
+
+		//map.addTheOnOffRamps();
+		for(int i = 0; i < map.cars.size(); i++)
+		{
+			map.cars.get(i).start();
+		}
+		
+		
+	}
+	private void moveCars() 
+	{
+		/*
+		for(int i = 0; i < cars.size(); i++)
+		{
+			long currentTime = System.currentTimeMillis();
+			drawCars();
+		}*/
 	}
 	/*
 	private void addTheOnOffRamps() 
@@ -90,44 +104,65 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 
 	}*/
-
-	private void drawCars() 
+	
+	private void setTheCurrentXandYs() 
 	{
 		for (int i = 0; i < cars.size(); i++) 
 		{
 			Integer freewayNumber = cars.get(i).getFreewayNumber();
 			switch (freewayNumber) {
 			case 10:
-				//drawCarOnThe10(cars.get(i));
+				drawCarOnThe10(cars.get(i));
+				cars.get(i).setWaypoints(I10.waypoints);
+				cars.get(i).setRamps(I10.ramps);
 				break;
 			case 101:
-				//drawCarOnThe101(cars.get(i));
+				drawCarOnThe101(cars.get(i));
+				cars.get(i).setWaypoints(I101.waypoints);
+				cars.get(i).setRamps(I101.ramps);
 				break;
 			case 105:
 				drawCarOnThe105(cars.get(i));
+				cars.get(i).setWaypoints(I105.waypoints);
+				cars.get(i).setRamps(I105.ramps);
 				break;
 			case 405:
 				drawCarOnThe405(cars.get(i));
+				cars.get(i).setWaypoints(I405.waypoints);
+				cars.get(i).setRamps(I405.ramps);
 				break;
 			default:
 				break;
 			}
 		}
 	}
-
+	
+	//making this one work first
 	private void drawCarOnThe405(Car car) 
 	{
-		int rampNumber = car.getRampNumber();
-		Ramp ramp = I405.ramps.get(rampNumber);
-		double xLocation = ramp.getxLocation();
-		double yLocation = ramp.getyLocation();
-		drawTheCarOnTheMap(car.getSpeed(), xLocation, yLocation);
+		if(car.getxLocation() == 0 || car.getyLocation() == 0)
+		{
+			int rampNumber = car.getRampNumber();
+			Ramp ramp = I405.ramps.get(rampNumber);
+			double xLocation = ramp.getxLocation();
+			double yLocation = ramp.getyLocation();
+			car.setxLocation(xLocation);
+			car.setyLocation(yLocation);
+		}
+		car.setMarker(drawTheCarOnTheMap(car.getSpeed(), car.getxLocation(), car.getyLocation()));
 		
 	}
 
-	private void drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
+	public synchronized CarDot drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
 	{
-		map().addMapMarker(new CarDot(speed, Color.BLACK, xLocation, yLocation));		
+		CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
+		map().addMapMarker(currentDot);		
+		return currentDot;
+	}
+	
+	public static synchronized void refreshTheMap()
+	{
+		currentMap.repaint();
 	}
 
 	private void drawCarOnThe105(Car car) 
@@ -158,7 +193,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		Ramp.setCurrentID(0);
 		I405.addFreewayPoints();
 		Ramp.setCurrentID(0);
-		testTheFreewayPoints();
+		//testTheFreewayPoints();
 		
 	}
 
@@ -277,8 +312,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		super("Map Demo");
 		setSize(400,400);
 
-		parser = new JSONsParser(cars);
-		parser.start();
+		
 
 		treeMap = new JMapViewerTree("Zones");
 		map().addJMVListener(this);
