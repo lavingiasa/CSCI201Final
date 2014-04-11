@@ -194,26 +194,12 @@ public class Car extends Thread
 			nextRamp = ramps.get(rampNumber + 1);
 			
 			Waypoint nextWaypoint = getNextWaypoint();
-			double timeItShouldBeThereBy = getTimeItShouldBeThereBy(nextWaypoint);
+			long timeItShouldBeThereBy = getTimeItShouldBeThereBy(nextWaypoint);
 			
-			/*
-			double currentTimeParam = System.currentTimeMillis();
-			double deltaTime = currentTime - currentTimeParam;
-			double KMPerHour = MathEquations.milesInKM(speed);
-
-			double deltaX = Math.abs(xLocation - nextWaypoint.getxLocation());
-			double deltaY = Math.abs(yLocation - nextWaypoint.getyLocation());
-			double angleInRad = Math.atan2(deltaY, deltaX);
-			double deltaWhatIWantToMove = KMPerHour * 0.00000027777778 * deltaTime;
-			double newX = deltaWhatIWantToMove * Math.cos(angleInRad);
-			double newY = deltaWhatIWantToMove * Math.sin(angleInRad);
 			
-			xLocation += newX;
-			yLocation += newY;
-			*/
 			while(timeItShouldBeThereBy > System.currentTimeMillis())
 			{
-				System.out.println("ID: " + id + " Current: " +System.currentTimeMillis() + " By: " + timeItShouldBeThereBy );
+				//System.out.println("ID: " + id + " Current: " +System.currentTimeMillis() + " By: " + timeItShouldBeThereBy );
 			}
 			
 			marker.setLat(nextWaypoint.getxLocation());
@@ -235,15 +221,17 @@ public class Car extends Thread
 		}
 	}
 
-	private double getTimeItShouldBeThereBy(Waypoint nextWaypoint) 
+	private long getTimeItShouldBeThereBy(Waypoint nextWaypoint) 
 	{
 		double distanceItShouldBe = MathEquations.calculateDistance(xLocation, yLocation, nextWaypoint.getxLocation(), nextWaypoint.getyLocation());
 		double KMPerHour = MathEquations.milesInKM(speed);
 
-		double timeItShouldTakeInHours = distanceItShouldBe/KMPerHour;
-		double timeItShouldTakeInMilliSeconds = timeItShouldTakeInHours * 3600000; 
-		
-		return timeItShouldTakeInMilliSeconds + System.currentTimeMillis();
+		double timeItShouldTakeInHours = (distanceItShouldBe/KMPerHour);
+		long timeItShouldTakeInMilliSeconds = (long) (timeItShouldTakeInHours * 3600000); 
+		long totalTime = System.currentTimeMillis() + timeItShouldTakeInMilliSeconds;
+		//System.out.println("ID: " + id +" curr: " + System.currentTimeMillis() + "timeshould: " + timeItShouldTakeInMilliSeconds +" by: " +  totalTime );
+
+		return totalTime;
 	}
 
 	private Waypoint getNextWaypoint() 
