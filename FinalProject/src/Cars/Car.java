@@ -22,12 +22,14 @@ public class Car extends Thread
 	private int freewayNumber;
 	private double xLocation;
 	private double yLocation;
+	private int wayPointNumber;
 	private double currentTime;
 	private CarDot marker;
 	private Ramp currentRamp;
 	private Waypoint currentWaypoint;
 	private Vector <Ramp> ramps;
 	private Vector <Waypoint> waypoints;
+	private boolean setRampHasBeenDone = false;
 	
 	public Car(int id, double speed, String direction, String ramp, String freeway, long time)
 	{
@@ -41,8 +43,8 @@ public class Car extends Thread
 		this.xLocation = 0;
 		this.yLocation = 0;
 		this.currentWaypoint = null;
+		this.wayPointNumber = 0;
 		this.currentRamp = null;
-		setRampTesting();
 		//setRampNumber();
 	}
 
@@ -175,49 +177,30 @@ public class Car extends Thread
 	@Override
 	public void run() 
 	{
+		//getNextWayPoint
+		//findHowMuchTime
+		//ifCurrentTime < HowMuchTime then move
+		if(!setRampHasBeenDone)
+		{
+			setRampTesting();
+			setRampHasBeenDone = true;
+		}
+
 		while(true)
 		{
 			Ramp nextRamp = null;
 			//get closest point to current ramp
+			currentRamp = ramps.get(rampNumber);
+			nextRamp = ramps.get(rampNumber + 1);
+			
 			Waypoint nextWaypoint = getNextWaypoint();
+			double timeItShouldBeThereBy = getTimeItShouldBeThereBy(nextWaypoint);
 			
-			switch (freewayNumber) {
-			case 10:
-				//TODO fix this to do waypoints
-				currentRamp = Interstate10.ramps.get(rampNumber);
-				nextRamp = Interstate10.ramps.get(rampNumber + 1);
-				ramps = Interstate10.ramps;
-				waypoints = Interstate10.waypoints;
-				break;
-			case 101:
-				currentRamp = Interstate101.ramps.get(rampNumber);
-				nextRamp = Interstate101.ramps.get(rampNumber + 1);
-				ramps = Interstate101.ramps;
-				waypoints = Interstate101.waypoints;
-				//rampNumber = 0;
-				break;
-			case 105:
-				currentRamp = Interstate105.ramps.get(rampNumber);
-				nextRamp = Interstate105.ramps.get(rampNumber + 1);
-				ramps = Interstate105.ramps;
-				waypoints = Interstate105.waypoints;
-				//rampNumber = 0;
-				break;
-			case 405:
-				currentRamp = Interstate405.ramps.get(rampNumber);
-				nextRamp = Interstate405.ramps.get(rampNumber + 1);
-				ramps = Interstate405.ramps;
-				waypoints = Interstate405.waypoints;
-				//rampNumber = 0;
-				break;
-				
-			default:
-				break;
-			}
-			
+			/*
 			double currentTimeParam = System.currentTimeMillis();
-			double KMPerHour = MathEquations.milesInKM(speed);
 			double deltaTime = currentTime - currentTimeParam;
+			double KMPerHour = MathEquations.milesInKM(speed);
+
 			double deltaX = Math.abs(xLocation - nextWaypoint.getxLocation());
 			double deltaY = Math.abs(yLocation - nextWaypoint.getyLocation());
 			double angleInRad = Math.atan2(deltaY, deltaX);
@@ -227,20 +210,40 @@ public class Car extends Thread
 			
 			xLocation += newX;
 			yLocation += newY;
+			*/
+			while(timeItShouldBeThereBy > System.currentTimeMillis())
+			{
+				System.out.println("ID: " + id + " Current: " +System.currentTimeMillis() + " By: " + timeItShouldBeThereBy );
+			}
+			
+			marker.setLat(nextWaypoint.getxLocation());
+			marker.setLon(nextWaypoint.getyLocation());
+			
+			
 			
 			//System.out.println("moving car: " + id);
-			marker.setLat(xLocation);
-			marker.setLon(yLocation);
 			
-			currentTime = currentTimeParam;
+			
+			//currentTime = currentTimeParam;
 			MapGUI.refreshTheMap();
 			try {
-				sleep(1000);
+				sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private double getTimeItShouldBeThereBy(Waypoint nextWaypoint) 
+	{
+		double distanceItShouldBe = MathEquations.calculateDistance(xLocation, yLocation, nextWaypoint.getxLocation(), nextWaypoint.getyLocation());
+		double KMPerHour = MathEquations.milesInKM(speed);
+
+		double timeItShouldTakeInHours = distanceItShouldBe/KMPerHour;
+		double timeItShouldTakeInMilliSeconds = timeItShouldTakeInHours * 3600000; 
+		
+		return timeItShouldTakeInMilliSeconds + System.currentTimeMillis();
 	}
 
 	private Waypoint getNextWaypoint() 
@@ -263,16 +266,37 @@ public class Car extends Thread
 					nextIndex = j;
 				}
 			}
-			currentWaypoint = waypoints.get(nextIndex);
-		}else{
 			
+			currentWaypoint = waypoints.get(nextIndex);
+			wayPointNumber = nextIndex;
+			return currentWaypoint;
+		}else{
+			currentWaypoint = waypoints.get(wayPointNumber+1);
+			return currentWaypoint;
 		}
-		return null;
 	}
 
 	public void setMarker(CarDot currentCarDot)
 	{
 		marker = currentCarDot;
 	}
+
+	public Vector<Ramp> getRamps() {
+		return ramps;
+	}
+
+	public void setRamps(Vector<Ramp> ramps) {
+		this.ramps = ramps;
+	}
+
+	public Vector<Waypoint> getWaypoints() {
+		return waypoints;
+	}
+
+	public void setWaypoints(Vector<Waypoint> waypoints) {
+		this.waypoints = waypoints;
+	}
+	
+	
 	
 }

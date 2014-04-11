@@ -56,14 +56,22 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	{
 		MapGUI map = new MapGUI();
 		currentMap = map;
+		map.addFreewayPoints();
+		
+		
+		map.parser = new JSONsParser(map.cars);
+		map.parser.start();
+		
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		//map.addTheOnOffRamps();
-		map.addFreewayPoints();
+		
+
 		map.setTheCurrentXandYs();
+
+		//map.addTheOnOffRamps();
 		for(int i = 0; i < map.cars.size(); i++)
 		{
 			map.cars.get(i).start();
@@ -99,16 +107,24 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			Integer freewayNumber = cars.get(i).getFreewayNumber();
 			switch (freewayNumber) {
 			case 10:
-				//drawCarOnThe10(cars.get(i));
+				drawCarOnThe10(cars.get(i));
+				cars.get(i).setWaypoints(I10.waypoints);
+				cars.get(i).setRamps(I10.ramps);
 				break;
 			case 101:
 				drawCarOnThe101(cars.get(i));
+				cars.get(i).setWaypoints(I101.waypoints);
+				cars.get(i).setRamps(I101.ramps);
 				break;
 			case 105:
 				drawCarOnThe105(cars.get(i));
+				cars.get(i).setWaypoints(I105.waypoints);
+				cars.get(i).setRamps(I105.ramps);
 				break;
 			case 405:
 				drawCarOnThe405(cars.get(i));
+				cars.get(i).setWaypoints(I405.waypoints);
+				cars.get(i).setRamps(I405.ramps);
 				break;
 			default:
 				break;
@@ -119,7 +135,6 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	//making this one work first
 	private void drawCarOnThe405(Car car) 
 	{
-		System.out.println(car.getID());
 		if(car.getxLocation() == 0 || car.getyLocation() == 0)
 		{
 			int rampNumber = car.getRampNumber();
@@ -292,8 +307,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		super("Map Demo");
 		setSize(400,400);
 
-		parser = new JSONsParser(cars);
-		parser.start();
+		
 
 		treeMap = new JMapViewerTree("Zones");
 		map().addJMVListener(this);
