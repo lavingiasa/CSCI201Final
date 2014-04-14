@@ -1,3 +1,7 @@
+Testing Document
+Samir Lavingia, Alexei Naumann, Jeff Kang, Ian Whelan, Aidan Blant
+
+
 JSONs Parser
   This class has two main methods, pullTheNewData and ParseTheData, which as their names suggest pull the data from the online json file and parse it into useful data.
 

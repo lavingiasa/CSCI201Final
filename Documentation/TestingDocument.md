@@ -7,6 +7,8 @@
 + Ian Whelan
 + Aidan Blant
 
+#DONT USE THIS. EDIT ON THE TXT!
+
 ----
 ##JSONs Parser
 + This class has two main methods, pullTheNewData and ParseTheData, which as their names suggest pull the data from the online json file and parse it into useful data.
