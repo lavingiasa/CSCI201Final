@@ -1,31 +1,31 @@
-10 (Santa Monica Freeway)
+﻿10 (Santa Monica Freeway)
 South
-34.012321,-118.497329|SR 1 north (Pacific Coast Highway)– Oxnard
+34.012321,-118.497329|SR 1 north (Pacific Coast Highway) Oxnard
 34.012463,-118.490446|4th Street, 5th Street
 34.021113,-118.477301|20th Street
 34.027374,-118.457220|Centinela Avenue
 34.028566,-118.448508|Bundy Drive
-34.030027,-118.441437|I-405 (San Diego Freeway) – Sacramento, LAX Airport, Long Beach
+34.030027,-118.441437|I-405 (San Diego Freeway) Sacramento, LAX Airport, Long Beach
 34.031673,-118.418809|National Boulevard
 34.034588,-118.384323|La Cienega Boulevard, Venice Boulevard (SR 187 west)
 34.036456,-118.375780|Fairfax Avenue, Washington Boulevard
 34.033882,-118.356856|La Brea Avenue
 34.034739,-118.337501|Crenshaw Boulevard
-34.036089, -118.320843|"Arlington Avenue
+34.036089, -118.320843|Arlington Avenue
 34.036662,-118.316861|Western Avenue, Normandie Avenue
-34.036616, -118.286537|"Hoover Street, Vermont Avenue
-34.036616, -118.286537|"Hoover Street
-34.036796,-118.286159|I-110 south (Harbor Freeway) / SR 110 north (Harbor Freeway) / Pico Boulevard – San Pedro, Pasadena, Downtown Los Angeles
+34.036616, -118.286537|Hoover Street, Vermont Avenue
+34.036616, -118.286537|Hoover Street
+34.036796,-118.286159|I-110 south (Harbor Freeway) / SR 110 north (Harbor Freeway) / Pico Boulevard San Pedro, Pasadena, Downtown Los Angeles
 34.032481,-118.263612|Maple Avenue
-34.032415,-118.263606|Los Angeles Street – Convention Center
+34.032415,-118.263606|Los Angeles Street Convention Center
 34.029874, -118.256853|"San Pedro Street
 34.034324,-118.266572|Central Avenue
 34.023581,-118.242734|Alameda Street
 34.025796,-118.236321|Mateo Street, Santa Fe Avenue
-34.028728,-118.227537|I-5 south (Santa Ana Freeway) / SR 60 east (Pomona Freeway) – Santa Ana, Pomona
-34.034200,-118.221913|Boyle Avenue
+34.028728,-118.227537|I-5 south (Santa Ana Freeway) / SR 60 east (Pomona Freeway) Santa Ana, Pomona
+34.034200,-118.221913|Boyle Avenue 
 34.046043,-118.215339|Fourth Street
-34.053053,-118.214486|I-5 north (Golden State Freeway) – Sacramento
+34.053053,-118.214486|I-5 north (Golden State Freeway) Sacramento
 34.055587,-118.197574|Soto Street
 34.055604,-118.184322|City Terrace Drive
 34.058691,-118.177351|Eastern Avenue
@@ -44,20 +44,20 @@ North
 34.037285, -118.309862|Arlington Avenue
 34.037089,-118.295382|Western Avenue, Normandie Avenue
 34.037203,-118.288597|Hoover Street, Vermont Avenue
-34.038109,-118.275780|I-110 south (Harbor Freeway) / SR 110 north (Harbor Freeway) / Pico Boulevard – San Pedro, Pasadena, Downtown Los   Angeles"></exit>
+34.038109,-118.275780|I-110 south (Harbor Freeway) / SR 110 north (Harbor Freeway) / Pico Boulevard San Pedro, Pasadena, Downtown Los Angeles
 34.034337, -118.266481|Grand Avenue
 34.031003,-118.258776|Maple Avenue
-34.030939,-118.258810|Los Angeles Street – Convention Center
+34.030939,-118.258810|Los Angeles Street Convention Center
 34.026642,-118.250395|San Pedro Street
 34.023754,-118.243304|Central Avenue
 34.026270,-118.235627|Alameda Street
 34.029496,-118.222997|Mateo Street, Santa Fe Avenue
-34.028536,-118.229613|I-5 south (Santa Ana Freeway) / SR 60 east (Pomona Freeway) – Santa Ana, Pomona
+34.028536,-118.229613|I-5 south (Santa Ana Freeway) / SR 60 east (Pomona Freeway) Santa Ana, Pomona
 34.033938,-118.220813|Boyle Avenue
 34.041171,-118.218225|Fourth Street
 34.047545,-118.214427|Cesar Chavez Avenue
-34.053116, -118.213692|I-5 north (Golden State Freeway) – Sacramento
-34.056291,-118.212657|US 101 north (Santa Ana Freeway via San Bernardino Freeway) – Los Angeles, Hollywood
+34.053116, -118.213692|I-5 north (Golden State Freeway) Sacramento
+34.056291,-118.212657|US 101 north (Santa Ana Freeway via San Bernardino Freeway) Los Angeles, Hollywood
 34.054612, -118.209656|State Street
 34.168396,-118.497403|City Terrace Drive
 34.061477,-118.166155|Eastern Avenue

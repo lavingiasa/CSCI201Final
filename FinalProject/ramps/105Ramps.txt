@@ -1,34 +1,37 @@
 105 (Century Freeway)
 East
-33.930287,-118.377986|La Cienega Boulevard, Aviation Boulevard/I-405 (San Diego Freeway) - Santa Monica, Long Beach
+33.930287,-118.377986|La Cienega Boulevard, Aviation Boulevard
+33.930287,-118.377986|I-405 (San Diego Freeway) Santa Monica, Long Beach
 33.933327,-118.352247|Prarie Avenue
 33.92479,-118.334749|Crenshaw Boulevard
 33.928191,-118.29605|Vermont Avenue
-33.928502,-118.289838|I-110 (Harbor Freeway) - Los Angeles, San Pedro
+33.928502,-118.289838|I-110 (Harbor Freeway) Los Angeles, San Pedro
 33.927327,-118.259014|Central Avenue
 33.928403,-118.243876|Wilmington Avenue
 33.926177,-118.21332|Long Beach Boulevard
-33.915725,-118.18918|I-710 (Long Beach Freeway) - Pasadena, Long Beach
+33.915725,-118.18918|I-710 (Long Beach Freeway) Pasadena, Long Beach
 33.912342,-118.179245|Garfield Avenue
 33.912841,-118.145986|SR 19 (Lakewood Boulevard)
 33.912965,-118.131115|Bellflower Boulevard
 33.913713,-118.113799|I-605 (San Gabriel River Freeway)
-33.913749,-118.108413|Hoxie Avenue - Norwalk Metro Station
+33.913749,-118.108413|Hoxie Avenue Norwalk Metro Station
 33.914212,-118.099315|Studebaker Road
 West
-33.914443,-118.100967|Hoxie Avenue - Norwalk Metro Station
+33.914443,-118.100967|Hoxie Avenue Norwalk Metro Station
 33.913678,-118.120344|Bellflower Boulevard
 33.913304,-118.135364|SR 19 (Lakewood Boulevard)
 33.912663,-118.153431|Paramount Boulevard
-33.911327,-118.168538|I-710 (Long Beach Freeway) - Pasadena, Long Beach
+33.911327,-118.168538|I-710 (Long Beach Freeway) Pasadena, Long Beach
 33.923222,-118.205745|Long Beach Boulevard
 33.928492,-118.230572|Imperial Highway
 33.92883,-118.249755|Central Avenue
-33.927833,-118.270762|I-110 (Harbor Freeway) - Los Angeles, San Pedro
+33.927833,-118.270762|I-110 (Harbor Freeway) Los Angeles, San Pedro
 33.928919,-118.287241|Vermont Avenue
 33.925643,-118.32093|Crenshaw Boulevard
-33.92835,-118.341315|Prarie Avenue/Harthorne Boulevard
-33.932907,-118.358974|I-405 (San Diego Freeway) - Santa Monica, Long Beach/La Cienega Boulevard, Aviation Boulevard
-33.931252,-118.385153|Nash Street - LAX Airport
-33.931465,-118.390603|SR 1 (Sepulveda Boulevard)/Imperial Highway east - LAX Airport
+33.92835,-118.341315|Prarie Avenue
+33.92835,-118.341315|Hawthorne Boulevard
+33.932907,-118.358974|I-405 (San Diego Freeway) Santa Monica, Long Beach
+33.932907,-118.348974|La Cienega Boulevard, Aviation Boulevard
+33.931252,-118.385153|Nash Street LAX Airport
+33.931465,-118.390603|SR 1 (Sepulveda Boulevard) / Imperial Highway east LAX Airport
 33.931462,-118.404164|Imperial Highway West
