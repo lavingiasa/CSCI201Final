@@ -5,8 +5,8 @@ import java.util.Vector;
 
 public class Interstate110
 {
-	static Vector<Ramp> ramps;
-	static Vector<Waypoint> waypoints;
+	public static Vector<Ramp> ramps;
+	public static Vector<Waypoint> waypoints;
 	
 	static
 	{
