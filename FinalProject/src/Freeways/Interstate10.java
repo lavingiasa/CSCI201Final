@@ -17,7 +17,7 @@ public class Interstate10
 		ramps = new Vector<Ramp>();
 		waypoints = new Vector<Waypoint>();
 	}
-	/*
+	
 	public void addFreewayPoints()
 	{
 		try {
@@ -58,5 +58,5 @@ public class Interstate10
 		} catch (NumberFormatException nfe) { nfe.printStackTrace(); } 
 		catch (FileNotFoundException e) { e.printStackTrace(); }  
 		catch (IOException e) { e.printStackTrace();}
-	}*/
+	}
 }

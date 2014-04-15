@@ -42,6 +42,7 @@ public class Car extends Thread
 		this.currentTime = time;
 		this.xLocation = 0;
 		this.yLocation = 0;
+		this.rampNumber = -1;
 		this.currentWaypoint = null;
 		this.wayPointNumber = 0;
 		this.currentRamp = null;
@@ -49,14 +50,18 @@ public class Car extends Thread
 
 	private void setRampTesting() 
 	{
+		
 		for(int i = 0; i < ramps.size(); i++)
 		{
-			if(ramps.get(i).equals(ramp))
+			if(ramps.get(i).getName().equals(ramp))
 			{
 				rampNumber = i;
+				System.out.println(ramp + ": " + rampNumber);
 				break;
 			}
 		}
+		System.out.println(ramp + ": " + rampNumber);
+
 	}
 	
 	private void setRampNumber() 
@@ -190,7 +195,7 @@ public class Car extends Thread
 			{
 				if(id == 6)
 				{
-					System.out.println("ID: " + id + " More Seconds: " + (timeItShouldBeThereBy - System.currentTimeMillis())/1000 );
+					//System.out.println("ID: " + id + " More Seconds: " + (timeItShouldBeThereBy - System.currentTimeMillis())/1000 );
 				}
 			}
 			System.out.println(nextWaypoint.getxLocation());

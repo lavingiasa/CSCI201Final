@@ -25,7 +25,7 @@ public class JSONsParser extends Thread {
 	}
 
 	public void run() {
-		// pullTheNewData(); //Reenable later
+		pullTheNewData(); //Reenable later
 		parseTheData();
 		try {
 			sleep( 3 * 60 * 1000 ); // 3 min * 60 sec/min *
@@ -62,7 +62,7 @@ public class JSONsParser extends Thread {
 		JSONParser parser = new JSONParser();
 		//ArrayList<Integer> listOfIDs = new ArrayList<Integer>();
 		try {
-			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/initialTest.json"));
+			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/currentData.json"));
 			cars.clear();
 			for (int i = 0; i < arrayFromFile.size(); i++)
 			{
