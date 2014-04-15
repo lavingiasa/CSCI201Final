@@ -46,6 +46,13 @@ public class Car extends Thread
 		this.currentWaypoint = null;
 		this.wayPointNumber = 0;
 		this.currentRamp = null;
+		try {
+			sleep(100);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		setRamps();
+		setRampTesting();
 	}
 
 	private void setRampTesting() 
@@ -56,29 +63,31 @@ public class Car extends Thread
 			if(ramps.get(i).getName().equals(ramp))
 			{
 				rampNumber = i;
+				//this.xLocation = ramps.get(rampNumber).getxLocation();
+				//this.yLocation = ramps.get(rampNumber).getyLocation();
 				System.out.println(ramp + ": " + rampNumber);
-				break;
+				return;
 			}
 		}
 		System.out.println(ramp + ": " + rampNumber);
 
 	}
 	
-	private void setRampNumber() 
+	private void setRamps() 
 	{
 		
 		switch (freewayNumber) {
 		case 10:
-			rampNumber = 0;
+			ramps = Interstate10.ramps;
 			break;
 		case 101:
-			rampNumber = 0;
+			ramps = Interstate101.ramps;
 			break;
 		case 105:
-			rampNumber = 0;
+			ramps = Interstate105.ramps;
 			break;
 		case 405:
-			rampNumber = 0;
+			ramps = Interstate405.ramps;
 			break;
 			
 		default:
@@ -173,12 +182,12 @@ public class Car extends Thread
 		//getNextWayPoint
 		//findHowMuchTime
 		//ifCurrentTime < HowMuchTime then move
-		if(!setRampHasBeenDone)
+		/*if(!setRampHasBeenDone)
 		{
 			setRampTesting();
 			setRampHasBeenDone = true;
 		}
-
+*/		
 		while(true)
 		{
 			//Ramp nextRamp = null;
@@ -188,18 +197,16 @@ public class Car extends Thread
 			
 			Waypoint nextWaypoint = getNextWaypoint();
 			long timeItShouldBeThereBy = getTimeItShouldBeThereBy(nextWaypoint);
-			//System.out.println("TimeShould " + timeItShouldBeThereBy + "current" +  System.currentTimeMillis());
+			System.out.println("TimeShould " + timeItShouldBeThereBy + "current" +  System.currentTimeMillis());
 
-
+			
 			while(timeItShouldBeThereBy > System.currentTimeMillis())
 			{
-				if(id == 6)
-				{
-					//System.out.println("ID: " + id + " More Seconds: " + (timeItShouldBeThereBy - System.currentTimeMillis())/1000 );
-				}
+				//if(id == 6)
+				//{
+					System.out.println("ID: " + id + " More Seconds: " + (timeItShouldBeThereBy - System.currentTimeMillis())/1000 + " Dir: " + direction );
+				//}
 			}
-			System.out.println(nextWaypoint.getxLocation());
-			System.out.println(nextWaypoint.getyLocation());
 			marker.setLat(nextWaypoint.getxLocation());
 			marker.setLon(nextWaypoint.getyLocation());			
 			currentWaypoint = nextWaypoint;
@@ -251,14 +258,21 @@ public class Car extends Thread
 			}
 			
 			currentWaypoint = waypoints.get(nextIndex);
-			System.out.println(xLocation +" "+currentWaypoint.getxLocation());
-			System.out.println(yLocation +" "+currentWaypoint.getyLocation());
+			//System.out.println(xLocation +" "+currentWaypoint.getxLocation());
+			//System.out.println(yLocation +" "+currentWaypoint.getyLocation());
 
 			wayPointNumber = nextIndex;
 			return currentWaypoint;
 		}else{			
-			currentWaypoint = waypoints.get(wayPointNumber+1);
-			wayPointNumber ++;
+			if(direction.equals("North") || direction.equals("East"))
+			{
+				currentWaypoint = waypoints.get(wayPointNumber+1);
+				wayPointNumber ++;
+			}else{
+				currentWaypoint = waypoints.get(wayPointNumber-1);
+				wayPointNumber --;
+			}
+			
 			return currentWaypoint;
 		}
 	}

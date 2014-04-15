@@ -25,7 +25,7 @@ public class JSONsParser extends Thread {
 	}
 
 	public void run() {
-		pullTheNewData(); //Reenable later
+		//pullTheNewData(); //Reenable later
 		parseTheData();
 		try {
 			sleep( 3 * 60 * 1000 ); // 3 min * 60 sec/min *
@@ -84,7 +84,7 @@ public class JSONsParser extends Thread {
 
 
 				//TODO only 405 for now
-				if(freeway.equals("405"))
+				if(freeway.equals("405") && !ramp.contains("Slauson"))
 				{
 					Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
 					cars.add(currentCar);

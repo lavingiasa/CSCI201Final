@@ -70,7 +70,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		map.parser.start();
 		
 		try {
-			Thread.sleep(5000);	// .5 seconds
+			Thread.sleep(500);	// .5 seconds
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -114,24 +114,24 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			Integer freewayNumber = cars.get(i).getFreewayNumber();
 			switch (freewayNumber) {
 			case 10:
-				//drawCarOnThe10(cars.get(i));
+				drawCarOnThe10(cars.get(i));
 				cars.get(i).setWaypoints(I10.waypoints);
 				cars.get(i).setRamps(I10.ramps);
 				break;
 			case 101:
-				//drawCarOnThe101(cars.get(i));
+				drawCarOnThe101(cars.get(i));
 				cars.get(i).setWaypoints(I101.waypoints);
 				cars.get(i).setRamps(I101.ramps);
 				break;
 			case 105:
-				//drawCarOnThe105(cars.get(i));
+				drawCarOnThe105(cars.get(i));
 				cars.get(i).setWaypoints(I105.waypoints);
 				cars.get(i).setRamps(I105.ramps);
 				break;
 			case 405:
 				cars.get(i).setWaypoints(I405.waypoints);
 				cars.get(i).setRamps(I405.ramps);
-				//drawCarOnThe405(cars.get(i));
+				drawCarOnThe405(cars.get(i));
 				break;
 			default:
 				break;
