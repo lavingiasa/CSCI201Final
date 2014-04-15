@@ -45,30 +45,18 @@ public class Car extends Thread
 		this.currentWaypoint = null;
 		this.wayPointNumber = 0;
 		this.currentRamp = null;
-		//setRampNumber();
 	}
 
 	private void setRampTesting() 
 	{
-		
-		switch (freewayNumber) {
-		case 10:
-			rampNumber = 0;
-			break;
-		case 101:
-			rampNumber = 0;
-			break;
-		case 105:
-			rampNumber = 0;
-			break;
-		case 405:
-			rampNumber = 0;
-			break;
-			
-		default:
-			break;
+		for(int i = 0; i < ramps.size(); i++)
+		{
+			if(ramps.get(i).equals(ramp))
+			{
+				rampNumber = i;
+				break;
+			}
 		}
-		
 	}
 	
 	private void setRampNumber() 
