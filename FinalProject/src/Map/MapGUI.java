@@ -9,6 +9,21 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.charset.Charset;
+import java.util.Scanner;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -23,6 +38,12 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.json.*;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
 import org.openstreetmap.gui.jmapviewer.events.JMVCommandEvent;
@@ -70,6 +91,10 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	public Ramp startRamp;
 	public Ramp endRamp;
 	public boolean preferShortestTime = true;
+	
+	private double[] routePoints;
+	
+	private final String MAPQUEST_API_KEY = "Fmjtd%7Cluur2qu829%2Cal%3Do5-9aaldu";
 	
 	
 	JSONsParser parser = null;
@@ -275,6 +300,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			e.printStackTrace();
 		}
 
+
 	}*/
 	/*
 	private void pullJSONUsingName(String rampName) 
@@ -325,6 +351,68 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	}
 	*/
+	
+	public void getDirections() {
+		String priority = "";
+		if (preferShortestTime) {
+			priority = "fastest";
+		}
+		else {
+			priority = "shortest";
+		}
+		String url = "http://open.mapquestapi.com/directions/v2/route?key=" + MAPQUEST_API_KEY + "&callback=renderAdvancedNarrative&outFormat=json&routeType=" + priority + "&timeType=1&enhancedNarrative=false&shapeFormat=raw&generalize=0&locale=en_US&unit=m&from="
+					+ startRamp.getxLocation() + "," + startRamp.getyLocation() + "&to=" + endRamp.getxLocation() + "," + endRamp.getyLocation();
+
+		System.out.println(url);
+		URL website;
+		
+
+		
+		try {
+			website = new URL(url);
+			HttpURLConnection request1 = (HttpURLConnection) website.openConnection();
+	        request1.setRequestMethod("GET");
+	        request1.connect();
+	        InputStream is = request1.getInputStream();
+	        BufferedReader bf_reader = new BufferedReader(new InputStreamReader(is));
+	        StringBuilder sb = new StringBuilder();
+	        String line = null;
+	        try {
+	            while ((line = bf_reader.readLine()) != null) {
+	                sb.append(line).append("\n");
+	            }
+	        } catch (IOException e) {
+	        } finally {
+	            try {
+	                is.close();
+	            } catch (IOException e) {
+	            }
+	        }
+	        String responseBody = sb.toString();
+	        System.out.println(responseBody.substring(0,23));
+	        System.out.println(responseBody.substring(23));
+	        responseBody = responseBody.substring(25, responseBody.length()-4);
+	        System.out.println(responseBody);
+	        JSONParser parser = new JSONParser();
+	        
+	        Object obj = new Object();
+			try {
+				obj = parser.parse(responseBody);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        System.out.println(obj);
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+	}
 
 	public MapGUI()
 	{
@@ -549,6 +637,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 					preferShortestTime = false;
 					System.out.println("Shortest distance is preferred");
 				}
+				
+				getDirections();
 			}
 		});
 		
@@ -618,3 +708,4 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	}
 
 }
+
