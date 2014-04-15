@@ -264,14 +264,21 @@ public class Car extends Thread
 			wayPointNumber = nextIndex;
 			return currentWaypoint;
 		}else{			
-			if(direction.equals("North") || direction.equals("East"))
+			if(wayPointNumber < waypoints.size())
 			{
-				currentWaypoint = waypoints.get(wayPointNumber+1);
-				wayPointNumber ++;
+				if(direction.equals("North") || direction.equals("East"))
+				{
+					currentWaypoint = waypoints.get(wayPointNumber+1);
+					wayPointNumber ++;
+				}else{
+					currentWaypoint = waypoints.get(wayPointNumber-1);
+					wayPointNumber --;
+				}
 			}else{
-				currentWaypoint = waypoints.get(wayPointNumber-1);
-				wayPointNumber --;
+				currentWaypoint = waypoints.get(wayPointNumber);
+				marker.setVisible(false);
 			}
+			
 			
 			return currentWaypoint;
 		}
