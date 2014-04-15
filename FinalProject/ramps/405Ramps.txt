@@ -11,8 +11,8 @@ South
 34.165935,-118.469675|US 101 (Ventura Freeway)   Ventura, Los Angeles
 34.156862,-118.469095|Ventura Boulevard
 34.149759,-118.468881|Sepulveda Boulevard, Valley Vista Boulevard
-34.100378,-118.478086|Sepulveda Boulevard, Getty Center Drive
-34.074983,-118.468473|Church Lane, Sunset Boulevard, Montana Avenue
+34.100378,-118.478086|Getty Center Drive
+34.074983,-118.468473|Sunset Boulevard, Montana Avenue
 34.060905,-118.4565|Wilshire Boulevard
 34.050168,-118.449054|SR 2 (Santa Monica Boulevard)
 34.03886,-118.439934|Olympic Boulevard, Pico Boulevard
@@ -28,17 +28,18 @@ North
 33.957009,-118.36921|Manchester Boulevard, La Cienega Boulevard, Florence Avenue
 33.970375,-118.374746|La Tijera Boulevard
 33.972848,-118.379595|Howard Hughes Parkway, Sepulveda Boulevard
+33.980444,-118.393199|Sepulveda Boulevard, Slauson Avenue (SR 90 east)
 33.983098,-118.395281|SR 90 west (Marina Freeway)   Marina del Rey
 33.984824,-118.396654|Jefferson Boulevard
 33.999554,-118.408263|Culver Boulevard, Washington Boulevard   Culver City
 34.009,-118.415666|Venice Boulevard (SR 187), Washington Boulevard
 34.024562,-118.428004|National Boulevard
-34.025345,-118.428669|I-10 (Santa Monica Freeway)   Santa Monica, Los Angeles
+34.025345,-118.428669|I-10 (Santa Monica Freeway), Santa Monica, Los Angeles
 34.043163,-118.443217|SR 2 (Santa Monica Boulevard)
 34.052426,-118.449461|Wilshire Boulevard
-34.069526,-118.463581|Sunset Boulevard
+34.069526,-118.463581|Sunset Boulevard, Montana Avenue
 34.076103,-118.468945|Moraga Drive
-34.092275,-118.475704|Sepulveda Boulevard, Getty Center Drive
+34.092275,-118.475704|Getty Center Drive
 34.121235,-118.479524|Mulholland Drive, Skirball Center Drive
 34.149705,-118.468494|Ventura Boulevard, Sepulveda Boulevard, Valley Vista Boulevard
 34.154518,-118.468001|US 101 (Ventura Freeway)   Ventura, Los Angeles
