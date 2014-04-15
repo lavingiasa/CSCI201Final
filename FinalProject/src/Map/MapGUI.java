@@ -3,12 +3,18 @@ package Map;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.util.Vector;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
@@ -314,6 +320,36 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		super("Map Demo");
 		setSize(400,400);
 
+		JMenuBar jmb = new JMenuBar();
+		JMenu file = new JMenu("File");
+		JMenu graph = new JMenu("Graph");
+		JMenu directions = new JMenu("Directions");
+		
+		//File menu items
+		JMenuItem exportToCSV = new JMenuItem("Export to CSV");
+		JMenuItem exit = new JMenuItem("Exit");
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				setVisible(false);
+				dispose();
+			}
+		});
+		file.add(exportToCSV);
+		file.add(exit);
+		
+		//Graph menu items
+		JMenuItem openGraph = new JMenuItem("Open Graph");
+		graph.add(openGraph);
+		
+		//Directions menu items
+		JMenuItem getDirections = new JMenuItem("Get Directions");
+		directions.add(getDirections);
+		
+		jmb.add(file);
+		jmb.add(graph);
+		jmb.add(directions);
+		
+		setJMenuBar(jmb);
 		
 
 		treeMap = new JMapViewerTree("Zones");
