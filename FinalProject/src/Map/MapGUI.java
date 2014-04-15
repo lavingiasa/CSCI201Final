@@ -10,6 +10,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -23,6 +25,8 @@ import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -61,6 +65,13 @@ import Freeways.Interstate110;
 import Freeways.Interstate405;
 import Freeways.Ramp;
 import Freeways.RampDot;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
+
 import JSON.JSONsParser;
 
 @SuppressWarnings("serial")
@@ -360,60 +371,57 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		else {
 			priority = "shortest";
 		}
-		String url = "http://open.mapquestapi.com/directions/v2/route?key=" + MAPQUEST_API_KEY + "&callback=renderAdvancedNarrative&outFormat=json&routeType=" + priority + "&timeType=1&enhancedNarrative=false&shapeFormat=raw&generalize=0&locale=en_US&unit=m&from="
+		String url = "http://open.mapquestapi.com/directions/v2/route?key=" + MAPQUEST_API_KEY + "&callback=renderAdvancedNarrative&outFormat=xml&routeType=" + priority + "&timeType=1&enhancedNarrative=false&shapeFormat=raw&generalize=0&locale=en_US&unit=m&from="
 					+ startRamp.getxLocation() + "," + startRamp.getyLocation() + "&to=" + endRamp.getxLocation() + "," + endRamp.getyLocation();
 
-		System.out.println(url);
-		URL website;
-		
-
-		
-		try {
-			website = new URL(url);
-			HttpURLConnection request1 = (HttpURLConnection) website.openConnection();
-	        request1.setRequestMethod("GET");
-	        request1.connect();
-	        InputStream is = request1.getInputStream();
-	        BufferedReader bf_reader = new BufferedReader(new InputStreamReader(is));
-	        StringBuilder sb = new StringBuilder();
-	        String line = null;
-	        try {
-	            while ((line = bf_reader.readLine()) != null) {
-	                sb.append(line).append("\n");
-	            }
-	        } catch (IOException e) {
-	        } finally {
-	            try {
-	                is.close();
-	            } catch (IOException e) {
-	            }
-	        }
-	        String responseBody = sb.toString();
-	        System.out.println(responseBody.substring(0,23));
-	        System.out.println(responseBody.substring(23));
-	        responseBody = responseBody.substring(25, responseBody.length()-4);
-	        System.out.println(responseBody);
-	        JSONParser parser = new JSONParser();
-	        
-	        Object obj = new Object();
-			try {
-				obj = parser.parse(responseBody);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	        System.out.println(obj);
-			
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		pullDirectionData(url);
+		parseDirectionData();
 		
 	}
 
+	private void parseDirectionData() 
+	{
+		File XMLFile;
+		Document XMLTree;
+		SAXReader reader;
+		
+		XMLTree = null;
+		reader = new SAXReader();
+		try {
+			XMLFile = new File("JSONs/directionsData.xml");
+			XMLTree = reader.read(XMLFile);//new FileInputStream("JSONs/directionsData.xml"));
+			List<? extends Node> shapeNodes = new ArrayList<Node>(); 
+			//shapeNodes = XMLTree.selectNodes("//response");
+			shapeNodes = XMLTree.selectNodes("//response/route/shape/shapePoints/latLng");
+			for(int i = 0; i < shapeNodes.size(); i++)
+			{
+				double latitude = Double.valueOf(shapeNodes.get(2).selectSingleNode("lat").getText());
+				double longitude = Double.valueOf(shapeNodes.get(2).selectSingleNode("lng").getText());
+
+			}
+
+		} catch (DocumentException e) {
+			System.out.println("Your XML File is invalid");
+			return;
+		}
+	}
+	private void pullDirectionData(String url) {
+		URL website;
+		try {
+			website = new URL(url);
+			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+			FileOutputStream fos = new FileOutputStream(
+					"JSONs/directionsData.xml");
+			fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	public MapGUI()
 	{
 		super("Map Demo");
