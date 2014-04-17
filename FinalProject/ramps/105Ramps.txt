@@ -23,7 +23,6 @@ West
 33.912663,-118.153431|Paramount Boulevard
 33.911327,-118.168538|I-710 (Long Beach Freeway) Pasadena, Long Beach
 33.923222,-118.205745|Long Beach Boulevard
-33.928492,-118.230572|Imperial Highway
 33.92883,-118.249755|Central Avenue
 33.927833,-118.270762|I-110 (Harbor Freeway) Los Angeles, San Pedro
 33.928919,-118.287241|Vermont Avenue

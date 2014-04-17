@@ -1,4 +1,4 @@
-﻿10 (Santa Monica Freeway)
+10 (Santa Monica Freeway)
 South
 34.012321,-118.497329|SR 1 north (Pacific Coast Highway) Oxnard
 34.012463,-118.490446|4th Street, 5th Street
@@ -18,7 +18,7 @@ South
 34.036796,-118.286159|I-110 south (Harbor Freeway) / SR 110 north (Harbor Freeway) / Pico Boulevard San Pedro, Pasadena, Downtown Los Angeles
 34.032481,-118.263612|Maple Avenue
 34.032415,-118.263606|Los Angeles Street Convention Center
-34.029874, -118.256853|"San Pedro Street
+34.029874, -118.256853|San Pedro Street
 34.034324,-118.266572|Central Avenue
 34.023581,-118.242734|Alameda Street
 34.025796,-118.236321|Mateo Street, Santa Fe Avenue
