@@ -3,12 +3,15 @@ package Map;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.awt.geom.Path2D;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,6 +29,7 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
@@ -48,9 +52,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
+import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
 import org.openstreetmap.gui.jmapviewer.events.JMVCommandEvent;
+import org.openstreetmap.gui.jmapviewer.interfaces.ICoordinate;
 import org.openstreetmap.gui.jmapviewer.interfaces.JMapViewerEventListener;
 import org.openstreetmap.gui.jmapviewer.interfaces.TileSource;
 import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
@@ -384,6 +391,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		File XMLFile;
 		Document XMLTree;
 		SAXReader reader;
+		List<Coordinate> coordinateList = new ArrayList<Coordinate>();
+		List<ArrayList<Coordinate>> routeListList = new ArrayList<ArrayList<Coordinate>>();
 		
 		XMLTree = null;
 		reader = new SAXReader();
@@ -395,16 +404,25 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			shapeNodes = XMLTree.selectNodes("//response/route/shape/shapePoints/latLng");
 			for(int i = 0; i < shapeNodes.size(); i++)
 			{
-				double latitude = Double.valueOf(shapeNodes.get(2).selectSingleNode("lat").getText());
-				double longitude = Double.valueOf(shapeNodes.get(2).selectSingleNode("lng").getText());
-
+				double latitude = Double.valueOf(shapeNodes.get(i).selectSingleNode("lat").getText());
+				double longitude = Double.valueOf(shapeNodes.get(i).selectSingleNode("lng").getText());
+				System.out.println(latitude + "," + longitude);
+				coordinateList.add(new Coordinate(latitude, longitude));
 			}
+			
+			MapPolyLine route = new MapPolyLine(coordinateList);
+			map().removeAllMapPolygons();
+			map().addMapPolygon(route);
+			map().setMapPolygonsVisible(true);
+			//map().repaint();
+			
 
 		} catch (DocumentException e) {
 			System.out.println("Your XML File is invalid");
 			return;
 		}
 	}
+	
 	private void pullDirectionData(String url) {
 		URL website;
 		try {
@@ -714,6 +732,40 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		if (zoomValue!=null)
 			zoomValue.setText(String.format("%s", map().getZoom()));
 	}
+	
+	protected void paintComponent(Graphics g) {
+		super.paintComponents(g);
+		
+	}
 
+	private class MapPolyLine extends MapPolygonImpl {
+		//By Aqua http://stackoverflow.com/users/1048330/aqua
+		//From http://stackoverflow.com/questions/20252592/draw-polyline-in-jmapviewer
+		 public MapPolyLine(List<? extends ICoordinate> points) {
+	            super(null, null, points);
+	        }
+
+	        @Override
+	        public void paint(Graphics g, List<Point> points) {
+	            Graphics2D g2d = (Graphics2D) g.create();
+	            g2d.setColor(getColor());
+	            g2d.setStroke(getStroke());
+	            Path2D path = buildPath(points);
+	            g2d.draw(path);
+	            g2d.dispose();
+	        }
+
+	        private Path2D buildPath(List<Point> points) {
+	            Path2D path = new Path2D.Double();
+	            if (points != null && points.size() > 0) {
+	                Point firstPoint = points.get(0);
+	                path.moveTo(firstPoint.getX(), firstPoint.getY());
+	                for (Point p : points) {
+	                    path.lineTo(p.getX(), p.getY());    
+	                }
+	            } 
+	            return path;
+	        }
+	}
 }
 
