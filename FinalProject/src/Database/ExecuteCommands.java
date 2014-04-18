@@ -6,11 +6,9 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import Cars.Car;
-
-import com.mysql.jdbc.Statement;
-
 
 public class ExecuteCommands {
 	public static void main(String[] args) {		
@@ -27,7 +25,28 @@ public class ExecuteCommands {
 //		}		
 	}
 
-	public Car getCar(int carID)  {		
+	public static void addCar(int carID, int carSpeed, String carDirection, int freewayNumber, int wayPointNumber)  {		
+		Connection connection = null;
+
+		try {			
+			connection = CreateConnection.getConnection();
+			Statement insertStatement = connection.createStatement();
+            insertStatement.executeUpdate("insert into Cars " + "values("+carID+", "+carSpeed+", "+carDirection+", "+freewayNumber+","+wayPointNumber+")");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public static Car getCar(int carID)  {		
 		ResultSet rs = null;
 		Connection connection = null;
 		java.sql.Statement statement = null; 
