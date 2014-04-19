@@ -111,6 +111,9 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	public Ramp endRamp;
 	public Ramp lastRamp;
 	public boolean preferShortestTime = true;
+	public boolean showDirections = false;
+	
+	private double routeDistance;
 	
 	private double[] routePoints;
 	
@@ -398,11 +401,107 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 			pullDirectionData(url);
 			parseDirectionData();
-			hasThreeDestinations = false;
+			map().removeAllMapPolygons();
 		}
 		
+		showDirections = true;
 		
+		double averageSpeed = 0;
 		
+		String freeway1 = "";
+		String freeway2 = "";
+		String freeway3 = "";
+
+		//freeway 1
+		if (I10.ramps.contains(startRamp)) {
+			freeway1 = "10";
+		}
+		
+		else if (I101.ramps.contains(startRamp)) {
+			freeway1 = "101";
+		}
+		
+		else if (I105.ramps.contains(startRamp)) {
+			freeway1 = "105";
+		}
+		
+//		else if (I110.ramps.contains(startRamp)) {
+//			freeway1 = "110";
+//		}
+		
+		else if (I405.ramps.contains(startRamp)) {
+			freeway1 = "405";
+		}
+		
+		//freeway 2
+		if (I10.ramps.contains(endRamp)) {
+			freeway2 = "10";
+		}
+		
+		else if (I101.ramps.contains(endRamp)) {
+			freeway2 = "101";
+		}
+		
+		else if (I105.ramps.contains(endRamp)) {
+			freeway2 = "105";
+		}
+		
+//		else if (I110.ramps.contains(endRamp)) {
+//			freeway2 = "110";
+//		}
+		
+		else if (I405.ramps.contains(endRamp)) {
+			freeway2 = "405";
+		}
+		
+		if (hasThreeDestinations) {
+			if (I10.ramps.contains(lastRamp)) {
+				freeway3 = "10";
+			}
+			
+			else if (I101.ramps.contains(lastRamp)) {
+				freeway3 = "101";
+			}
+			
+			else if (I105.ramps.contains(lastRamp)) {
+				freeway3 = "105";
+			}
+			
+//			else if (I110.ramps.contains(lastRamp)) {
+//				freeway3 = "110";
+//			}
+			
+			else if (I405.ramps.contains(lastRamp)) {
+				freeway3 = "405";
+			}
+		}
+		
+		int numCars = 0;
+		
+		for (int i = 0; i < cars.size(); i++) {
+			System.out.println(cars.get(i).getFreeway());
+			if (hasThreeDestinations) {
+				if (cars.get(i).getFreeway().equals(freeway1) || cars.get(i).getFreeway().equals(freeway2) || cars.get(i).getFreeway().equals(freeway3)) {
+					numCars += 1;
+					averageSpeed += cars.get(i).getSpeed();
+					System.out.println(cars.get(i).getSpeed());
+				}
+			}
+			else {
+				if (cars.get(i).getFreeway().equals(freeway1) || cars.get(i).getFreeway().equals(freeway2)) {
+					numCars += 1;
+					averageSpeed += cars.get(i).getSpeed();
+					System.out.println(cars.get(i).getSpeed());
+				}
+			}
+		}
+		
+		averageSpeed = averageSpeed/((double) numCars);
+		System.out.println("Average Speed: " + averageSpeed);
+		
+		double projectedTime = routeDistance/averageSpeed;
+		
+		JOptionPane.showMessageDialog(currentMap, "Route Distance: " + routeDistance + " miles \n" + "Projected Time: " + projectedTime + " minutes");
 	}
 
 	private void parseDirectionData() 
@@ -421,6 +520,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			List<? extends Node> shapeNodes = new ArrayList<Node>(); 
 			//shapeNodes = XMLTree.selectNodes("//response");
 			shapeNodes = XMLTree.selectNodes("//response/route/shape/shapePoints/latLng");
+			List<? extends Node> distanceNodes = XMLTree.selectNodes("//response/route/distance");
 			for(int i = 0; i < shapeNodes.size(); i++)
 			{
 				double latitude = Double.valueOf(shapeNodes.get(i).selectSingleNode("lat").getText());
@@ -430,15 +530,14 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			}
 			
 			MapPolyLine route = new MapPolyLine(coordinateList);
-			
-			if (hasThreeDestinations) {
-				map().removeAllMapPolygons();
-			}
-			
+	
 			map().addMapPolygon(route);
 			map().setMapPolygonsVisible(true);
-			//map().repaint();
-			
+
+			for (int i = 0; i < distanceNodes.size(); i++) {
+				System.out.println("distance: " + distanceNodes.get(i).getText().toString());
+				routeDistance += Double.parseDouble(distanceNodes.get(i).getText().toString());
+			}
 
 		} catch (DocumentException e) {
 			System.out.println("Your XML File is invalid");
@@ -491,6 +590,15 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		graph.add(openGraph);
 		
 		//Directions menu items
+		JMenuItem clearDirections = new JMenuItem("Clear Directions");
+		clearDirections.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent ae) {
+				map().removeAllMapPolygons();
+				showDirections = false;
+				routeDistance = 0;
+			}
+		});
+		
 		JMenuItem getDirections = new JMenuItem("Get Directions");
 		getDirections.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
@@ -759,7 +867,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		});
 		
 		directions.add(getDirections);
-		
+		directions.add(clearDirections);
+	
 		jmb.add(file);
 		jmb.add(graph);
 		jmb.add(directions);
