@@ -45,6 +45,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import org.json.*;
 import org.json.simple.JSONArray;
@@ -108,11 +109,23 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	
 	public Ramp startRamp;
 	public Ramp endRamp;
+	public Ramp lastRamp;
 	public boolean preferShortestTime = true;
 	
 	private double[] routePoints;
 	
 	private final String MAPQUEST_API_KEY = "Fmjtd%7Cluur2qu829%2Cal%3Do5-9aaldu";
+	
+	private JPanel directionsPanel;
+	private JPanel startPanel;
+	private JPanel endPanel;
+	private JPanel lastPanel;
+	
+	private int response;
+	
+	private JOptionPane directionsDialog;
+	
+	private boolean hasThreeDestinations = false;
 	
 	
 	JSONsParser parser = null;
@@ -371,18 +384,24 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	*/
 	
 	public void getDirections() {
-		String priority = "";
-		if (preferShortestTime) {
-			priority = "fastest";
-		}
-		else {
-			priority = "shortest";
-		}
+		String priority = "fastest";
+
 		String url = "http://open.mapquestapi.com/directions/v2/route?key=" + MAPQUEST_API_KEY + "&callback=renderAdvancedNarrative&outFormat=xml&routeType=" + priority + "&timeType=1&enhancedNarrative=false&shapeFormat=raw&generalize=0&locale=en_US&unit=m&from="
 					+ startRamp.getxLocation() + "," + startRamp.getyLocation() + "&to=" + endRamp.getxLocation() + "," + endRamp.getyLocation();
 
 		pullDirectionData(url);
 		parseDirectionData();
+		
+		if (hasThreeDestinations) {
+			url = "http://open.mapquestapi.com/directions/v2/route?key=" + MAPQUEST_API_KEY + "&callback=renderAdvancedNarrative&outFormat=xml&routeType=" + priority + "&timeType=1&enhancedNarrative=false&shapeFormat=raw&generalize=0&locale=en_US&unit=m&from="
+					+ endRamp.getxLocation() + "," + endRamp.getyLocation() + "&to=" + lastRamp.getxLocation() + "," + lastRamp.getyLocation();
+
+			pullDirectionData(url);
+			parseDirectionData();
+			hasThreeDestinations = false;
+		}
+		
+		
 		
 	}
 
@@ -411,7 +430,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			}
 			
 			MapPolyLine route = new MapPolyLine(coordinateList);
-			map().removeAllMapPolygons();
+			
+			if (hasThreeDestinations) {
+				map().removeAllMapPolygons();
+			}
+			
 			map().addMapPolygon(route);
 			map().setMapPolygonsVisible(true);
 			//map().repaint();
@@ -496,29 +519,46 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 					rampList.add(I405.ramps.get(i).getName() + "-- I-405");
 				}
 				
-				JPanel directionsPanel = new JPanel();
+				directionsPanel = new JPanel();
 				directionsPanel.setLayout(new BoxLayout(directionsPanel, BoxLayout.PAGE_AXIS));
 				
 				JComboBox startList = new JComboBox(rampList);
 				JComboBox endList = new JComboBox(rampList);
-				JComboBox optionsList = new JComboBox(optionList);
+				JComboBox lastList = new JComboBox(rampList);
 				
-				JPanel startPanel = new JPanel(new FlowLayout());
+				startPanel = new JPanel(new FlowLayout());
 				startPanel.add(new JLabel("Starting Ramp:"));
 				startPanel.add(startList);
 				
-				JPanel endPanel = new JPanel(new FlowLayout());
+				endPanel = new JPanel(new FlowLayout());
 				endPanel.add(new JLabel("Ending Ramp:"));
 				endPanel.add(endList);
 				
-				JPanel optionsPanel = new JPanel(new FlowLayout());
-				optionsPanel.add(new JLabel("Preference:"));
-				optionsPanel.add(optionsList);
+				lastPanel = new JPanel(new FlowLayout());
+				lastPanel.add(new JLabel("Ending Ramp:"));
+				lastPanel.add(lastList);
 				
-				JOptionPane directionsDialog = new JOptionPane();
+				directionsDialog = new JOptionPane();
 				directionsPanel.add(startPanel);
 				directionsPanel.add(endPanel);
-				directionsPanel.add(optionsPanel);
+				
+				hasThreeDestinations = false;
+				
+				final JButton addButton = new JButton("Add Stop");
+				addButton.setAlignmentX(CENTER_ALIGNMENT);
+				addButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent ae) {
+						hasThreeDestinations = true;
+						directionsPanel.remove(addButton);
+						directionsPanel.add(lastPanel);
+						endPanel.remove(0);
+						endPanel.add(new JLabel("Middle Ramp:"), 0);
+						SwingUtilities.getWindowAncestor(directionsPanel).dispose();
+						response = JOptionPane.showConfirmDialog(null, directionsPanel, "Select Locations", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+					}
+				});
+				
+				directionsPanel.add(addButton);
 				
 //				JPanel buttonPanel = new JPanel(new FlowLayout());
 //				
@@ -643,7 +683,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 //					}
 //				}
 				
-				else if (startListSelection[endListSelection.length - 1].equals(" I-405")) {
+				else if (endListSelection[endListSelection.length - 1].equals(" I-405")) {
 					System.out.println("End ramp is on I-405");
 					for (int i = 0; i < I405.ramps.size(); i++) {
 						if (I405.ramps.get(i).getName().equals(endListSelection[0])) {
@@ -654,16 +694,66 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 					}
 				}
 				
-				if (optionsList.getSelectedItem().toString().equals("Shortest Time")) {
-					preferShortestTime = true;
-					System.out.println("Shortest time is preferred");
-				}
+				if (hasThreeDestinations) {
 				
-				else {
-					preferShortestTime = false;
-					System.out.println("Shortest distance is preferred");
+					String[] lastListSelection = lastList.getSelectedItem().toString().split("--");
+					
+					if (lastListSelection[lastListSelection.length - 1].equals(" I-10")) {
+						System.out.println("Last ramp is on I-10");
+						for (int i = 0; i < I10.ramps.size(); i++) {
+							if (I10.ramps.get(i).getName().equals(lastListSelection[0])) {
+								lastRamp = I10.ramps.get(i);
+								System.out.println("Last ramp is " + I10.ramps.get(i).getName());
+								break;
+							}
+						}
+					}
+					
+					else if (lastListSelection[lastListSelection.length - 1].equals(" I-101")) {
+						System.out.println("Last ramp is on I-101");
+						for (int i = 0; i < I101.ramps.size(); i++) {
+							if (I101.ramps.get(i).getName().equals(lastListSelection[0])) {
+								lastRamp = I101.ramps.get(i);
+								System.out.println("Last ramp is " + I101.ramps.get(i).getName());
+								break;
+							}
+						}
+					}
+					
+					else if (lastListSelection[lastListSelection.length - 1].equals(" I-105")) {
+						System.out.println("Last ramp is on I-105");
+						for (int i = 0; i < I105.ramps.size(); i++) {
+							if (I105.ramps.get(i).getName().equals(lastListSelection[0])) {
+								lastRamp = I105.ramps.get(i);
+								System.out.println("Last ramp is " + I105.ramps.get(i).getName());
+								break;
+							}
+						}
+					}
+					
+	//				else if (lastListSelection[lastListSelection.length - 1].equals(" I-110")) {
+	//					System.out.println("Last ramp is on I-110");
+	//					for (int i = 0; i < I110.ramps.size(); i++) {
+	//						if (I110.ramps.get(i).getName().equals(lastListSelection[0])) {
+	//							lastRamp = I110.ramps.get(i);
+	//							System.out.println("Last ramp is " + I110.ramps.get(i).getName());
+	//							break;
+	//						}
+	//					}
+	//				}
+					
+					else if (lastListSelection[lastListSelection.length - 1].equals(" I-405")) {
+						System.out.println("Last ramp is on I-405");
+						for (int i = 0; i < I405.ramps.size(); i++) {
+							if (I405.ramps.get(i).getName().equals(lastListSelection[0])) {
+								lastRamp = I405.ramps.get(i);
+								System.out.println("Last ramp is " + I405.ramps.get(i).getName());
+								break;
+							}
+						}
+					}
 				}
-				
+			
 				getDirections();
 			}
 		});
