@@ -153,6 +153,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
 		System.out.println("Number of Cars: " + map.cars.size());
 		map.setTheCurrentXandYs();
 		
