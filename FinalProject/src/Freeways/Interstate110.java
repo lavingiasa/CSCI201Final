@@ -1,6 +1,5 @@
 package Freeways;
 
-import java.util.ArrayList;
 import java.util.Vector;
 
 public class Interstate110

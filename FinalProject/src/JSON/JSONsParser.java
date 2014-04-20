@@ -25,7 +25,7 @@ public class JSONsParser extends Thread {
 	}
 
 	public void run() {
-		//pullTheNewData(); //Reenable later
+		pullTheNewData(); //Reenable later
 		parseTheData();
 		try {
 			sleep( 3 * 60 * 1000 ); // 3 min * 60 sec/min *
@@ -37,6 +37,7 @@ public class JSONsParser extends Thread {
 	}
 
 	// Pulls new Data and replaces currentData.json file
+	@SuppressWarnings("resource")
 	private void pullTheNewData() {
 		URL website;
 		try {

@@ -8,7 +8,6 @@ import Freeways.Interstate105;
 import Freeways.Interstate405;
 import Freeways.Ramp;
 import Freeways.Waypoint;
-import Map.MapGUI;
 import MathFunctions.MathEquations;
 
 public class Car extends Thread
@@ -23,13 +22,11 @@ public class Car extends Thread
 	private double xLocation;
 	private double yLocation;
 	private int wayPointNumber;
-	private double currentTime;
 	private CarDot marker;
 	private Ramp currentRamp;
 	private Waypoint currentWaypoint;
 	private Vector <Ramp> ramps;
 	private Vector <Waypoint> waypoints;
-	private boolean setRampHasBeenDone = false;
 	
 	public Car(int id, double speed, String direction, String ramp, String freeway, long time)
 	{
@@ -39,7 +36,6 @@ public class Car extends Thread
 		this.ramp = ramp;
 		this.freeway = freeway;
 		this.freewayNumber = Integer.parseInt(freeway);
-		this.currentTime = time;
 		this.xLocation = 0;
 		this.yLocation = 0;
 		this.rampNumber = 0;
@@ -190,7 +186,6 @@ public class Car extends Thread
 		try {
 			sleep(1000);
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		while(true)

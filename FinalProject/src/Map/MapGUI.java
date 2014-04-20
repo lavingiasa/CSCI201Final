@@ -10,28 +10,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
 import java.awt.geom.Path2D;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
@@ -49,14 +38,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import org.json.*;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
-import org.openstreetmap.gui.jmapviewer.DefaultMapController;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
@@ -68,24 +50,19 @@ import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
 import Cars.Car;
 import Cars.CarDot;
-import Freeways.Freeway;
 import Freeways.Interstate10;
 import Freeways.Interstate101;
 import Freeways.Interstate105;
-import Freeways.Interstate110;
 import Freeways.Interstate405;
 import Freeways.Ramp;
-import Freeways.RampDot;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 import JSON.JSONsParser;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "static-access", "serial" })
 public class MapGUI extends JFrame implements JMapViewerEventListener
 {	
 
@@ -118,7 +95,6 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	
 	private double routeDistance;
 	
-	private double[] routePoints;
 	
 	private final String MAPQUEST_API_KEY = "Fmjtd%7Cluur2qu829%2Cal%3Do5-9aaldu";
 	
@@ -127,10 +103,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	private JPanel endPanel;
 	private JPanel lastPanel;
 	
-	private int response;
-	
-	private JOptionPane directionsDialog;
-	
+		
 	private boolean hasThreeDestinations = false;
 	
 	
@@ -204,26 +177,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 		dialog.setVisible(true);		
 	}
-	private void moveCars() 
-	{
-		/*
-		for(int i = 0; i < cars.size(); i++)
-		{
-			long currentTime = System.currentTimeMillis();
-			drawCars();
-		}*/
-	}
-	/*
-	private void addTheOnOffRamps() 
-	{
-		for(int i = 0; i < cars.size(); i++)
-		{
-			pullJSONUsingName(cars.get(i).getRamp());
-			parseJSONUsingPulledJSON();
-		}
-		
-
-	}*/
+	
 	
 	private void setTheCurrentXandYs() 
 	{
@@ -343,35 +297,9 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 	}
 
-	private void testTheFreewayPoints() 
-	{
-		for(int i = 0; i < I101.waypoints.size(); i++)
-		{
-			drawTheRampOnTheMap(I101.waypoints.get(i).getxLocation(), I101.waypoints.get(i).getyLocation());
-		}
-		
-		for(int i = 0; i < I405.waypoints.size(); i++)
-		{
-			drawTheRampOnTheMap(I405.waypoints.get(i).getxLocation(), I405.waypoints.get(i).getyLocation());
-		}
-		
-		for(int i = 0; i < I10.waypoints.size(); i++)
-		{
-			drawTheRampOnTheMap(I10.waypoints.get(i).getxLocation(), I10.waypoints.get(i).getyLocation());
-		}
-
-	    for(int i = 0; i < I105.waypoints.size(); i++)
-	    {
-	      drawTheRampOnTheMap(I105.waypoints.get(i).getxLocation(), I105.waypoints.get(i).getyLocation());
-	    }
-		
-	}
+	
 	//http://svn.openstreetmap.org/applications/viewer/jmapviewer/src/org/openstreetmap/gui/jmapviewer/
-	private void drawTheRampOnTheMap(Double xLocation, Double yLocation) 
-	{
-		map().addMapMarker(new RampDot(xLocation, yLocation));
-
-	}
+	
 	
 	/*
 	private void parseJSONUsingPulledJSON() 
@@ -572,13 +500,13 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		JOptionPane.showMessageDialog(currentMap, "Route Distance: " + routeDistance + " miles \n" + "Projected Time: " + projectedTime + " minutes");
 	}
 
+	@SuppressWarnings("unchecked")
 	private void parseDirectionData() 
 	{
 		File XMLFile;
 		Document XMLTree;
 		SAXReader reader;
 		List<Coordinate> coordinateList = new ArrayList<Coordinate>();
-		List<ArrayList<Coordinate>> routeListList = new ArrayList<ArrayList<Coordinate>>();
 		
 		XMLTree = null;
 		reader = new SAXReader();
@@ -613,6 +541,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		}
 	}
 	
+	@SuppressWarnings("resource")
 	private void pullDirectionData(String url) {
 		URL website;
 		try {
@@ -681,6 +610,9 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 		JMenuItem getDirections = new JMenuItem("Get Directions");
 		getDirections.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
+			private JOptionPane directionsDialog;
+
 			public void actionPerformed(ActionEvent ae) {
 				Vector<String> rampList = new Vector<String>();
 				Vector<String> optionList = new Vector<String>();
@@ -735,6 +667,9 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				final JButton addButton = new JButton("Add Stop");
 				addButton.setAlignmentX(CENTER_ALIGNMENT);
 				addButton.addActionListener(new ActionListener() {
+					@SuppressWarnings("unused")
+					private int response;
+
 					public void actionPerformed(ActionEvent ae) {
 						hasThreeDestinations = true;
 						directionsPanel.remove(addButton);
