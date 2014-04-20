@@ -33,7 +33,7 @@
 ----
 
 ##Map Design:
-+ JavaScript Map will be embedded into standard Java application (maybe?)
++ (-- JavaScript -- ) ( ++ Java ++ ) Map will be embedded into standard Java application (-- (maybe?) --)
 + Graphics will be overlayed on top of Map image
 	+ Cars should appear to be moving on top of map image
 + Trace paths on map for navigation
