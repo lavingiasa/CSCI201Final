@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Vector;
 
 import javax.swing.BoxLayout;
@@ -147,12 +149,13 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		map.parser.setPriority(Thread.MAX_PRIORITY);
 		map.parser.start();
 		
-		
 		try {
-			Thread.sleep(120000);	// 10 seconds
+			Thread.sleep(120000);	// 120 seconds
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
+		
 		
 		System.out.println("Number of Cars: " + map.cars.size());
 		map.setTheCurrentXandYs();
@@ -162,6 +165,15 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		{
 			map.cars.get(i).start();
 		}
+		
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			  @Override
+			  public void run() 
+			  {
+				  currentMap.repaint();
+			  }
+			}, 1000, 1000);
 		
 		
 	}
@@ -239,13 +251,13 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	public synchronized CarDot drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
 	{
 		CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
-		//map().addMapMarker(currentDot);
+		map().addMapMarker(currentDot);
 		return currentDot;
 	}
 	
 	public static synchronized void refreshTheMap()
 	{
-		currentMap.repaint();
+		//currentMap.repaint();
 	}
 
 	private void drawCarOnThe105(Car car) 
