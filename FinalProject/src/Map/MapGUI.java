@@ -144,17 +144,18 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 		
 		map.parser = new JSONsParser(map.cars);
+		map.parser.setPriority(Thread.MAX_PRIORITY);
 		map.parser.start();
 		
+		
 		try {
-			Thread.sleep(500);	// .5 seconds
+			Thread.sleep(120000);	// 10 seconds
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		
-
+		System.out.println("Number of Cars: " + map.cars.size());
 		map.setTheCurrentXandYs();
-
+		
 		//map.addTheOnOffRamps();
 		for(int i = 0; i < map.cars.size(); i++)
 		{
@@ -191,19 +192,19 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			Integer freewayNumber = cars.get(i).getFreewayNumber();
 			switch (freewayNumber) {
 			case 10:
-				drawCarOnThe10(cars.get(i));
 				cars.get(i).setWaypoints(I10.waypoints);
 				cars.get(i).setRamps(I10.ramps);
+				drawCarOnThe10(cars.get(i));
 				break;
 			case 101:
-				drawCarOnThe101(cars.get(i));
 				cars.get(i).setWaypoints(I101.waypoints);
 				cars.get(i).setRamps(I101.ramps);
+				drawCarOnThe101(cars.get(i));
 				break;
 			case 105:
-				drawCarOnThe105(cars.get(i));
 				cars.get(i).setWaypoints(I105.waypoints);
 				cars.get(i).setRamps(I105.ramps);
+				drawCarOnThe105(cars.get(i));
 				break;
 			case 405:
 				cars.get(i).setWaypoints(I405.waypoints);
@@ -221,8 +222,10 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	{
 		if(car.getxLocation() == 0 || car.getyLocation() == 0)
 		{
-			int rampNumber = car.getRampNumber();
-			Ramp ramp = I405.ramps.get(rampNumber);
+			Ramp ramp;
+			
+			ramp = I405.ramps.get(car.getRampNumber());
+
 			double xLocation = ramp.getxLocation();
 			double yLocation = ramp.getyLocation();
 			car.setxLocation(xLocation);
@@ -246,20 +249,44 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 
 	private void drawCarOnThe105(Car car) 
 	{
-		// TODO Auto-generated method stub
-		
+		if(car.getxLocation() == 0 || car.getyLocation() == 0)
+		{
+			int rampNumber = car.getRampNumber();
+			Ramp ramp = I105.ramps.get(rampNumber);
+			double xLocation = ramp.getxLocation();
+			double yLocation = ramp.getyLocation();
+			car.setxLocation(xLocation);
+			car.setyLocation(yLocation);
+		}
+		car.setMarker(drawTheCarOnTheMap(car.getSpeed(), car.getxLocation(), car.getyLocation()));		
 	}
 
 	private void drawCarOnThe101(Car car)
 	{
-		// TODO Auto-generated method stub
-		
+		if(car.getxLocation() == 0 || car.getyLocation() == 0)
+		{
+			int rampNumber = car.getRampNumber();
+			Ramp ramp = I101.ramps.get(rampNumber);
+			double xLocation = ramp.getxLocation();
+			double yLocation = ramp.getyLocation();
+			car.setxLocation(xLocation);
+			car.setyLocation(yLocation);
+		}
+		car.setMarker(drawTheCarOnTheMap(car.getSpeed(), car.getxLocation(), car.getyLocation()));		
 	}
 	
 	private void drawCarOnThe10(Car car) 
 	{
-		// TODO Auto-generated method stub
-		
+		if(car.getxLocation() == 0 || car.getyLocation() == 0)
+		{
+			int rampNumber = car.getRampNumber();
+			Ramp ramp = I10.ramps.get(rampNumber);
+			double xLocation = ramp.getxLocation();
+			double yLocation = ramp.getyLocation();
+			car.setxLocation(xLocation);
+			car.setyLocation(yLocation);
+		}
+		car.setMarker(drawTheCarOnTheMap(car.getSpeed(), car.getxLocation(), car.getyLocation()));		
 	}
 
 	private void addFreewayPoints() 

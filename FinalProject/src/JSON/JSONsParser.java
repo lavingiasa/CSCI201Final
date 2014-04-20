@@ -41,7 +41,7 @@ public class JSONsParser extends Thread {
 		URL website;
 		try {
 			website = new URL(
-					"http://www-scf.usc.edu/~csci201/mahdi_project/test.json");
+					"http://www-scf.usc.edu/~csci201/mahdi_project/project_data.json");
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
 			FileOutputStream fos = new FileOutputStream(
 					"JSONs/currentData.json");
@@ -84,11 +84,11 @@ public class JSONsParser extends Thread {
 
 
 				//TODO only 405 for now
-				if(freeway.equals("405") && !ramp.contains("Slauson"))
-				{
+				//if(freeway.equals("405") && !ramp.contains("Slauson"))
+				//{
 					Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
 					cars.add(currentCar);
-				}
+				//}
 
 
 			}
