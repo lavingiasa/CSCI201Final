@@ -153,6 +153,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		
 		System.out.println("Number of Cars: " + map.cars.size());
 		map.setTheCurrentXandYs();
 		
@@ -238,7 +239,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	public synchronized CarDot drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
 	{
 		CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
-		map().addMapMarker(currentDot);
+		//map().addMapMarker(currentDot);
 		return currentDot;
 	}
 	
