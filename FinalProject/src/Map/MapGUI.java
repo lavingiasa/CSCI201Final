@@ -239,7 +239,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	public synchronized CarDot drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
 	{
 		CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
-		map().addMapMarker(currentDot);
+		//map().addMapMarker(currentDot);
 		return currentDot;
 	}
 	

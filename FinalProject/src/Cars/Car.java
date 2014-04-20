@@ -207,10 +207,11 @@ public class Car extends Thread
 			
 			while(timeItShouldBeThereBy > System.currentTimeMillis())
 			{
-				//if(id == 6)
-				//{
-					//System.out.println("ID: " + id + " More Seconds: " + (timeItShouldBeThereBy - System.currentTimeMillis())/1000 + " Dir: " + direction );
-				//}
+				try {
+					sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 			marker.setLat(nextWaypoint.getxLocation());
 			marker.setLon(nextWaypoint.getyLocation());
@@ -218,9 +219,9 @@ public class Car extends Thread
 			setyLocation(nextWaypoint.getyLocation());
 			currentWaypoint = nextWaypoint;
 			//currentTime = currentTimeParam;
-			MapGUI.refreshTheMap();
+			//MapGUI.refreshTheMap();
 			try {
-				sleep(10);
+				sleep(100);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -264,6 +265,10 @@ public class Car extends Thread
 				}
 			}
 			
+			if(nextIndex == -1)
+			{
+				nextIndex = 0;
+			}
 			currentWaypoint = waypoints.get(nextIndex);
 			//System.out.println(xLocation +" "+currentWaypoint.getxLocation());
 			//System.out.println(yLocation +" "+currentWaypoint.getyLocation());
@@ -271,7 +276,7 @@ public class Car extends Thread
 			wayPointNumber = nextIndex;
 			return currentWaypoint;
 		}else{			
-			if(wayPointNumber < waypoints.size()-1)
+			if(wayPointNumber < waypoints.size()-1 && wayPointNumber > 0)
 			{
 				if(direction.equals("North") || direction.equals("East"))
 				{
