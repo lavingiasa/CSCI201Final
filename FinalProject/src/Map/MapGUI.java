@@ -149,6 +149,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		map.parser.setPriority(Thread.MAX_PRIORITY);
 		map.parser.start();
 		
+		openTheLoadingPane(120000);
+		
 		try {
 			Thread.sleep(120000);	// 120 seconds
 		} catch (InterruptedException e) {
@@ -176,6 +178,31 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			}, 1000, 1000);
 		
 		
+	}
+	private static void openTheLoadingPane(int timeToLoadFor)
+	{
+		final JOptionPane optionPane = new JOptionPane("Loading", JOptionPane.INFORMATION_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[]{}, null);
+
+		final JDialog dialog = new JDialog();
+		dialog.setTitle("Loading");
+		dialog.setModal(true);
+
+		dialog.setContentPane(optionPane);
+
+		dialog.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		dialog.pack();
+
+		//create timer to dispose of dialog after 5 seconds
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				dialog.dispose();
+			}
+		}, timeToLoadFor);
+
+		dialog.setVisible(true);		
 	}
 	private void moveCars() 
 	{
