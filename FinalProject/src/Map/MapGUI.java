@@ -123,12 +123,12 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		map.parser.start();
 		
 		openTheLoadingPane(120000);
-		
+		/*
 		try {
 			Thread.sleep(120000);	// 120 seconds
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 		
 		
