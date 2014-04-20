@@ -208,7 +208,9 @@ public class Car extends Thread
 				//}
 			}
 			marker.setLat(nextWaypoint.getxLocation());
-			marker.setLon(nextWaypoint.getyLocation());			
+			marker.setLon(nextWaypoint.getyLocation());
+			setxLocation(nextWaypoint.getxLocation());
+			setyLocation(nextWaypoint.getyLocation());
 			currentWaypoint = nextWaypoint;
 			//currentTime = currentTimeParam;
 			MapGUI.refreshTheMap();

@@ -54,6 +54,7 @@ import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
+import org.openstreetmap.gui.jmapviewer.DefaultMapController;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
 import org.openstreetmap.gui.jmapviewer.MapPolygonImpl;
@@ -234,7 +235,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	public synchronized CarDot drawTheCarOnTheMap(double speed, double xLocation, double yLocation) 
 	{
 		CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
-		map().addMapMarker(currentDot);		
+		map().addMapMarker(currentDot);
 		return currentDot;
 	}
 	
@@ -249,7 +250,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 	}
 
-	private void drawCarOnThe101(Car car) 
+	private void drawCarOnThe101(Car car)
 	{
 		// TODO Auto-generated method stub
 		
@@ -562,6 +563,18 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		}
 		
 	}
+	
+	private Car searchClick(Coordinate c){
+		for(int i = 0; i < cars.size(); i++){
+			if(c.getLat() > cars.get(i).getxLocation()-.001 && c.getLat() < cars.get(i).getxLocation()+.001){
+				if(c.getLon() > cars.get(i).getyLocation()-.001 && c.getLon() < cars.get(i).getyLocation()+.001){
+					return cars.get(i);
+				}
+			}
+		}
+		return null;
+	}
+	
 	public MapGUI()
 	{
 		super("Map Demo");
@@ -890,8 +903,18 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		map().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if (e.getButton() == MouseEvent.BUTTON1) {
-					map().getAttribution().handleAttribution(e.getPoint(), true);
+				if(e.getButton() == MouseEvent.BUTTON1) {
+					//map().getAttribution().handleAttribution(e.getPoint(), true);
+					Car c = searchClick(map().getPosition(e.getPoint()));
+					if(c != null){
+						String carInfo = "ID: " + c.getID();
+						carInfo += "\nSpeed: " + c.getSpeed();
+						carInfo += "\nFreeway: " + c.getFreeway();
+						carInfo += "\nRamp: " + c.getRamp();
+						carInfo += "\nLatitude: " + c.getxLocation();
+						carInfo += "\nLongitude: " + c.getyLocation();
+						JOptionPane.showMessageDialog(MapGUI.this,carInfo,"Selected Car",JOptionPane.PLAIN_MESSAGE);
+					}
 				}
 			}
 		});
