@@ -612,7 +612,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			
 				// Create Bar Chart with data
 				 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-				 dataset.setValue( 6, "# Cars", "I 10" );
+				 dataset.setValue( 3, "# Cars", "I 10" );
 				 dataset.setValue( 8, "Ave. Speed", "I 10" );
 				 dataset.setValue(7, "# Cars", "I 101");
 				 dataset.setValue(2, "Ave. Speed", "I 101");
