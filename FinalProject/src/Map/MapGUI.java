@@ -2,6 +2,7 @@ package Map;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -25,7 +26,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -38,6 +41,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.Plot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
 import org.openstreetmap.gui.jmapviewer.JMapViewerTree;
@@ -55,6 +64,7 @@ import Freeways.Interstate101;
 import Freeways.Interstate105;
 import Freeways.Interstate405;
 import Freeways.Ramp;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Node;
@@ -596,7 +606,41 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 		//Graph menu items
 		JMenuItem openGraph = new JMenuItem("Open Graph");
-		graph.add(openGraph);
+		graph.add( openGraph );
+		openGraph.addActionListener( new ActionListener () {
+			public void actionPerformed( ActionEvent ae ) {
+			
+				// Create Bar Chart with data
+				 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+				 dataset.setValue( 6, "# Cars", "I 10" );
+				 dataset.setValue( 8, "Ave. Speed", "I 10" );
+				 dataset.setValue(7, "# Cars", "I 101");
+				 dataset.setValue(2, "Ave. Speed", "I 101");
+				 dataset.setValue(8, "# Cars", "I 105");
+				 dataset.setValue(5, "Ave. Speed", "I 105");
+				 dataset.setValue(2, "# Cars", "I 110");
+				 dataset.setValue(5, "Ave. Speed", "I 110");
+				 dataset.setValue(8, "# Cars", "I 405");
+				 dataset.setValue(12, "Ave. Speed", "I 405");
+				 
+				 JFreeChart chart = ChartFactory.createBarChart( "Look at My Tasty Data", "Interstate", "# Cars/Speed", dataset, PlotOrientation.VERTICAL, false, true, false);
+				 
+				 try {
+					 ChartUtilities.saveChartAsJPEG(new File( "src/chart.png" ), chart, 500, 300);
+				 } catch (IOException e) { System.err.println("Problem occurred creating chart.");
+				 }
+				 
+				 // Displays chart as image on a JFrame
+				 
+				 JFrame chartFrame = new JFrame( "This is a window" );
+				 chartFrame.setSize( new Dimension( 350, 350 ) );
+				 chartFrame.add( new JLabel( new ImageIcon( "src/chart.png" ) ) );
+				 chartFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+				 chartFrame.setVisible( true );
+				
+			}
+		});
+		
 		
 		//Directions menu items
 		JMenuItem clearDirections = new JMenuItem("Clear Directions");
