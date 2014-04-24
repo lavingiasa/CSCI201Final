@@ -32,24 +32,25 @@ JSONs Parser
 	
   private void pulltheNewData(){}
 	This method accesses JSON file located at specified URL, and replace the previous "currentData.json" file that parser accesses.
+
+
+
+
 	
 	Three catches
 		MalformedURLException:
 			Check if URL is incorrectly formatted, search where URL might either be input incorrectly or edited by another method ( should not be as it is instantiated and accessed within method ).
 
-			
 		FileNotFoundException:
 			1) File either does not exist or is in incorrect location
 			Fixes:	Ensure file has not been deleted by another method 
 					Correct the location and run solely this method again 
 					Alter method to run with input string with hard coded location
-
 				parseTheData(){
 					String toRead = 
 					.....
 					....( toRead );
 				]
-				
 					
 		IOException:
 			1) 
@@ -87,6 +88,8 @@ Freeway
 	}
 		This lets us know if information is being handed to other methods correctly, also if individual variables or whole sets of data are inaccurate.  Some variables might be out of range of map ( xLocation and yLocation ), possible mismatch through parsing that testing parsing doesn't catch.
 		
+
+
   private void setTheCurrentXandYs(){}
 		This calls the draw Car method for every highway, issues should be traced back along the separate methods it calls upon, including but not limited to drawCarsOnFreeway( int freeway_num, Car car ), Car.setWaypoints( Waypoint w1), Car.setRamps( Ramp r1 )
   
