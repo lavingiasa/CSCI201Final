@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -44,8 +45,13 @@ import javax.swing.SwingUtilities;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.AxisLocation;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Plot;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.openstreetmap.gui.jmapviewer.Coordinate;
 import org.openstreetmap.gui.jmapviewer.JMapViewer;
@@ -611,19 +617,69 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			public void actionPerformed( ActionEvent ae ) {
 			
 				// Create Bar Chart with data
-				 DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-				 dataset.setValue( 3, "# Cars", "I 10" );
-				 dataset.setValue( 8, "Ave. Speed", "I 10" );
-				 dataset.setValue(7, "# Cars", "I 101");
-				 dataset.setValue(2, "Ave. Speed", "I 101");
-				 dataset.setValue(8, "# Cars", "I 105");
-				 dataset.setValue(5, "Ave. Speed", "I 105");
-				 dataset.setValue(2, "# Cars", "I 110");
-				 dataset.setValue(5, "Ave. Speed", "I 110");
-				 dataset.setValue(8, "# Cars", "I 405");
-				 dataset.setValue(12, "Ave. Speed", "I 405");
+				 DefaultCategoryDataset datasetOfNumberOfCars = new DefaultCategoryDataset();
+				 DefaultCategoryDataset datasetOfAverageSpeed = new DefaultCategoryDataset();
 				 
-				 JFreeChart chart = ChartFactory.createBarChart( "Look at My Tasty Data", "Interstate", "# Cars/Speed", dataset, PlotOrientation.VERTICAL, false, true, false);
+				
+
+				 
+				 datasetOfNumberOfCars.addValue(3, "# Cars", "I 10" );
+				 datasetOfNumberOfCars.addValue(7, "# Cars", "I 101");
+				 datasetOfNumberOfCars.addValue(8, "# Cars", "I 105");
+				 datasetOfNumberOfCars.addValue(8, "# Cars", "I 405");
+
+				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 10");
+				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 101");
+				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 105");
+				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 405");
+				 
+				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 10" );
+				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 101" );
+				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 105" );
+				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 405" );
+				 
+				 datasetOfAverageSpeed.addValue(200, "Ave. Speed", "I 10" );
+				 datasetOfAverageSpeed.addValue(250, "Ave. Speed", "I 101");
+				 datasetOfAverageSpeed.addValue(333, "Ave. Speed", "I 105");
+ 				 datasetOfAverageSpeed.addValue(155, "Ave. Speed", "I 405");
+				 
+				 
+
+
+				 
+				 JFreeChart chart = ChartFactory.createBarChart( "Data About The Freeways!", "Interstate", "# Cars", datasetOfNumberOfCars, PlotOrientation.VERTICAL, true, true, false);
+				// set the background color for the chart...
+
+		        // get a reference to the plot for further customisation...
+		        CategoryPlot plot = (CategoryPlot)chart.getPlot();
+		        // set the range axis to display integers only...
+		        NumberAxis rangeAxis = (NumberAxis)plot.getRangeAxis();
+		        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+
+		        BarRenderer renderer = (BarRenderer)plot.getRenderer();
+		        renderer.setDrawBarOutline(true);
+		        renderer.setMaximumBarWidth(.05);
+		        // set up gradient paints for series...
+		        GradientPaint gp0 = new GradientPaint(0.0f, 0.0f, Color.blue, 0.0f, 0.0f, new Color(0, 0, 64));
+		        renderer.setSeriesPaint(0, gp0);
+
+		        CategoryAxis domainAxis = plot.getDomainAxis();
+		        domainAxis.setCategoryMargin(0.1f);
+		        // domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI
+		        // / 6.0));
+		        
+	            final NumberAxis axis2 = new NumberAxis("Ave. Speed");
+	            plot.setDataset(1, datasetOfAverageSpeed);
+	            plot.mapDatasetToRangeAxis(1, 1);
+	            plot.setRangeAxis(1, axis2);
+	            plot.setRangeAxisLocation(1, AxisLocation.BOTTOM_OR_RIGHT);
+	            final BarRenderer renderer2 = new BarRenderer();
+	            renderer2.setDrawBarOutline(true);
+	            renderer2.setMaximumBarWidth(.05);
+	            plot.setRenderer(1, renderer2);
+	        
+				 
+				 
 				 
 				 try {
 					 ChartUtilities.saveChartAsJPEG(new File( "src/chart.png" ), chart, 500, 300);
