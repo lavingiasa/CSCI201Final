@@ -632,7 +632,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 101 ");
 				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 105 ");
 				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 405 ");
-//				 
+				 
 				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 10" );
 				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 101" );
 				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 105" );
