@@ -628,20 +628,20 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 datasetOfNumberOfCars.addValue(8, "# Cars", "I 105");
 				 datasetOfNumberOfCars.addValue(8, "# Cars", "I 405");
 
-				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 10");
-				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 101");
-				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 105");
-				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 405");
-				 
+				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 10 ");
+				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 101 ");
+				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 105 ");
+				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 405 ");
+//				 
 				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 10" );
 				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 101" );
 				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 105" );
 				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 405" );
 				 
-				 datasetOfAverageSpeed.addValue(200, "Ave. Speed", "I 10" );
-				 datasetOfAverageSpeed.addValue(250, "Ave. Speed", "I 101");
-				 datasetOfAverageSpeed.addValue(333, "Ave. Speed", "I 105");
- 				 datasetOfAverageSpeed.addValue(155, "Ave. Speed", "I 405");
+				 datasetOfAverageSpeed.addValue(200, "Ave. Speed", "I 10 " );
+				 datasetOfAverageSpeed.addValue(250, "Ave. Speed", "I 101 ");
+				 datasetOfAverageSpeed.addValue(333, "Ave. Speed", "I 105 ");
+				 datasetOfAverageSpeed.addValue(155, "Ave. Speed", "I 405 ");
 				 
 				 
 
