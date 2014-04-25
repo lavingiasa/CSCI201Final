@@ -620,34 +620,80 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 DefaultCategoryDataset datasetOfNumberOfCars = new DefaultCategoryDataset();
 				 DefaultCategoryDataset datasetOfAverageSpeed = new DefaultCategoryDataset();
 				 
-				
-
 				 
-				 datasetOfNumberOfCars.addValue(3, "# Cars", "I 10" );
-				 datasetOfNumberOfCars.addValue(7, "# Cars", "I 101");
-				 datasetOfNumberOfCars.addValue(8, "# Cars", "I 105");
-				 datasetOfNumberOfCars.addValue(8, "# Cars", "I 405");
+				 Vector<Car> I10Cars = new Vector<Car>();
+				 Vector<Car> I101Cars = new Vector<Car>();
+				 Vector<Car> I105Cars = new Vector<Car>();
+				 Vector<Car> I405Cars = new Vector<Car>();
+				 
+				 for (int i = 0; i < cars.size(); i++) {
+					 if (cars.get(i).getFreewayNumber() == 10) {
+						 I10Cars.add(cars.get(i));
+					 }
+					 
+					 if (cars.get(i).getFreewayNumber() == 101) {
+						 I101Cars.add(cars.get(i));
+					 }
+					 
+					 if (cars.get(i).getFreewayNumber() == 105) {
+						 I105Cars.add(cars.get(i));
+					 }
+					 
+					 if (cars.get(i).getFreewayNumber() == 405) {
+						 I405Cars.add(cars.get(i));
+					 }
+				 }
+				 
+				
+				 
+				 datasetOfNumberOfCars.addValue(I10Cars.size(), "# Cars", "I 10" );
+				 datasetOfNumberOfCars.addValue(I101Cars.size(), "# Cars", "I 101");
+				 datasetOfNumberOfCars.addValue(I105Cars.size(), "# Cars", "I 105");
+				 datasetOfNumberOfCars.addValue(I405Cars.size(), "# Cars", "I 405");
 
 				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 10 ");
 				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 101 ");
 				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 105 ");
 				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 405 ");
 				 
-				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 10" );
-				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 101" );
-				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 105" );
-				 datasetOfAverageSpeed.addValue( null, "Ave. Speed", "I 405" );
+				 datasetOfAverageSpeed.addValue( null, "Avg. Speed", "I 10" );
+				 datasetOfAverageSpeed.addValue( null, "Avg. Speed", "I 101" );
+				 datasetOfAverageSpeed.addValue( null, "Avg. Speed", "I 105" );
+				 datasetOfAverageSpeed.addValue( null, "Avg. Speed", "I 405" );
 				 
-				 datasetOfAverageSpeed.addValue(200, "Ave. Speed", "I 10 " );
-				 datasetOfAverageSpeed.addValue(250, "Ave. Speed", "I 101 ");
-				 datasetOfAverageSpeed.addValue(333, "Ave. Speed", "I 105 ");
-				 datasetOfAverageSpeed.addValue(155, "Ave. Speed", "I 405 ");
+				 double averageSpeed = 0;
+				 for (int i = 0; i < I10Cars.size(); i++) {
+					 averageSpeed += I10Cars.get(i).getSpeed();
+				 }
+				 averageSpeed = averageSpeed/((double) I10Cars.size());
 				 
+				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 10 " );
 				 
-
-
+				 averageSpeed = 0;
+				 for (int i = 0; i < I101Cars.size(); i++) {
+					 averageSpeed += I101Cars.get(i).getSpeed();
+				 }
+				 averageSpeed = averageSpeed/((double) I101Cars.size());
 				 
-				 JFreeChart chart = ChartFactory.createBarChart( "Data About The Freeways!", "Interstate", "# Cars", datasetOfNumberOfCars, PlotOrientation.VERTICAL, true, true, false);
+				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 101 ");
+				 
+				 averageSpeed = 0;
+				 for (int i = 0; i < I105Cars.size(); i++) {
+					 averageSpeed += I105Cars.get(i).getSpeed();
+				 }
+				 averageSpeed = averageSpeed/((double) I105Cars.size());
+				 
+				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 105 ");
+				 
+				 averageSpeed = 0;
+				 for (int i = 0; i < I405Cars.size(); i++) {
+					 averageSpeed += I405Cars.get(i).getSpeed();
+				 }
+				 averageSpeed = averageSpeed/((double) I405Cars.size());
+				 
+				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 405 ");
+				 
+				 JFreeChart chart = ChartFactory.createBarChart( "Freeway Data", "Interstate", "# Cars", datasetOfNumberOfCars, PlotOrientation.VERTICAL, true, true, false);
 				// set the background color for the chart...
 
 		        // get a reference to the plot for further customisation...
@@ -668,7 +714,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		        // domainAxis.setCategoryLabelPositions(CategoryLabelPositions.createUpRotationLabelPositions(Math.PI
 		        // / 6.0));
 		        
-	            final NumberAxis axis2 = new NumberAxis("Ave. Speed");
+	            final NumberAxis axis2 = new NumberAxis("Avg. Speed");
 	            plot.setDataset(1, datasetOfAverageSpeed);
 	            plot.mapDatasetToRangeAxis(1, 1);
 	            plot.setRangeAxis(1, axis2);
@@ -678,8 +724,6 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	            renderer2.setMaximumBarWidth(.05);
 	            plot.setRenderer(1, renderer2);
 	        
-				 
-				 
 				 
 				 try {
 					 ChartUtilities.saveChartAsJPEG(new File( "src/chart.png" ), chart, 500, 300);
