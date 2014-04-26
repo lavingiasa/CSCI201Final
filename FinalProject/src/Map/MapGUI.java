@@ -732,10 +732,10 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 
 				 // Displays chart as image on a JFrame
 				 
-				 JFrame chartFrame = new JFrame( "This is a window" );
-				 chartFrame.setSize( new Dimension( 350, 350 ) );
+				 JFrame chartFrame = new JFrame( "Freeway Data" );
+				 chartFrame.setSize( new Dimension( 500, 330 ) );
+				 chartFrame.setResizable( false );
 				 chartFrame.add( new JLabel( new ImageIcon( "src/chart.png" ) ) );
-				 chartFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 				 chartFrame.setVisible( true );
 				
 			}

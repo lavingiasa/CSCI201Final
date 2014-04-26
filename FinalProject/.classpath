@@ -6,8 +6,7 @@
 	<classpathentry kind="lib" path="lib/JMapViewer.jar"/>
 	<classpathentry kind="lib" path="lib/dom4j-1.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/jaxen-1.1.6.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ian/CSCI201Final/FinalProject/lib/mysql-connector-java-5.0.8-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ian/CSCI201Final/FinalProject/lib/jcommon-1.0.21.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Ian/CSCI201Final/FinalProject/lib/jfreechart-1.0.17.jar"/>
+	<classpathentry kind="lib" path="lib/jcommon-1.0.21.jar"/>
+	<classpathentry kind="lib" path="lib/jfreechart-1.0.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
