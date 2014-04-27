@@ -20,7 +20,7 @@ public class ExecuteCommands {
 
 	public static void addFreeway(int freewayID, int numCars, double averageSpeed)  {		
 		Connection connection = null;
-		System.out.println("Adding Freeway "+ freewayID);
+//		System.out.println("Adding Freeway "+ freewayID);
 		try {			
 			connection = CreateConnection.getConnection();
 			Statement insertStatement = connection.createStatement();
