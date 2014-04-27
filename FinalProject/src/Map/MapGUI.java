@@ -1135,5 +1135,13 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	            return path;
 	        }
 	}
+
+	public void clearAllDots()
+	{
+		map().removeAllMapMarkers();
+		map().removeAllMapPolygons();
+		map().removeAllMapRectangles();
+		
+	}
 }
 

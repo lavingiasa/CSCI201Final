@@ -68,7 +68,8 @@ public class JSONsParser extends Thread {
 		//ArrayList<Integer> listOfIDs = new ArrayList<Integer>();
 		try {
 			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/currentData.json"));
-			//cars.clear();
+			cars.clear();
+			MapGUI.currentMap.clearAllDots();
 			for (int i = 0; i < arrayFromFile.size(); i++)
 			{
 				JSONObject car = (JSONObject) arrayFromFile.get(i);
