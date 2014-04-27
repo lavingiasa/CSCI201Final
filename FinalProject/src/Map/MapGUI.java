@@ -1,5 +1,6 @@
 package Map;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -21,6 +22,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -40,7 +42,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.table.DefaultTableModel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtilities;
@@ -676,50 +680,56 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 datasetOfAverageSpeed.addValue( null, "Avg. Speed", "I 105" );
 				 datasetOfAverageSpeed.addValue( null, "Avg. Speed", "I 405" );
 				 
-				 double averageSpeed = 0;
+				 double I10averageSpeed = 0;
 				 for (int i = 0; i < I10Cars.size(); i++) {
-					 averageSpeed += I10Cars.get(i).getSpeed();
+					 I10averageSpeed += I10Cars.get(i).getSpeed();
 				 }
-				 averageSpeed = averageSpeed/((double) I10Cars.size());
+				 I10averageSpeed = I10averageSpeed/((double) I10Cars.size());
 				 
+				 datasetOfAverageSpeed.addValue(I10averageSpeed, "Avg. Speed", "I 10 " );				 
+				 ExecuteCommands.addFreeway(10, I10Cars.size(), I10averageSpeed);                     // Add 10 Freeway to databse
 				 
-
-				 ExecuteCommands.addFreeway(10, I10Cars.size(), averageSpeed);                     // Add 10 Freeway to databse
+				 datasetOfAverageSpeed.addValue(I10averageSpeed, "Avg. Speed", "I 10 " );
 				 
-				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 10 " );
-				 
-				 averageSpeed = 0;
+				 double I101averageSpeed = 0;
 				 for (int i = 0; i < I101Cars.size(); i++) {
-					 averageSpeed += I101Cars.get(i).getSpeed();
+					 I101averageSpeed += I101Cars.get(i).getSpeed();
 				 }
-				 averageSpeed = averageSpeed/((double) I101Cars.size());
+				 I101averageSpeed = I101averageSpeed/((double) I101Cars.size());
 				 
-				 ExecuteCommands.addFreeway(101, I101Cars.size(), averageSpeed);                   // Add 101 Freeway to database
+				 datasetOfAverageSpeed.addValue(I101averageSpeed, "Avg. Speed", "I 101 ");
+				 ExecuteCommands.addFreeway(101, I101Cars.size(), I101averageSpeed);                   // Add 101 Freeway to database
 
-				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 101 ");
+				 datasetOfAverageSpeed.addValue(I101averageSpeed, "Avg. Speed", "I 101 ");
 				 
-				 averageSpeed = 0;
+				 double I105averageSpeed = 0;
 				 for (int i = 0; i < I105Cars.size(); i++) {
-					 averageSpeed += I105Cars.get(i).getSpeed();
+					 I105averageSpeed += I105Cars.get(i).getSpeed();
 				 }
-				 averageSpeed = averageSpeed/((double) I105Cars.size());
+				 I105averageSpeed = I105averageSpeed/((double) I105Cars.size());
+				 
+				 datasetOfAverageSpeed.addValue(I105averageSpeed, "Avg. Speed", "I 105 ");
+				 I105averageSpeed = I105averageSpeed/((double) I105Cars.size());
 
 				 
-				 ExecuteCommands.addFreeway(105, I105Cars.size(), averageSpeed);                 // Add 105 Freeway to database
+				 ExecuteCommands.addFreeway(105, I105Cars.size(), I105averageSpeed);                 // Add 105 Freeway to database
 
 
-				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 105 ");
+				 datasetOfAverageSpeed.addValue(I105averageSpeed, "Avg. Speed", "I 105 ");
 				 
-				 averageSpeed = 0;
+				 double I405averageSpeed = 0;
 				 for (int i = 0; i < I405Cars.size(); i++) {
-					 averageSpeed += I405Cars.get(i).getSpeed();
+					 I405averageSpeed += I405Cars.get(i).getSpeed();
 				 }
-				 averageSpeed = averageSpeed/((double) I405Cars.size());
+				 I405averageSpeed = I405averageSpeed/((double) I405Cars.size());
+				 
+				 datasetOfAverageSpeed.addValue(I405averageSpeed, "Avg. Speed", "I 405 ");
+				 I405averageSpeed = I405averageSpeed/((double) I405Cars.size());
 
-				 ExecuteCommands.addFreeway(405, I405Cars.size(), averageSpeed);                 // Add 405 Freeway to database
+				 ExecuteCommands.addFreeway(405, I405Cars.size(), I405averageSpeed);                 // Add 405 Freeway to database
 
 
-				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 405 ");
+				 datasetOfAverageSpeed.addValue(I405averageSpeed, "Avg. Speed", "I 405 ");
 				 
 				 JFreeChart chart = ChartFactory.createBarChart( "Freeway Data", "Interstate", "# Cars", datasetOfNumberOfCars, PlotOrientation.VERTICAL, true, true, false);
 				// set the background color for the chart...
@@ -761,9 +771,50 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 // Displays chart as image on a JFrame
 				 
 				 JFrame chartFrame = new JFrame( "Freeway Data" );
-				 chartFrame.setSize( new Dimension( 500, 330 ) );
+				 chartFrame.setSize( new Dimension( 882, 330 ) );
 				 chartFrame.setResizable( false );
-				 chartFrame.add( new JLabel( new ImageIcon( "src/chart.png" ) ) );
+				 chartFrame.add(new JLabel(new ImageIcon("src/chart.png")), BorderLayout.WEST);
+				 
+				 
+				 DefaultTableModel tableModel = new DefaultTableModel();
+				 
+				 tableModel.addColumn("");
+				 tableModel.addColumn("");
+				 tableModel.addColumn("");
+				 tableModel.addColumn("");
+				 tableModel.addColumn("");
+				 
+				 Vector<String> columnNames = new Vector<String>();
+				 columnNames.add("");
+				 columnNames.add("I10");
+				 columnNames.add("I101");
+				 columnNames.add("I105");
+				 columnNames.add("I405");
+				 
+				 tableModel.addRow(columnNames);
+				 
+				 DecimalFormat df = new DecimalFormat("0.00");
+				 Vector<String> averageSpeedVector = new Vector<String>();
+				 averageSpeedVector.add("Avg. Speed");
+				 averageSpeedVector.add(df.format(I10averageSpeed));
+				 averageSpeedVector.add(df.format(I101averageSpeed));
+				 averageSpeedVector.add(df.format(I105averageSpeed));
+				 averageSpeedVector.add(df.format(I405averageSpeed));
+
+				 tableModel.addRow(averageSpeedVector);
+				 
+				 Vector<String> numCarsVector = new Vector<String>();
+				 numCarsVector.add("# of Cars");
+				 numCarsVector.add(Integer.toString(I10Cars.size()));
+				 numCarsVector.add(Integer.toString(I101Cars.size()));
+				 numCarsVector.add(Integer.toString(I105Cars.size()));
+				 numCarsVector.add(Integer.toString(I405Cars.size()));
+				 
+				 tableModel.addRow(numCarsVector);
+				 tableModel.setNumRows(3);
+				 JTable jTable = new JTable(tableModel);
+				 
+				 chartFrame.add(jTable, BorderLayout.EAST);
 				 chartFrame.setVisible( true );
 				
 			}
