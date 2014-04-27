@@ -6,29 +6,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import Cars.Car;
+import Freeways.Freeway;
 
 public class ExecuteCommands {
 	public static void main(String[] args) {		
-//		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//		System.out.println("Enter the EmployeeID:");
-//		
-//		int employeeId;
-//		try {
-//			employeeId = Integer.parseInt(br.readLine());
-//			ExecuteCommands demo = new ExecuteCommands();
-//			
-//		} catch (NumberFormatException e) {
-//			e.printStackTrace();
-//		}		
+		try {
+			ExecuteCommands demo = new ExecuteCommands();
+			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}		
 	}
 
-	public static void addCar(int carID, int carSpeed, String carDirection, int freewayNumber, int wayPointNumber)  {		
+	public static void addFreeway(int freewayID, int numCars, int averageSpeed)  {		
 		Connection connection = null;
 
 		try {			
 			connection = CreateConnection.getConnection();
 			Statement insertStatement = connection.createStatement();
-            insertStatement.executeUpdate("insert into Cars " + "values("+carID+", "+carSpeed+", "+carDirection+", "+freewayNumber+","+wayPointNumber+")");
+            insertStatement.executeUpdate("insert into FinalProject.Freeways " + "values("+freewayID+", "+numCars+", "+averageSpeed+")");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -43,13 +39,36 @@ public class ExecuteCommands {
 		}
 	}
 	
-	public static Car getCar(int carID)  {		
+	public static void updateFreeway(int freewayID, int numCars, int averageSpeed)  {		
+		Connection connection = null;
+
+		try {			
+			connection = CreateConnection.getConnection();
+			Statement insertStatement = connection.createStatement();
+            insertStatement.executeUpdate("UPDATE FinalProject.Freeways "
+            		+ "SET numCars='"+numCars+"', averageSpeed='"+averageSpeed+"' "
+            		+ "WHERE Name='"+freewayID+"';");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public static Freeway getFreewayInfo(int freewayID)  {		
 		ResultSet rs = null;
 		Connection connection = null;
 		java.sql.Statement statement = null; 
 		
-		Car car = null;
-		String query = "SELECT * FROM Cars WHERE carID=" + carID;
+		Freeway freeway = null;
+		String query = "SELECT * FROM FinalProject.Freeways WHERE carID=" + freewayID;
 		try {			
 			connection = CreateConnection.getConnection();
 			statement = connection.createStatement();
@@ -74,6 +93,6 @@ public class ExecuteCommands {
 				}
 			}
 		}
-		return car;
+		return freeway;
 	}
 }
