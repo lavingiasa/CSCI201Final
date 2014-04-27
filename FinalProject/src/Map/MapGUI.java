@@ -138,7 +138,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		map.parser.setPriority(Thread.MAX_PRIORITY);
 		map.parser.start();
 		
-		openTheLoadingPane(120000);
+		//openTheLoadingPane(100000);
 		/*
 		try {
 			Thread.sleep(120000);	// 120 seconds
@@ -149,13 +149,13 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 		
 		System.out.println("Number of Cars: " + map.cars.size());
-		map.setTheCurrentXandYs();
+		/*map.setTheCurrentXandYs();
 		
 		//map.addTheOnOffRamps();
 		for(int i = 0; i < map.cars.size(); i++)
 		{
 			map.cars.get(i).start();
-		}
+		}*/
 		
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
@@ -195,35 +195,33 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	}
 	
 	
-	private void setTheCurrentXandYs() 
+	public void setTheCurrentXandYs(Car car) 
 	{
-		for (int i = 0; i < cars.size(); i++) 
-		{
-			Integer freewayNumber = cars.get(i).getFreewayNumber();
+			Integer freewayNumber = car.getFreewayNumber();
 			switch (freewayNumber) {
 			case 10:
-				cars.get(i).setWaypoints(I10.waypoints);
-				cars.get(i).setRamps(I10.ramps);
-				drawCarOnThe10(cars.get(i));
+				car.setWaypoints(I10.waypoints);
+				car.setRamps(I10.ramps);
+				drawCarOnThe10(car);
 				break;
 			case 101:
-				cars.get(i).setWaypoints(I101.waypoints);
-				cars.get(i).setRamps(I101.ramps);
-				drawCarOnThe101(cars.get(i));
+				car.setWaypoints(I101.waypoints);
+				car.setRamps(I101.ramps);
+				drawCarOnThe101(car);
 				break;
 			case 105:
-				cars.get(i).setWaypoints(I105.waypoints);
-				cars.get(i).setRamps(I105.ramps);
-				drawCarOnThe105(cars.get(i));
+				car.setWaypoints(I105.waypoints);
+				car.setRamps(I105.ramps);
+				drawCarOnThe105(car);
 				break;
 			case 405:
-				cars.get(i).setWaypoints(I405.waypoints);
-				cars.get(i).setRamps(I405.ramps);
-				drawCarOnThe405(cars.get(i));
+				car.setWaypoints(I405.waypoints);
+				car.setRamps(I405.ramps);
+				drawCarOnThe405(car);
 				break;
 			default:
 				break;
-			}
+			
 		}
 	}
 	

@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Cars.Car;
+import Map.MapGUI;
 
 public class JSONsParser extends Thread {
 	private Vector<Car> cars;
@@ -91,7 +92,10 @@ public class JSONsParser extends Thread {
 				//{
 					Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
 					cars.add(currentCar);
+					MapGUI.currentMap.setTheCurrentXandYs(currentCar);
+					currentCar.start();
 				//}
+					//System.out.println(i);
 					//TODO add the cars to the database here!!!! FOR ALEXEI
 
 			}
