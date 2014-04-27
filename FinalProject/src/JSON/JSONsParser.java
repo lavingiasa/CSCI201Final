@@ -18,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Cars.Car;
+import Database.ExecuteCommands;
 import Map.MapGUI;
 
 public class JSONsParser extends Thread {
@@ -102,7 +103,7 @@ public class JSONsParser extends Thread {
 				//}
 					//System.out.println(i);
 					//TODO add the cars to the database here!!!! FOR ALEXEI
-
+					ExecuteCommands.addCar(id, speed, direction, ramp, freeway);
 			}
 
 		} catch (FileNotFoundException e) {

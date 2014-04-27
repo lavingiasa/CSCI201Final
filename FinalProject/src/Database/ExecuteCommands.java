@@ -96,4 +96,24 @@ public class ExecuteCommands {
 		}
 		return freeway;
 	}
+
+	public static void addCar(int carID, double speed, String direction, String ramp, String freeway)  {		
+		Connection connection = null;
+		//	System.out.println("Adding Car "+ carID);
+		try {			
+			connection = CreateConnection.getConnection();
+			Statement insertStatement = connection.createStatement();
+			insertStatement.executeUpdate("INSERT INTO FinalProject.Cars "
+					+ "VALUES("+carID+", "+speed+", "+direction+", "+ramp+", "+freeway+")");
+
+		} catch (SQLException e) {	e.printStackTrace();} 
+		finally {
+			if (connection != null) {
+				try {	connection.close();	} 
+				catch (SQLException e) {e.printStackTrace();	}
+			}
+		}
+	} 
+	
+
 }

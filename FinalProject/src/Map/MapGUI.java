@@ -609,7 +609,6 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			public void actionPerformed(ActionEvent e) 
 			{
 				exportDataFromDatabaseToCSV();
-				//TODO FOR ALEXEI
 				
 			}
 		});
@@ -1110,6 +1109,10 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		setVisible(true);
 	}
 
+	public void exportDataFromDatabaseToCSV() {
+		
+	}
+	
 	private JMapViewer map() 
 	{
 		return treeMap.getViewer();
