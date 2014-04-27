@@ -25,7 +25,7 @@ public class Interstate405
 			BufferedReader br = new BufferedReader(fr);
 			String line;
 			String headerText = br.readLine();
-			System.out.println("Adding points on " + headerText);         // Prints out name of highway
+			//System.out.println("Adding points on " + headerText);         // Prints out name of highway
 			while ((line = br.readLine()) != null) {
 				final String[] coordinatesArray = line.split(",");
 				final double x = Double.parseDouble(coordinatesArray[0]);
@@ -38,11 +38,11 @@ public class Interstate405
 			BufferedReader br2 = new BufferedReader(fr2);
 			br2.readLine();
 			String orientation = "";
-			System.out.println("Adding ramps on " + headerText);
+			//System.out.println("Adding ramps on " + headerText);
 			while((line = br2.readLine()) != null){
 				if(line.equals("North") || line.equals("South") || line.equals("East") || line.equals("West")){
 					orientation = line;
-					System.out.println("Setting orientation " + orientation);
+					//System.out.println("Setting orientation " + orientation);
 				}
 				else{
 					final double rampX = Double.parseDouble(line.substring(0,line.indexOf(',')));

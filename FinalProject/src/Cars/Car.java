@@ -65,7 +65,7 @@ public class Car extends Thread
 				return;
 			}
 		}
-		System.out.println(ramp);
+		//System.out.println(ramp);
 		//System.out.println(ramp + ": " + rampNumber);
 
 	}
