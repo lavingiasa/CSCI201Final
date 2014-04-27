@@ -103,7 +103,7 @@ public class JSONsParser extends Thread {
 				//}
 					//System.out.println(i);
 					//TODO add the cars to the database here!!!! FOR ALEXEI
-					ExecuteCommands.addCar(id, speed, direction, ramp, freeway);
+ 					ExecuteCommands.addCar(id, speed, direction, ramp, freeway);           // Add Car info to database
 			}
 
 		} catch (FileNotFoundException e) {

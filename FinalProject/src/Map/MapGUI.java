@@ -1161,7 +1161,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	}
 
 	public void exportDataFromDatabaseToCSV() {
-		
+		ExecuteCommands.convertToCSV();
 	}
 	
 	private JMapViewer map() 

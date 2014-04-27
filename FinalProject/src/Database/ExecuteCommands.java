@@ -25,7 +25,7 @@ public class ExecuteCommands {
 			connection = CreateConnection.getConnection();
 			Statement insertStatement = connection.createStatement();
             insertStatement.executeUpdate("INSERT INTO FinalProject.Freeways "
-            		+ "VALUES("+freewayID+", "+numCars+", "+averageSpeed+")");
+            		+ "VALUES("+freewayID+", "+numCars+", "+averageSpeed+");");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -103,8 +103,8 @@ public class ExecuteCommands {
 		try {			
 			connection = CreateConnection.getConnection();
 			Statement insertStatement = connection.createStatement();
-			insertStatement.executeUpdate("INSERT INTO FinalProject.Cars "
-					+ "VALUES("+carID+", "+speed+", "+direction+", "+ramp+", "+freeway+")");
+			insertStatement.executeUpdate("INSERT INTO FinalProject.Cars (carID, speed, direction, ramp, freeway) "    
+					+ "VALUES("+carID+", "+speed+", '"+direction+"','"+ramp+"','"+freeway+"');");
 
 		} catch (SQLException e) {	e.printStackTrace();} 
 		finally {
@@ -115,5 +115,21 @@ public class ExecuteCommands {
 		}
 	} 
 	
+	public static void convertToCSV() {
+		Connection connection = null;
+		try {			
+			connection = CreateConnection.getConnection();
+			Statement insertStatement = connection.createStatement();
+			insertStatement.executeQuery("SELECT * FROM FinalProject.Cars INTO OUTFILE "
+					+ "'Documents/outfile.txt'");
+
+		} catch (SQLException e) {	e.printStackTrace();} 
+		finally {
+			if (connection != null) {
+				try {	connection.close();	} 
+				catch (SQLException e) {e.printStackTrace();	}
+			}
+		}
+	}
 
 }
