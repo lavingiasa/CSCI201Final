@@ -10,6 +10,8 @@ import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
 import java.util.Vector;
 
+import javax.swing.JOptionPane;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -69,7 +71,9 @@ public class JSONsParser extends Thread {
 		try {
 			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/currentData.json"));
 			cars.clear();
+			MapGUI.currentMap.allCarsAdded = false;
 			MapGUI.currentMap.clearAllDots();
+			//JOptionPane.showMessageDialog(null, "Pulling new data!");
 			for (int i = 0; i < arrayFromFile.size(); i++)
 			{
 				JSONObject car = (JSONObject) arrayFromFile.get(i);

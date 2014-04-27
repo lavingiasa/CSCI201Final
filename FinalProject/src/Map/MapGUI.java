@@ -94,6 +94,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	private Vector<Car> cars = new Vector<Car>();
 	//private Vector<String> ramps = new Vector<String>();
 		
+	public boolean allCarsAdded = false;
+	
 	public static MapGUI currentMap;
 	public Interstate10 I10 = new Interstate10();
 	public Interstate101 I101 = new Interstate101();
@@ -149,7 +151,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 		
 		
-		System.out.println("Number of Cars: " + map.cars.size());
+		//System.out.println("Number of Cars: " + map.cars.size());
 		/*map.setTheCurrentXandYs();
 		
 		//map.addTheOnOffRamps();
@@ -163,6 +165,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			  @Override
 			  public void run() 
 			  {
+				  if(!MapGUI.currentMap.allCarsAdded && MapGUI.currentMap.cars.size() == 1000)
+				  {
+					  JOptionPane.showMessageDialog(null, "All cars have been loaded!");
+					  MapGUI.currentMap.allCarsAdded = true;
+				  }
 				  currentMap.repaint();
 			  }
 			}, 1000, 1000);
@@ -490,25 +497,25 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		int numCars = 0;
 		
 		for (int i = 0; i < cars.size(); i++) {
-			System.out.println(cars.get(i).getFreeway());
+			//System.out.println(cars.get(i).getFreeway());
 			if (hasThreeDestinations) {
 				if (cars.get(i).getFreeway().equals(freeway1) || cars.get(i).getFreeway().equals(freeway2) || cars.get(i).getFreeway().equals(freeway3)) {
 					numCars += 1;
 					averageSpeed += cars.get(i).getSpeed();
-					System.out.println(cars.get(i).getSpeed());
+					//System.out.println(cars.get(i).getSpeed());
 				}
 			}
 			else {
 				if (cars.get(i).getFreeway().equals(freeway1) || cars.get(i).getFreeway().equals(freeway2)) {
 					numCars += 1;
 					averageSpeed += cars.get(i).getSpeed();
-					System.out.println(cars.get(i).getSpeed());
+					//System.out.println(cars.get(i).getSpeed());
 				}
 			}
 		}
 		
 		averageSpeed = averageSpeed/((double) numCars);
-		System.out.println("Average Speed: " + averageSpeed);
+		//System.out.println("Average Speed: " + averageSpeed);
 		
 		double projectedTime = routeDistance/averageSpeed;
 		
@@ -536,7 +543,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			{
 				double latitude = Double.valueOf(shapeNodes.get(i).selectSingleNode("lat").getText());
 				double longitude = Double.valueOf(shapeNodes.get(i).selectSingleNode("lng").getText());
-				System.out.println(latitude + "," + longitude);
+//				System.out.println(latitude + "," + longitude);
 				coordinateList.add(new Coordinate(latitude, longitude));
 			}
 			
@@ -546,7 +553,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 			map().setMapPolygonsVisible(true);
 
 			for (int i = 0; i < distanceNodes.size(); i++) {
-				System.out.println("distance: " + distanceNodes.get(i).getText().toString());
+//				System.out.println("distance: " + distanceNodes.get(i).getText().toString());
 				routeDistance += Double.parseDouble(distanceNodes.get(i).getText().toString());
 			}
 
@@ -864,33 +871,33 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				String[] startListSelection = startList.getSelectedItem().toString().split("--");
 				
 				if (startListSelection[startListSelection.length - 1].equals(" I-10")) {
-					System.out.println("Start ramp is on I-10");
+					//System.out.println("Start ramp is on I-10");
 					for (int i = 0; i < I10.ramps.size(); i++) {
 						if (I10.ramps.get(i).getName().equals(startListSelection[0])) {
 							startRamp = I10.ramps.get(i);
-							System.out.println("Start ramp is " + I10.ramps.get(i).getName());
+							//System.out.println("Start ramp is " + I10.ramps.get(i).getName());
 							break;
 						}
 					}
 				}
 				
 				else if (startListSelection[startListSelection.length - 1].equals(" I-101")) {
-					System.out.println("Start ramp is on I-101");
+//					System.out.println("Start ramp is on I-101");
 					for (int i = 0; i < I101.ramps.size(); i++) {
 						if (I101.ramps.get(i).getName().equals(startListSelection[0])) {
 							startRamp = I101.ramps.get(i);
-							System.out.println("Start ramp is " + I101.ramps.get(i).getName());
+							//System.out.println("Start ramp is " + I101.ramps.get(i).getName());
 							break;
 						}
 					}
 				}
 				
 				else if (startListSelection[startListSelection.length - 1].equals(" I-105")) {
-					System.out.println("Start ramp is on I-105");
+					//System.out.println("Start ramp is on I-105");
 					for (int i = 0; i < I105.ramps.size(); i++) {
 						if (I105.ramps.get(i).getName().equals(startListSelection[0])) {
 							startRamp = I105.ramps.get(i);
-							System.out.println("Start ramp is " + I105.ramps.get(i).getName());
+							//System.out.println("Start ramp is " + I105.ramps.get(i).getName());
 							break;
 						}
 					}
@@ -908,11 +915,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 //				}
 				
 				else if (startListSelection[startListSelection.length - 1].equals(" I-405")) {
-					System.out.println("Start ramp is on I-405");
+					//System.out.println("Start ramp is on I-405");
 					for (int i = 0; i < I405.ramps.size(); i++) {
 						if (I405.ramps.get(i).getName().equals(startListSelection[0])) {
 							startRamp = I405.ramps.get(i);
-							System.out.println("Start ramp is " + I405.ramps.get(i).getName());
+							//System.out.println("Start ramp is " + I405.ramps.get(i).getName());
 							break;
 						}
 					}
@@ -921,33 +928,33 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				String[] endListSelection = endList.getSelectedItem().toString().split("--");
 				
 				if (endListSelection[endListSelection.length - 1].equals(" I-10")) {
-					System.out.println("End ramp is on I-10");
+					//System.out.println("End ramp is on I-10");
 					for (int i = 0; i < I10.ramps.size(); i++) {
 						if (I10.ramps.get(i).getName().equals(endListSelection[0])) {
 							endRamp = I10.ramps.get(i);
-							System.out.println("End ramp is " + I10.ramps.get(i).getName());
+							//System.out.println("End ramp is " + I10.ramps.get(i).getName());
 							break;
 						}
 					}
 				}
 				
 				else if (endListSelection[endListSelection.length - 1].equals(" I-101")) {
-					System.out.println("End ramp is on I-101");
+					//System.out.println("End ramp is on I-101");
 					for (int i = 0; i < I101.ramps.size(); i++) {
 						if (I101.ramps.get(i).getName().equals(endListSelection[0])) {
 							endRamp = I101.ramps.get(i);
-							System.out.println("End ramp is " + I101.ramps.get(i).getName());
+							//System.out.println("End ramp is " + I101.ramps.get(i).getName());
 							break;
 						}
 					}
 				}
 				
 				else if (endListSelection[endListSelection.length - 1].equals(" I-105")) {
-					System.out.println("End ramp is on I-105");
+					//System.out.println("End ramp is on I-105");
 					for (int i = 0; i < I105.ramps.size(); i++) {
 						if (I105.ramps.get(i).getName().equals(endListSelection[0])) {
 							endRamp = I105.ramps.get(i);
-							System.out.println("End ramp is " + I105.ramps.get(i).getName());
+							//System.out.println("End ramp is " + I105.ramps.get(i).getName());
 							break;
 						}
 					}
@@ -965,11 +972,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 //				}
 				
 				else if (endListSelection[endListSelection.length - 1].equals(" I-405")) {
-					System.out.println("End ramp is on I-405");
+					//System.out.println("End ramp is on I-405");
 					for (int i = 0; i < I405.ramps.size(); i++) {
 						if (I405.ramps.get(i).getName().equals(endListSelection[0])) {
 							endRamp = I405.ramps.get(i);
-							System.out.println("End ramp is " + I405.ramps.get(i).getName());
+							//System.out.println("End ramp is " + I405.ramps.get(i).getName());
 							break;
 						}
 					}
@@ -980,33 +987,33 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 					String[] lastListSelection = lastList.getSelectedItem().toString().split("--");
 					
 					if (lastListSelection[lastListSelection.length - 1].equals(" I-10")) {
-						System.out.println("Last ramp is on I-10");
+						//System.out.println("Last ramp is on I-10");
 						for (int i = 0; i < I10.ramps.size(); i++) {
 							if (I10.ramps.get(i).getName().equals(lastListSelection[0])) {
 								lastRamp = I10.ramps.get(i);
-								System.out.println("Last ramp is " + I10.ramps.get(i).getName());
+								//System.out.println("Last ramp is " + I10.ramps.get(i).getName());
 								break;
 							}
 						}
 					}
 					
 					else if (lastListSelection[lastListSelection.length - 1].equals(" I-101")) {
-						System.out.println("Last ramp is on I-101");
+						//System.out.println("Last ramp is on I-101");
 						for (int i = 0; i < I101.ramps.size(); i++) {
 							if (I101.ramps.get(i).getName().equals(lastListSelection[0])) {
 								lastRamp = I101.ramps.get(i);
-								System.out.println("Last ramp is " + I101.ramps.get(i).getName());
+								//System.out.println("Last ramp is " + I101.ramps.get(i).getName());
 								break;
 							}
 						}
 					}
 					
 					else if (lastListSelection[lastListSelection.length - 1].equals(" I-105")) {
-						System.out.println("Last ramp is on I-105");
+//						System.out.println("Last ramp is on I-105");
 						for (int i = 0; i < I105.ramps.size(); i++) {
 							if (I105.ramps.get(i).getName().equals(lastListSelection[0])) {
 								lastRamp = I105.ramps.get(i);
-								System.out.println("Last ramp is " + I105.ramps.get(i).getName());
+//								System.out.println("Last ramp is " + I105.ramps.get(i).getName());
 								break;
 							}
 						}
@@ -1024,11 +1031,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	//				}
 					
 					else if (lastListSelection[lastListSelection.length - 1].equals(" I-405")) {
-						System.out.println("Last ramp is on I-405");
+						//System.out.println("Last ramp is on I-405");
 						for (int i = 0; i < I405.ramps.size(); i++) {
 							if (I405.ramps.get(i).getName().equals(lastListSelection[0])) {
 								lastRamp = I405.ramps.get(i);
-								System.out.println("Last ramp is " + I405.ramps.get(i).getName());
+								//System.out.println("Last ramp is " + I405.ramps.get(i).getName());
 								break;
 							}
 						}
