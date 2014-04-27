@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class CreateConnection {
 	//static reference to itself
 	private static CreateConnection instance = new CreateConnection();
-	public static final String URL = "jdbc:mysql://localhost/JDBCDB";             // Change this part to connect to different servers
+	public static final String URL = "jdbc:mysql://localhost/FinalProject";             // Change this part to connect to different servers
 	public static final String USER = "root";
 	public static final String PASSWORD = "";
 	public static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";          // this driver is included in the FinalProject directory
