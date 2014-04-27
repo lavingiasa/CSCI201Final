@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import Cars.Car;
+import Map.MapGUI;
 
 public class JSONsParser extends Thread {
 	private Vector<Car> cars;
@@ -67,7 +68,8 @@ public class JSONsParser extends Thread {
 		//ArrayList<Integer> listOfIDs = new ArrayList<Integer>();
 		try {
 			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/currentData.json"));
-			//cars.clear();
+			cars.clear();
+			MapGUI.currentMap.clearAllDots();
 			for (int i = 0; i < arrayFromFile.size(); i++)
 			{
 				JSONObject car = (JSONObject) arrayFromFile.get(i);
@@ -91,7 +93,10 @@ public class JSONsParser extends Thread {
 				//{
 					Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
 					cars.add(currentCar);
+					MapGUI.currentMap.setTheCurrentXandYs(currentCar);
+					currentCar.start();
 				//}
+					//System.out.println(i);
 					//TODO add the cars to the database here!!!! FOR ALEXEI
 
 			}
