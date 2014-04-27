@@ -65,6 +65,7 @@ import org.openstreetmap.gui.jmapviewer.tilesources.MapQuestOsmTileSource;
 
 import Cars.Car;
 import Cars.CarDot;
+import Database.ExecuteCommands;
 import Freeways.Interstate10;
 import Freeways.Interstate101;
 import Freeways.Interstate105;
@@ -674,6 +675,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 }
 				 averageSpeed = averageSpeed/((double) I10Cars.size());
 				 
+				 
+				 //TODO sendToDatabase("I 10", I10Cars.size(), averageSpeed);
+
+//				 ExecuteCommands.addFreeway(10, I10Cars.size(), averageSpeed);
+				 
 				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 10 " );
 				 
 				 averageSpeed = 0;
@@ -681,7 +687,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 					 averageSpeed += I101Cars.get(i).getSpeed();
 				 }
 				 averageSpeed = averageSpeed/((double) I101Cars.size());
-				 
+				 //TODO sendToDatabase("I 101", I101Cars.size(), averageSpeed);
+
 				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 101 ");
 				 
 				 averageSpeed = 0;
@@ -689,7 +696,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 					 averageSpeed += I105Cars.get(i).getSpeed();
 				 }
 				 averageSpeed = averageSpeed/((double) I105Cars.size());
-				 
+				 //TODO sendToDatabase("I 105", I105Cars.size(), averageSpeed);
+
 				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 105 ");
 				 
 				 averageSpeed = 0;
@@ -697,7 +705,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 					 averageSpeed += I405Cars.get(i).getSpeed();
 				 }
 				 averageSpeed = averageSpeed/((double) I405Cars.size());
-				 
+				 //TODO sendToDatabase("I 405", I405Cars.size(), averageSpeed);
+
 				 datasetOfAverageSpeed.addValue(averageSpeed, "Avg. Speed", "I 405 ");
 				 
 				 JFreeChart chart = ChartFactory.createBarChart( "Freeway Data", "Interstate", "# Cars", datasetOfNumberOfCars, PlotOrientation.VERTICAL, true, true, false);
