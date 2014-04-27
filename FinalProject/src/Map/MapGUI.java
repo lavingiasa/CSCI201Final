@@ -605,6 +605,14 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		
 		//File menu items
 		JMenuItem exportToCSV = new JMenuItem("Export to CSV");
+		exportToCSV.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				exportDataFromDatabaseToCSV();
+				//TODO FOR ALEXEI
+				
+			}
+		});
 		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
