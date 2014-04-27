@@ -24,7 +24,8 @@ public class ExecuteCommands {
 		try {			
 			connection = CreateConnection.getConnection();
 			Statement insertStatement = connection.createStatement();
-            insertStatement.executeUpdate("insert into FinalProject.Freeways " + "values("+freewayID+", "+numCars+", "+averageSpeed+")");
+            insertStatement.executeUpdate("INSERT INTO FinalProject.Freeways "
+            		+ "VALUES("+freewayID+", "+numCars+", "+averageSpeed+")");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
