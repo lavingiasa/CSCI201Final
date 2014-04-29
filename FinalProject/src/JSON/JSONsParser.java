@@ -71,6 +71,11 @@ public class JSONsParser extends Thread {
 		//ArrayList<Integer> listOfIDs = new ArrayList<Integer>();
 		try {
 			JSONArray arrayFromFile = (JSONArray) parser.parse(new FileReader("JSONs/currentData.json"));
+//			System.out.println("KILLLSADFLASDLFLASDF");
+//			for(int i = 0; i < cars.size(); i++)
+//			{
+//				cars.get(i).stop();
+//			}
 			cars.clear();
 			MapGUI.currentMap.allCarsAdded = false;
 			MapGUI.currentMap.clearAllDots();
@@ -96,10 +101,10 @@ public class JSONsParser extends Thread {
 
 				//if(freeway.equals("405") && !ramp.contains("Slauson"))
 				//{
-					//Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
-					//cars.add(currentCar);
-					//MapGUI.currentMap.setTheCurrentXandYs(currentCar);
-					//currentCar.start();
+					Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
+					cars.add(currentCar);
+					MapGUI.currentMap.setTheCurrentXandYs(currentCar);
+					currentCar.start();
 				//}
 					//System.out.println(i);
 					//TODO add the cars to the database here!!!! FOR ALEXEI

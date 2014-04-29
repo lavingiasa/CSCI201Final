@@ -673,10 +673,10 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 datasetOfNumberOfCars.addValue(I105Cars.size(), "# Cars", "I 105");
 				 datasetOfNumberOfCars.addValue(I405Cars.size(), "# Cars", "I 405");
 
-				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(10), "# Cars", "I 10" );
-				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(101), "# Cars", "I 101" );
-				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(105), "# Cars", "I 105" );
-				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(405), "# Cars", "I 405" );
+				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(10)*2, "# Cars", "I 10" );
+				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(101)*2, "# Cars", "I 101" );
+				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(105)*2, "# Cars", "I 105" );
+				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(405)*2, "# Cars", "I 405" );
 
  
 				 
