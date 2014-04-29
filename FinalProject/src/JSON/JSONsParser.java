@@ -96,13 +96,14 @@ public class JSONsParser extends Thread {
 
 				//if(freeway.equals("405") && !ramp.contains("Slauson"))
 				//{
-					Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
-					cars.add(currentCar);
-					MapGUI.currentMap.setTheCurrentXandYs(currentCar);
-					currentCar.start();
+					//Car currentCar = new Car(id, speed, direction, ramp, freeway, System.currentTimeMillis());
+					//cars.add(currentCar);
+					//MapGUI.currentMap.setTheCurrentXandYs(currentCar);
+					//currentCar.start();
 				//}
 					//System.out.println(i);
 					//TODO add the cars to the database here!!!! FOR ALEXEI
+					//System.out.println("Addingcar");
  					ExecuteCommands.addCar(id, speed, direction, ramp, freeway);           // Add Car info to database
 			}
 

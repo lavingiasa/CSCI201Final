@@ -136,6 +136,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	
 	public static void main (String [] args)
 	{
+
 		MapGUI map = new MapGUI();
 		
 		//TODO suck on my balls
@@ -640,7 +641,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				// Create Bar Chart with data
 				 DefaultCategoryDataset datasetOfNumberOfCars = new DefaultCategoryDataset();
 				 DefaultCategoryDataset datasetOfAverageSpeed = new DefaultCategoryDataset();
-				 
+				 DefaultCategoryDataset datasetOfNumberOfCarsAll = new DefaultCategoryDataset();
 				 
 				 Vector<Car> I10Cars = new Vector<Car>();
 				 Vector<Car> I101Cars = new Vector<Car>();
@@ -672,7 +673,12 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 datasetOfNumberOfCars.addValue(I105Cars.size(), "# Cars", "I 105");
 				 datasetOfNumberOfCars.addValue(I405Cars.size(), "# Cars", "I 405");
 
-				 
+				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(10), "# Cars", "I 10" );
+				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(101), "# Cars", "I 101" );
+				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(105), "# Cars", "I 105" );
+				 datasetOfNumberOfCarsAll.addValue(ExecuteCommands.numCarsOn(405), "# Cars", "I 405" );
+
+ 
 				 
 				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 10 ");
 				 datasetOfNumberOfCars.addValue(null, "# Cars", "I 101 ");
@@ -737,6 +743,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 
 				 JFreeChart chart = ChartFactory.createBarChart( "Freeway Data", "Interstate", "# Cars", datasetOfNumberOfCars, PlotOrientation.VERTICAL, true, true, false);
 				// set the background color for the chart...
+				 JFreeChart chartForAll = ChartFactory.createBarChart( "Freeway Data All Time", "Interstate", "# Cars", datasetOfNumberOfCarsAll, PlotOrientation.VERTICAL, true, true, false);
 
 		        // get a reference to the plot for further customisation...
 		        CategoryPlot plot = (CategoryPlot)chart.getPlot();
@@ -769,6 +776,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 
 				 try {
 					 ChartUtilities.saveChartAsJPEG(new File( "src/chart.png" ), chart, 500, 300);
+					 ChartUtilities.saveChartAsJPEG(new File( "src/chartAll.png" ), chartForAll, 500, 300);
 				 } catch (IOException e) { System.err.println("Problem occurred creating chart.");
 				 }
 				 
@@ -778,6 +786,11 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 chartFrame.setSize( new Dimension( 882, 330 ) );
 				 chartFrame.setResizable( false );
 				 chartFrame.add(new JLabel(new ImageIcon("src/chart.png")), BorderLayout.WEST);
+				 
+				 JFrame chartFrameTwo = new JFrame( "Freeway Data All Time" );
+				 chartFrameTwo.setSize( new Dimension( 882, 330 ) );
+				 chartFrameTwo.setResizable( false );
+				 chartFrameTwo.add(new JLabel(new ImageIcon("src/chartAll.png")), BorderLayout.CENTER);
 				 
 				 
 				 DefaultTableModel tableModel = new DefaultTableModel();
@@ -820,6 +833,8 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 				 
 				 chartFrame.add(jTable, BorderLayout.EAST);
 				 chartFrame.setVisible( true );
+				 
+				 chartFrameTwo.setVisible(true);
 				
 			}
 		});
@@ -1165,6 +1180,7 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	}
 
 	public void exportDataFromDatabaseToCSV() {
+		ExecuteCommands.CSV();
 		ExecuteCommands.CSV();
 	}
 	

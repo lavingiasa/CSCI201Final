@@ -14,14 +14,14 @@ import Cars.Car;
 import Freeways.Freeway;
 
 public class ExecuteCommands {
-	public static void main(String[] args) {		
-		try {
-			ExecuteCommands demo = new ExecuteCommands();
-			
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}		
-	}
+//	public static void main(String[] args) {		
+//		try {
+//			ExecuteCommands demo = new ExecuteCommands();
+//			
+//		} catch (NumberFormatException e) {
+//			e.printStackTrace();
+//		}		
+//	}
 
 	public static void addFreeway(int freewayID, int numCars, double averageSpeed)  {		
 		Connection connection = null;
@@ -119,6 +119,42 @@ public class ExecuteCommands {
 			}
 		}
 	} 
+	
+	public static int numCarsOn(int freewayID)
+	{
+		ResultSet rs = null;
+		Connection connection = null;
+		java.sql.Statement statement = null; 
+		
+		String query = "SELECT * FROM FinalProject.Cars WHERE freeway=" + freewayID;
+		try {			
+			connection = CreateConnection.getConnection();
+			statement = connection.createStatement();
+			rs = statement.executeQuery(query);
+			
+			if (rs.last()) 
+			{
+				int rowcount = rs.getRow();
+				rs.beforeFirst(); // not rs.first() because the rs.next() below will move on, missing the first element
+				return rowcount;
+
+			}
+			if (rs.next()) {
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return 0;
+	}
+	
 		
 	public static void CSV() {
 
@@ -147,7 +183,7 @@ public class ExecuteCommands {
 				int colunmCount = getColumnCount(res);
 
 				try {
-					fw = new FileWriter("CSVs/"+tableName+".csv");
+					fw = new FileWriter("CSVs/"+tableName+".csv", true);
 					for(int i=1 ; i<= colunmCount ;i++)
 					{
 						fw.append(res.getMetaData().getColumnName(i));
@@ -187,7 +223,7 @@ public class ExecuteCommands {
 	}
 
 	//to get numbers of rows in a result set 
-	public static int  getRowCount(ResultSet res) throws SQLException
+	public static int getRowCount(ResultSet res) throws SQLException
 	{
 		res.last();
 		int numberOfRows = res.getRow();
