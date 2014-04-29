@@ -526,9 +526,14 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 		averageSpeed = averageSpeed/((double) numCars);
 		//System.out.println("Average Speed: " + averageSpeed);
 		
+		//TODO HORRIBLE FIX FOR NOW
 		double projectedTime = routeDistance/averageSpeed;
+		DecimalFormat twoDForm = new DecimalFormat("#.##");
+	    projectedTime = Double.valueOf(twoDForm.format(projectedTime));
+	    
+		routeDistance = Double.valueOf(twoDForm.format(routeDistance));
 		
-		JOptionPane.showMessageDialog(currentMap, "Route Distance: " + routeDistance + " miles \n" + "Projected Time: " + projectedTime + " minutes");
+		JOptionPane.showMessageDialog(currentMap, "Route Distance: " + routeDistance + " miles \n" + "Projected Time: " + projectedTime + " hours");
 	}
 
 	@SuppressWarnings("unchecked")
