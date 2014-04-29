@@ -107,6 +107,10 @@ public class ExecuteCommands {
 		//	System.out.println("Adding Car "+ carID);
 		try {			
 			connection = CreateConnection.getConnection();
+			if(connection == null)
+			{
+				//TODO CREATE The DATABASE OR WHATEVER YOU NEED TO DO
+			}
 			Statement insertStatement = connection.createStatement();
 			insertStatement.executeUpdate("INSERT INTO FinalProject.Cars (carID, speed, direction, freeway) "    
 					+ "VALUES("+carID+", "+speed+", '"+direction+"','"+freeway+"');");
