@@ -147,8 +147,7 @@ public class ExecuteCommands {
 				int colunmCount = getColumnCount(res);
 
 				try {
-					fw = new FileWriter("CSCI201Final/FinalProject/CSVs/"+tableName+".csv");
-					//this loop is used to add column names at the top of file , if you do not need it just comment this loop
+					fw = new FileWriter("CSVs/"+tableName+".csv");
 					for(int i=1 ; i<= colunmCount ;i++)
 					{
 						fw.append(res.getMetaData().getColumnName(i));
@@ -159,8 +158,7 @@ public class ExecuteCommands {
 					{
 						for(int i=1;i<=colunmCount;i++)
 						{
-							//you can update it here by using the column type but i am fine with the data so just converting 
-							//everything to string first and then saving
+
 							if(res.getObject(i)!=null)
 							{
 								String data= res.getObject(i).toString();
