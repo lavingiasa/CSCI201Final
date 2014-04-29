@@ -132,28 +132,21 @@ public class ExecuteCommands {
 			connection = CreateConnection.getConnection();
 			Statement queryStatement = connection.createStatement();
 			ResultSet res = queryStatement.executeQuery("SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_schema = 'FinalProject' ");
-
 			//Preparing List of table Names
 			List <String> tableNameList = new ArrayList<String>();
 			while(res.next())
 			{
 				tableNameList.add(res.getString(1));
 			}
-
 			//star iterating on each table to fetch its data and save in a .csv file
 			for(String tableName:tableNameList)
 			{
 				int k=0;
-
 				int j=1;
-
-				System.out.println(tableName);
-
+//				System.out.println(tableName);
 				List<String> columnsNameList  = new ArrayList<String>();
-
 				//select all data from table
 				res = queryStatement.executeQuery("select * from FinalProject."+tableName);
-
 				//colunm count is necessay as the tables are dynamic and we need to figure out the numbers of columns
 				int colunmCount = getColumnCount(res);
 
@@ -164,16 +157,12 @@ public class ExecuteCommands {
 					{
 						fw.append(res.getMetaData().getColumnName(i));
 						fw.append(",");
-
 					}
-
 					fw.append(System.getProperty("line.separator"));
-
 					while(res.next())
 					{
 						for(int i=1;i<=colunmCount;i++)
 						{
-
 							//you can update it here by using the column type but i am fine with the data so just converting 
 							//everything to string first and then saving
 							if(res.getObject(i)!=null)
@@ -188,20 +177,15 @@ public class ExecuteCommands {
 								fw.append(data) ;
 								fw.append(",");
 							}
-
 						}
 						//new line entered after each row
 						fw.append(System.getProperty("line.separator"));
 					}
-
 					fw.flush();
 					fw.close();
-
 				} catch (IOException e) {	e.printStackTrace();		}
-
 			}
 			connection.close();
-			System.out.println("Exporting CSV file");
 		}
 		catch(SQLException ex){
 			System.err.println("SQLException information");
