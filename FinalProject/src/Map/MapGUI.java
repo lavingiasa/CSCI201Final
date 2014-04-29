@@ -137,6 +137,10 @@ public class MapGUI extends JFrame implements JMapViewerEventListener
 	public static void main (String [] args)
 	{
 		MapGUI map = new MapGUI();
+		
+		//TODO suck on my balls
+		ExecuteCommands.createTables();
+		
 		currentMap = map;
 		map.addFreewayPoints();
 		

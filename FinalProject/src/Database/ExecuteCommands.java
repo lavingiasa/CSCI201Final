@@ -107,10 +107,6 @@ public class ExecuteCommands {
 		//	System.out.println("Adding Car "+ carID);
 		try {			
 			connection = CreateConnection.getConnection();
-			if(connection == null)
-			{
-				//TODO CREATE The DATABASE OR WHATEVER YOU NEED TO DO
-			}
 			Statement insertStatement = connection.createStatement();
 			insertStatement.executeUpdate("INSERT INTO FinalProject.Cars (carID, speed, direction, freeway) "    
 					+ "VALUES("+carID+", "+speed+", '"+direction+"','"+freeway+"');");
@@ -208,4 +204,32 @@ public class ExecuteCommands {
 		return res.getMetaData().getColumnCount();
 	}
 
+	public static void createTables() {
+		Connection connection = null;
+		//	System.out.println("Adding Car "+ carID);
+		try {			
+			connection = CreateConnection.getConnection();
+			Statement insertStatement = connection.createStatement();
+			insertStatement.executeUpdate("CREATE TABLE IF NOT EXISTS Cars "+         // Create Cars table if it doesn't exist
+			"(carID int(11), "
+			+ "speed DOUBLE, "
+			+ "direction VARCHAR(45), "
+			+ "ramp VARCHAR(200), "
+			+ "freeway VARCHAR(200));");
+			
+			insertStatement.executeUpdate("CREATE TABLE IF NOT EXISTS Freeways "+           // create Freeways table if it doesn't exist
+					"(Name int(11), "
+					+ "numCars DOUBLE, "
+					+ "averageSpeed VARCHAR(45));");
+			
+			insertStatement.executeUpdate("truncate table Freeways");
+		
+		} catch (SQLException e) {	e.printStackTrace();} 
+		finally {
+			if (connection != null) {
+				try {	connection.close();	} 
+				catch (SQLException e) {e.printStackTrace();	}
+			}
+		}
+	}
 }
