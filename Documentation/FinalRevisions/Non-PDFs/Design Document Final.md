@@ -197,6 +197,15 @@ More specifically this application will work as a traffic simulator that is cons
 		+ static int currentID: used to count up the id of the ramps
 	+ ####Functions:
 		+ Getters and setters for the variables
++ ###MathEquations:
+	+ Just a bunch of static equations we use
+	+ ####Parents:
+		+ None
+	+ ####Data:
+		+ None
+	+ ####Functions:
+		+ milesInKM(): takes in a length in miles and makes it into KM
+		+ calculateDistance(): takes in an x1,y1 and x2,y2 and calculates the distance between them
 #Gui Images:
 ----
 <img src="../../Images/GUIDiagramNoClicks.png" alt="Nothing Clicked"/>
