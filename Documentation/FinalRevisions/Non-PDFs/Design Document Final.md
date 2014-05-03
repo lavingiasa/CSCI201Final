@@ -84,6 +84,16 @@ More specifically this application will work as a traffic simulator that is cons
 		+ void exportToCSV(): This function will take all this data and export it to a CSV file.
 	+ #####Data:
 		+ The MySQL database
+		
++ ###CarDot:
+	+ This is the class that will take care of the dots on the map
+	+ #####Parents:
+		+ MapMarkerCircle: this is the base class that just shows dots on the map
+	+ #####Functions:
+		+ @Overrided the constructor to allow us to change the colours of the dots on the map
+	+ #####Data:
+		+ All from parents
+		
 + ###Graph:
 	+ This class will make and display the graph. It is just going to popup all the information we need.
 	+ #####Parents:
@@ -95,18 +105,23 @@ More specifically this application will work as a traffic simulator that is cons
 	+ #####Data:
 		+ ArrayList\<ArrayList\<String>> data: This will be a list of the shortest times to get from A to B depending on the time and the two locations chosen. The locations it chooses from depends on the nodes that will be selected.
 		+ JPanel graphPanel: This is the panel that is the actual graph that is added to the popup.
-+ ###Nodes:
-	+ This class will be the nodes that are overlaid on the map that the user can select to gain more data. We are going to draw this directly on the maps.
++ ###Freeway:
+	+ This class is the freeway class that parents all the other freeways
 	+ #####Parents:
 		+ None
 	+ #####Functions:
 		+ Getters and setters
 	+ #####Data:
-		+ double xLocation: This is the x location of the node.
-			+ I believe that we will make this work easiest for the map. This would mean latitude in degrees in this case.
-		+ double yLocation: This is the y location of the node.
-			+ I believe that we will make this work easiest for the map. This would mean longitude in degrees in this case.
-	
+		+ int num: the freeway number
++ ###Interstate10/101/105/405:
+	+ These classes model the freeways
+	+ #####Parents:
+		+ None
+	+ #####Functions:
+		+ Getters and setters
+	+ #####Data:
+		+ Vector \<Ramp> ramps: This represents the ramps on each specific freeway
+		+ Vector \<Waypoint> waypoints: This represents the waypoints on each specific freeway
 + ###JSONParser:
 	+ This class will pull and parse the JSON. This will be done at a certain time interval (set for three minutes at this moment).
 	+ #####Parents:
@@ -140,6 +155,15 @@ More specifically this application will work as a traffic simulator that is cons
 		+ pullJSONUsingName(): Using the name of the ramp it will pull the JSON information about it from the Google Maps API.
 			+ We will then proceed to get the location from here and stuff like that.
 		+ getURLOfTheRamp(String rampName): Using the name of the ramp it will construct a string with the URL corresponding to it.
+		+ openTheLoadingPane(): used to open a loading pane, which we now do not use anymore.
+		+ setTheCurrentXandYs(): sets the starting X and Ys of the cars
+		+ drawCarOnThe405/105/10/101(): draws the car on the correct freeway
+		+ addFreeWayPoints(): adds the ramps points and the waypoints to each freeway
+		+ getDirections(): gets the directions between two/three waypoints and draws it on the map
+		+ parseDirectionData(): downloads the direction data and parses the data to get the points to draw on the map
+		+ searchClick(): finds the car that was clicked on
+		+ exportDataFromDatabase(): exports the data from the database to CSVs
+		+ clearAllDots(): gets rid of all the markings on the map
 		+ constructor: Sets the defaults and makes the map panel show up/aligns stuff.
 + ###Ramp:
 	+ This class will represent the ramps that we use in the program.
@@ -149,10 +173,30 @@ More specifically this application will work as a traffic simulator that is cons
 		+ string Name: This is the string that is the name for the ramp.
 		+ double xLocation: This is the xLocation of the ramp.
 		+ double yLocation: This is the yLocation of the ramp.
-		+ static Vector\<Ramp> ramps: This is just a vector to hold all the ramps after they are added.
+		+ String orientation: this is the string that says which way the ramp is facing
+		+ int id: this is the id of the ramp in the ramps vector of each freeway
+		+ static int currentID: used to count up the id of the ramps
 	+ ####Functions:
 		+ Getters and setters for the variables
-
++ ###RampDot:
+	+ This is the class that will take care of the dots on the map for the ramps. Was used only for testing
+	+ #####Parents:
+		+ MapMarkerCircle: this is the base class that just shows dots on the map
+	+ #####Functions:
+		+ @Overrided the constructor to allow us to change the colours of the dots on the map
+	+ #####Data:
+		+ All from parents
++ ###Waypoint:
+	+ This class will represent the waypoints we use in the program
+	+ ####Parents:
+		+ None
+	+ ####Data:
+		+ double xLocation: This is the xLocation of the waypoint.
+		+ double yLocation: This is the yLocation of the waypoint.
+		+ int id: this is the id of the ramp in the ramps vector of each freeway
+		+ static int currentID: used to count up the id of the ramps
+	+ ####Functions:
+		+ Getters and setters for the variables
 #Gui Images:
 ----
 <img src="../../Images/GUIDiagramNoClicks.png" alt="Nothing Clicked"/>
