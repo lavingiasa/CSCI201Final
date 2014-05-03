@@ -24,14 +24,18 @@ More specifically this application will work as a traffic simulator that is cons
 + ###Car:
 	+ This class will represent the cars on the map. Each car will most likely be it's own thread.
 	+ #####Parents:
-		+ Runnable: Each car will be its own thread and due to Java's rules about multiple inheritence we must implement this, not inherit it.
-		+ JComponent: Each car will be able to draw itself on the map, so it must have the paintComponent method overwritten. To let cars draw themselves we need to inherit this class.
+		+ Thread: Each car will be its own thread
 	+ #####Functions:
 		+ paintComponent(Graphics g)
 			+ Using the location and speed the cars will draw themselves on the map with the Graphics class instance that is passed in.
 		+ Getters/Setters for the data
 		+ UpdateLocation:
 			+ Using the location, direction, and speed of the car, this method will be called to update the location of the car on the map.
+		+ setRamp(): sets the current ramp the car will start on
+		+ setRamps(): sets the ramps vector accordingly depending on the freeway the car is on
+		+ run(): this is where all the magic happens. The car calculates how long it should take to move to the next waypoint, and when the time is correct, it will move there
+		+ getTimeItShouldBeThereBy(): a helper method to find out when it should move to the next spot
+		+ getNextWaypoint(): gets the next spot it should move to
 		+ Constructor:
 			+ Given JSON data, a new car will be created.
 	+ #####Data:
