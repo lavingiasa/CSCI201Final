@@ -3,14 +3,12 @@ package Database;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import Cars.Car;
 import Freeways.Freeway;
 
 public class ExecuteCommands {
@@ -173,10 +171,10 @@ public class ExecuteCommands {
 			//star iterating on each table to fetch its data and save in a .csv file
 			for(String tableName:tableNameList)
 			{
-				int k=0;
-				int j=1;
+				//int k=0;
+				//int j=1;
 //				System.out.println(tableName);
-				List<String> columnsNameList  = new ArrayList<String>();
+				//List<String> columnsNameList  = new ArrayList<String>();
 				//select all data from table
 				res = queryStatement.executeQuery("select * from FinalProject."+tableName);
 				//colunm count is necessay as the tables are dynamic and we need to figure out the numbers of columns

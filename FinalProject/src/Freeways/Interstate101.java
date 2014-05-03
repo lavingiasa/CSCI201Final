@@ -23,7 +23,7 @@ public class Interstate101
 			FileReader fr = new FileReader("waypoints/101WayPoints.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String line;
-			String headerText = br.readLine();
+//			String headerText = br.readLine();
 			//System.out.println("Adding points on " + headerText);         // Prints out name of highway
 			while ((line = br.readLine()) != null) {
 				final String[] coordinatesArray = line.split(",");

@@ -24,7 +24,7 @@ public class Interstate405
 			FileReader fr = new FileReader("waypoints/405WayPoints.txt");
 			BufferedReader br = new BufferedReader(fr);
 			String line;
-			String headerText = br.readLine();
+//			String headerText = br.readLine();
 			//System.out.println("Adding points on " + headerText);         // Prints out name of highway
 			while ((line = br.readLine()) != null) {
 				final String[] coordinatesArray = line.split(",");
