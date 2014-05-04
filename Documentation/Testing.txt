@@ -1,42 +1,56 @@
 Testing Document
 Samir Lavingia, Alexei Naumann, Jeff Kang, Ian Whelan, Aidan Blant
 
+Testing Overview
+	White box/black box testing, two common methods of testing.  White box or 'transparent' testing tests internal structure of application/method as opposed to black box testing, which tests functionality.  As a large portion of our design involves the management and flow of large volume of data, which in turn are a prerequisite for the graphical interface components, our testing methods and debugging focus on these methods and their interactions with each other.  
+	Through testing each method, one of the simplest forms of testing is simply printing out arrays of data.  As our data consists often of legible data and can be cross-referenced with text files from which we parse the data.
+
+  Ex.
+	Public void printArray( Array: array ){
+		for(int i = 0; i < array.length;i++){
+			System.out.println( array[i].data1 );
+			System.out.println( array[i].data2 );
+			….....
+			System.out.println( array[i].datan);			
+			
+		}
+	}
+   Noting that formatting differs for readability.
+
+	We also utilize this simple method for interactions between methods, and keeping track of general flow of data as it is converted from text files, parsed, used for calculations and/or entered into appropriate data structures, and used/saved for the user.
+	GUI Components are another story, as they provide their own visible output, but we dealt with this easily through thorough carefully review of drawing method design and implementations.
+
+
 
 JSONs Parser
-  This class has two main methods, pullTheNewData and ParseTheData, which as their names suggest pull the data from the online json file and parse it into useful data.
+  This class has two main methods, pullTheNewData and ParseTheData, which, respectively, pull the data from the online JSON file and parse the most current JSON file on record into useful data.
 
   parseTheData(){}
 	This method parses the currentData.JSON file and updates the car data
 
 	Three catches
 		Malformed Exception: JSON file is not appropriately formatted
-			Check JSON file for proper formatting
+		   Fixes: Check JSON file for proper formatting
 			
 		FileNotFoundException: File is not Present 
-			1) File either does not exist or is in incorrect location
-			Fixes:	Ensure file has not been deleted by another method 
-					Correct the location and run solely this method again 
-					Alter method to run with input string with hard coded location
+		   1) File either does not exist or is in incorrect location
+		   Fixes:	-Ensure file has not been deleted by examining file in  
+				hard disk, then run method 										Alter method to run using a hard coded location
 
 				pullTheNewData(){
 					String toRead = "C:\User\Myself\Desktop\toRead.JSON"
 					.....
 					....( toRead );
 				]
-			2) Could be related to pullTheNewData method not updating currentData.json
-				- Make sure pullTheNewData does not delete old method or replace it if Exception is caught, detailed below
+		   2) Can be related to pullTheNewData method not updating currentData
+			- Make sure pullTheNewData does not delete old method or replace it if Exception is caught, detailed below
 				
 		IOException: Other misc exception with IO
 			Review JSON if variables are of incorrect type, use Java library methods to check if is of appropriate type or throw an exception so problem can be more accurately located.
 
-	
   private void pulltheNewData(){}
 	This method accesses JSON file located at specified URL, and replace the previous "currentData.json" file that parser accesses.
 
-
-
-
-	
 	Three catches
 		MalformedURLException:
 			Check if URL is incorrectly formatted, search where URL might either be input incorrectly or edited by another method ( should not be as it is instantiated and accessed within method ).
@@ -99,8 +113,7 @@ Freeway
 			CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
 			map().addMapMarker(currentDot);		
 			return currentDot;
-		Blah blah blah blah, this returns cardot so a test can test it...
-		code and stuff
+		// returns Cardot to be placed on map
 	
 	private void addFreewayPoints(){}
 		I(Freeway).addFreeWayPoints();
