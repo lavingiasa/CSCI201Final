@@ -67,7 +67,7 @@ JSONs Parser
 				]
 					
 		IOException:
-			1) 
+			1) Sys.out at intervals throughout method to catch errors such as punctuation or incorrect character types
 			
 Freeway
   Freeway class holds Ramp and Waypoint vectors, with a method 'addFreewayPoints()
@@ -101,13 +101,9 @@ Freeway
 		}
 	}
 		This lets us know if information is being handed to other methods correctly, also if individual variables or whole sets of data are inaccurate.  Some variables might be out of range of map ( xLocation and yLocation ), possible mismatch through parsing that testing parsing doesn't catch.
-		
-
 
   private void setTheCurrentXandYs(){}
 		This calls the draw Car method for every highway, issues should be traced back along the separate methods it calls upon, including but not limited to drawCarsOnFreeway( int freeway_num, Car car ), Car.setWaypoints( Waypoint w1), Car.setRamps( Ramp r1 )
-  
-  
 
   public synchronized CarDot drawCarOnTheMap( double speed, double xLoc, double yLoc){}
 			CarDot currentDot = new CarDot(speed, Color.BLACK, xLocation, yLocation);
@@ -147,9 +143,10 @@ Freeway
 	
 	
 	
-The Various Drawing Methods
+Drawing Methods
 
-	This is more as it calls upon different methods and different classes.  In short method of Testing will initialize by simply using draw Methods at hard-coded locations to test that methods work the way we desire, if they do it is a short matter of constructing methods to call upon these drawing methods with our specified parameters.  If drawing fails it is more likely to occur due to incorrect parameters, in which case it can be traced back all the way to the input file.  The values the parameters call upon can be output at various points along the flow of the data to ensure the intended values are being passed forward.  
+	This is more as it calls upon different methods and different classes.  In short method of Testing will initialize by simply using draw Methods at hard-coded locations to test that methods work the way we desire, if they do it is a short matter of constructing methods to call upon these drawing methods with our specified parameters.
+	If drawing fails it is more likely to occur due to incorrect parameters, in which case it can be traced back all the way to the input file.  The values the parameters call upon can be output at various points along the flow of the data to ensure the intended values are being passed forward.  
 
 
 	
